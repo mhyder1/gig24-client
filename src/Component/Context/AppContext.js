@@ -3,7 +3,8 @@ import React from 'react';
 
 const AppContext= React.createContext({
 
-   posts:[]
+   events:[],
+   addEvent: ()=>{}
 })
 
 export default AppContext;

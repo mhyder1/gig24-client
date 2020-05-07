@@ -1,0 +1,16 @@
+.navbar {
+    padding: 20px;
+    background-color: rgb(20, 173, 150);
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.links {
+text-decoration: none;
+color: white;
+}
+
+li {
+    list-style: none; 
+}
+
