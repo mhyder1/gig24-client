@@ -23,7 +23,7 @@ static contextType = AppContext
       name: this.state.name,
       title: this.state.title,
       description: this.state.description,
-      id: Math.floor(Math.random()*10000)
+      id: Math.floor(Math.random()*10000) //TODO: fix
     })
     
   }
@@ -31,33 +31,44 @@ static contextType = AppContext
   render() {
     return (
       <>
-        <h2>Add your event</h2>
+        <h2>Create your event</h2>
         <p>Choose date and time:</p>
           <DayTimePicker /> <br/>
         <form onSubmit ={this.handleSubmit}>
           <label>Parent name</label> <br/>
           <input onChange={(e) => this.handleChange(e)}
-          type="text" 
-          name="name" 
-          value={this.state.name} 
-          required />
-          <br/>
+            type="text" 
+            name="name" 
+            value={this.state.name} 
+            required />
+            <br/>
           <label>Event title</label> <br/>
           <input onChange={(e) => this.handleChange(e)}
-          type="text" 
-          name="title" 
-          value={this.state.title} 
-          required />
+            type="text" 
+            name="title" 
+            value={this.state.title} 
+            required />
           <br/>
           <label>Describe your event</label>
           <br/>
           <textarea onChange={(e) => this.handleChange(e)}
-          type="text" 
-          value={this.state.description} 
-          name="description" 
-          required />
+            type="text" 
+            value={this.state.description} 
+            name="description" 
+            required />
           <br/>
-          <input type="submit" value="create event" />
+          <label>Event type</label>
+          <select
+                onChange={(e) => this.handleChange(e)}>
+                <option>--</option>
+                <option>Arts & Crafts</option>
+                <option>Music & Dance</option>
+                <option>Outdoor activities</option>
+                <option>Sport & Fitness</option>
+                <option>Books & Films</option>
+                <option>Tutoring</option>
+              </select>
+          <input type="submit" value="add event" />
         </form>
       </>
     );
