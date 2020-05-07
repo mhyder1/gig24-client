@@ -18,6 +18,15 @@ class App extends Component {
   state = {
     events: [
       {
+        pname: "Marie",
+        title: " Online Yoga with Marie",
+        time_of_event: new Date(),
+        description:
+          "Cras semper sed sem ac consectetur. Ut lobortis lacus non dui accumsan viverra. Quisque eleifend libero vitae nunc venenatis malesuada",
+        location: "zoom",
+      },
+
+      {
         pname: "Angela",
         title: "Paint with Angela",
         time_of_event: new Date(),
@@ -75,9 +84,12 @@ class App extends Component {
                 <Route path="/" component={Header} />
               </Switch>
             </header>
+            <Route exact path="/" component={NavMenu} />
             <Route exact path="/" component={Intro} />
-            <Route exact path="/signup" component={Signup} />
-
+            <section>
+              <Route path="/signup" component={NavMenu} />
+              <Route path="/signup" component={Signup} />
+            </section>
             <section className="home-page">
               <Route path="/home" component={GuestView} />
               <Route path="/home" component={NavMenu} />
@@ -85,7 +97,6 @@ class App extends Component {
             <section className="userview">
               <Route path="/userview" component={NavMenu} />
               <Route path="/userview" component={UserView} />
-
             </section>
             <section className="add-events">
               <Route path="/add-events" component={NavMenu} />
@@ -114,8 +125,7 @@ class App extends Component {
 
               <Route path="/tutoring" component={NavMenu} />
               <Route path="/tutoring" component={EventList} />
-
-            </section>  
+            </section>
           </div>
         </>
       </AppContext.Provider>

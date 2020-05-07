@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import AppContext from "../Context/AppContext";
+import {Link} from 'react-router-dom'
 import "./eventList.css";
 
 export default class EventList extends Component {
@@ -10,7 +11,8 @@ export default class EventList extends Component {
     console.log(events);
     return (
       <>
-        <h2>Current events</h2>
+        <button style={{backgroundColor:'green', color:'white'}}><Link style={{textDecoration:'none', color:'white'}} to='/add-events'>Create your event</Link></button>
+        <h3>Current events</h3>
         <ul>
           {events.map((event, id) => (
             <li key={event.id}>
@@ -20,8 +22,8 @@ export default class EventList extends Component {
               <p>{event.description}</p>
               <p className="bold">Location</p>
               <p>{event.location}</p>
-              <button>Join Event</button>{' '} 
-              <button>Update Event</button>
+              <button>Join</button>{' '} 
+              <button><Link style={{textDecoration:'none', color:'black'}} to='/add-events'>Update</Link></button>
               <hr />
               <br/>
             </li>
