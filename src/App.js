@@ -1,13 +1,44 @@
-import React, {Component} from "react";
+import React, { Component } from "react";
+import { Route, Switch } from "react-router-dom";
+import AppContext from "./Component/Context/AppContext";
+import Header from "./Component/Header/Header";
+import Intro from "./Component/Intro/Intro";
+import Signup from "./Component/Signup/Signup";
+import GuestView from "./Component/GuestView/GuestView";
+import UserView from "./Component/UserView/UserView";
+import AddEvents from './Component/AddEvents/AddEvents';
+import NavMenu from './Component/NavMenu/NavMenu';
 import "./App.css";
 
-class App extends Component{
-  render(){
 
-    return <div className="App">
-      <h1>Solo parenting</h1>
-      <p>The Solo Parenting app is built to help single parents connect and support each other. Assist with day to day activities by seamlessly toggling between schedules. Our community of helpers provide practica support such as babysitting, transporting, and dogwalking and plenty more. Sign up and join a virtual village like no other </p>
-    </div>;
+class App extends Component {
+  static contextType = AppContext;
+
+  render() {
+    return (
+      <>
+        <div className="App">
+          <header className="App__header">
+            <Switch>
+              <Route path="/" component={Header} />
+            </Switch>
+          </header>
+          <Route exact path="/" component={Intro} />
+          <Route exact path="/signup" component={Signup} />
+          <section className="home-page">
+            <Route path="/home" component={GuestView} />
+            <Route path="/home" component={NavMenu}/>
+            <Route path="/userview" component={NavMenu}/>
+            <Route path="/userview" component={UserView} />
+          </section>
+          <section className="add-events">
+          <Route path="/add-events" component={NavMenu}/>
+          <Route path="/add-events" component={AddEvents} />
+
+          </section>
+        </div>
+      </>
+    );
   }
 }
 
