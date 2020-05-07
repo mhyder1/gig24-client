@@ -18,23 +18,22 @@ class App extends Component {
     return (
       <>
         <div className="App">
-          <header className="App__header">
+          <header className="App-header">
             <Switch>
               <Route path="/" component={Header} />
             </Switch>
           </header>
           <Route exact path="/" component={Intro} />
-          <Route exact path="/signup" component={Signup} />
+          <Route exact path="/signup" component={Signup}/>
           <section className="home-page">
-            <Route path="/home" component={GuestView} />
+            <Route path="/home" component={GuestView}/>
             <Route path="/home" component={NavMenu}/>
             <Route path="/userview" component={NavMenu}/>
             <Route path="/userview" component={UserView} />
           </section>
           <section className="add-events">
           <Route path="/add-events" component={NavMenu}/>
-          <Route path="/add-events" component={AddEvents} />
-
+          <Route path="/add-events" component={AddEvents}/>
           </section>
         </div>
       </>
