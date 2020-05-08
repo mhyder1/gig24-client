@@ -36,7 +36,7 @@ static contextType = AppContext
         <h2>Create your event</h2>
         <p>Choose date and time:</p>
           <DayTimePicker /> <br/>
-        <form onSubmit ={this.handleSubmit}>
+        {/* <form onSubmit ={this.handleSubmit}>
           <label>Parent name</label> <br/>
           <input onChange={(e) => this.handleChange(e)}
             type="text" 
@@ -76,7 +76,7 @@ static contextType = AppContext
                 <option>Tutoring</option>
               </select> <br/>
           <input type="submit" value="add event" />
-        </form>
+        </form> */}
       </>
     );
   }

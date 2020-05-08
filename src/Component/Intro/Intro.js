@@ -1,6 +1,5 @@
 import React, { Component } from "react";
-import {Link} from 'react-router-dom';
-
+//import { Link } from "react-router-dom";
 
 export default class Intro extends Component {
   state = {};
@@ -18,7 +17,7 @@ export default class Intro extends Component {
         </p>
 
         <h3>Log in</h3>
-        <form onSubmit>
+        {/* <form onSubmit>
           <label>Username: </label>
           <input
             onChange
@@ -32,9 +31,16 @@ export default class Intro extends Component {
           <label>Password: </label>
           <input onChange type="text" name="password" value="" required />
           <br />
-          <input type="submit" value="login" /> {' '}
-          <button><Link style={{textDecoration:'none', color:'black'}} to='/signup'>create account</Link></button>
-        </form>
+          <input type="submit" value="login" />{" "}
+          <button>
+            <Link
+              style={{ textDecoration: "none", color: "black" }}
+              to="/signup"
+            >
+              create account
+            </Link>
+          </button>
+        </form> */}
       </>
     );
   }

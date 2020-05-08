@@ -7,10 +7,9 @@ export default class EventList extends Component {
   static contextType = AppContext;
 
   render() {
-    //console.log(this.props.match.url.split('/')[1])
     const type = this.props.match.url.split('/')[1]
-    const { events } = this.context;
-    console.log(events);
+    const { events } = this.context
+    console.log(events)
     const eventList = events.filter(event => event.type === type)
     
     return (
