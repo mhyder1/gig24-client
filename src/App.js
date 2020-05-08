@@ -11,6 +11,7 @@ import NavMenu from "./Component/NavMenu/NavMenu";
 import Confirm from "./Component/Confirm/Confirm";
 import "./App.css";
 import EventList from "./Component/EventList/EventList";
+import ArtsCrafts from './Component/navViews/arts-crafts';
 
 class App extends Component {
   static contextType = AppContext;
@@ -18,46 +19,60 @@ class App extends Component {
   state = {
     events: [
       {
-        pname: "Marie",
+        parent_name: "Marie",
         title: " Online Yoga with Marie",
         time_of_event: new Date(),
         description:
           "Cras semper sed sem ac consectetur. Ut lobortis lacus non dui accumsan viverra. Quisque eleifend libero vitae nunc venenatis malesuada",
         address: "zoom",
+        type:'sport-fitness'
       },
 
       {
-        pname: "Angela",
+        parent_name: "Angela",
         title: "Paint with Angela",
         time_of_event: new Date(),
         description:
           "Cras semper sed sem ac consectetur. Ut lobortis lacus non dui accumsan viverra. Quisque eleifend libero vitae nunc venenatis malesuada",
         address: "Palisades Park, 1500 Ocean Dr, Santa Monica, CA90504",
+        type: 'arts-crafts'
       },
       {
-        pname: "Meek",
+        parent_name: "Meek",
         title: "Hiking with Meek and Sophia",
         time_of_event: new Date(),
         description:
           "Cras semper sed sem ac consectetur. Ut lobortis lacus non dui accumsan viverra. Quisque eleifend libero vitae nunc venenatis malesuada",
         address: "Statue of Liberty, New York, NY 10004",
+        type:'outdoor-activities'
       },
       {
-        pname: "Sara",
+        parent_name: "Sara",
         title: "Dance party with Sara",
         time_of_event: new Date(),
         description:
           "Cras semper sed sem ac consectetur. Ut lobortis lacus non dui accumsan viverra. Quisque eleifend libero vitae nunc venenatis malesuada",
         address: "Little Library, 5575 E 33rd Ave, Denver, CO 80207",
+        type: 'music-dance'
       },
       {
-        pname: "Jenny",
+        parent_name: "Jenny",
         title: "Storytelling competition",
         time_of_event: new Date(),
         description:
           "Cras semper sed sem ac consectetur. Ut lobortis lacus non dui accumsan viverra. Quisque eleifend libero vitae nunc venenatis malesuada",
         address: "National Park 100, Larkin St, San Francisco, CA 94102",
+        type: 'books-films'
       },
+      {
+        parent_name: "Muhammad",
+        title: "Math",
+        time_of_event: new Date(),
+        description:
+          "Cras semper sed sem ac consectetur. Ut lobortis lacus non dui accumsan viverra. Quisque eleifend libero vitae nunc venenatis malesuada",
+        address: "National Park 100, Larkin St, San Francisco, CA 94102",
+        type: 'tutoring'
+      }
     ],
   };
 
@@ -65,6 +80,7 @@ class App extends Component {
     this.setState({
       events: [...this.state.events, event],
     });
+
   };
 
   componentDidMount() {}
@@ -109,7 +125,7 @@ class App extends Component {
             </section>
             <section className="eventList">
               <Route path="/arts-crafts" component={NavMenu} />
-              <Route path="/arts-crafts" component={EventList} />
+              <Route path="/arts-crafts" component={ArtsCrafts} />
 
               <Route path="/music-dance" component={NavMenu} />
               <Route path="/music-dance" component={EventList} />

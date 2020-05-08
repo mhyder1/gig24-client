@@ -51,20 +51,20 @@ static contextType = AppContext
             value={this.state.title} 
             required />
           <br/>
-          <label>Describe your event</label>
-          <br/>
+          <label>Describe your event</label><br/>
           <textarea onChange={(e) => this.handleChange(e)}
             type="text" 
             value={this.state.description} 
             name="description" 
             required />
           <br/>
+          <label>Address</label><br/>
           <input onChange={(e) => this.handleChange(e)}
             type="text" 
             name="address" 
             value={this.state.address} 
-            required />
-          <label>Event type</label>
+            required /> <br/>
+          <label>Event type</label><br/>
           <select
                 onChange={(e) => this.handleChange(e)}>
                 <option>--</option>
@@ -74,7 +74,7 @@ static contextType = AppContext
                 <option>Sport & Fitness</option>
                 <option>Books & Films</option>
                 <option>Tutoring</option>
-              </select>
+              </select> <br/>
           <input type="submit" value="add event" />
         </form>
       </>

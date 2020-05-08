@@ -1,7 +1,13 @@
 import React from "react";
-import {Link} from 'react-router-dom'
+import {Link} from 'react-router-dom';
+
 
 export default function Header() {
-  return <><nav><Link  to='/'>Solo Parenting Solved</Link></nav></>;
+  return <><nav><Link to='/'>PARENT <span>&#9900;</span> CONNECT</Link>
+  </nav></>;
 }
-// style={{padding:'20px', backgroundColor:'grey'}}
+
+//css example
+// span {
+//   content: "\26AC";
+// }

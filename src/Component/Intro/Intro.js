@@ -10,7 +10,7 @@ export default class Intro extends Component {
       <>
         <h2>Welcome parents!</h2>
         <p>
-          The Solo Parenting app is built to help single parents connect and
+          The Parent connect app is built to help single parents connect and
           support each other. Assist with day to day activities by seamlessly
           toggling between schedules. Our community of helpers provide practica
           support such as babysitting, transporting, and dogwalking and plenty
