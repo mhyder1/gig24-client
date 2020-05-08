@@ -19,6 +19,7 @@ export default class EventList extends Component {
         <ul>
           {eventList.map((event, id) => (
             <li key={id}>
+              <p className="bold">{event.parent_name}</p>
               <p className="bold">{event.title}</p>
               {/* <p>{event.time_of_event}</p> */}
               <p className="bold">Description</p>
