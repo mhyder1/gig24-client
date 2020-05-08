@@ -6,9 +6,10 @@ export default class AddEvents extends Component {
 static contextType = AppContext
 
   state = {
-    name : '',
+    parent_name : '',
     title : '',
-    description : ''
+    description : '',
+    address:''
   }
 
   handleChange =(e) => {
@@ -20,9 +21,10 @@ static contextType = AppContext
   handleSubmit =(e)=> {
     e.preventDefault()
     console.log({
-      name: this.state.name,
+      parent_name: this.state.parent_name,
       title: this.state.title,
       description: this.state.description,
+      address:this.state.address,
       id: Math.floor(Math.random()*10000) //TODO: fix
     })
     
@@ -57,6 +59,11 @@ static contextType = AppContext
             name="description" 
             required />
           <br/>
+          <input onChange={(e) => this.handleChange(e)}
+            type="text" 
+            name="address" 
+            value={this.state.address} 
+            required />
           <label>Event type</label>
           <select
                 onChange={(e) => this.handleChange(e)}>

@@ -23,7 +23,7 @@ class App extends Component {
         time_of_event: new Date(),
         description:
           "Cras semper sed sem ac consectetur. Ut lobortis lacus non dui accumsan viverra. Quisque eleifend libero vitae nunc venenatis malesuada",
-        location: "zoom",
+        address: "zoom",
       },
 
       {
@@ -32,7 +32,7 @@ class App extends Component {
         time_of_event: new Date(),
         description:
           "Cras semper sed sem ac consectetur. Ut lobortis lacus non dui accumsan viverra. Quisque eleifend libero vitae nunc venenatis malesuada",
-        location: "Palisades Park, 1500 Ocean Dr, Santa Monica, CA90504",
+        address: "Palisades Park, 1500 Ocean Dr, Santa Monica, CA90504",
       },
       {
         pname: "Meek",
@@ -40,7 +40,7 @@ class App extends Component {
         time_of_event: new Date(),
         description:
           "Cras semper sed sem ac consectetur. Ut lobortis lacus non dui accumsan viverra. Quisque eleifend libero vitae nunc venenatis malesuada",
-        location: "Statue of Liberty, New York, NY 10004",
+        address: "Statue of Liberty, New York, NY 10004",
       },
       {
         pname: "Sara",
@@ -48,7 +48,7 @@ class App extends Component {
         time_of_event: new Date(),
         description:
           "Cras semper sed sem ac consectetur. Ut lobortis lacus non dui accumsan viverra. Quisque eleifend libero vitae nunc venenatis malesuada",
-        location: "Little Library, 5575 E 33rd Ave, Denver, CO 80207",
+        address: "Little Library, 5575 E 33rd Ave, Denver, CO 80207",
       },
       {
         pname: "Jenny",
@@ -56,7 +56,7 @@ class App extends Component {
         time_of_event: new Date(),
         description:
           "Cras semper sed sem ac consectetur. Ut lobortis lacus non dui accumsan viverra. Quisque eleifend libero vitae nunc venenatis malesuada",
-        location: "National Park 100, Larkin St, San Francisco, CA 94102",
+        address: "National Park 100, Larkin St, San Francisco, CA 94102",
       },
     ],
   };

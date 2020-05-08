@@ -20,8 +20,8 @@ export default class EventList extends Component {
               {/* <p>{event.time_of_event}</p> */}
               <p className="bold">Description</p>
               <p>{event.description}</p>
-              <p className="bold">Location</p>
-              <p>{event.location}</p>
+              <p className="bold">Address</p>
+              <p>{event.address}</p>
               <button>Join</button>{' '} 
               <button><Link style={{textDecoration:'none', color:'black'}} to='/add-events'>Update</Link></button>
               <hr />
