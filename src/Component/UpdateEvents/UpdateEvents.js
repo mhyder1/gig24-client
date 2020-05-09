@@ -1,9 +1,12 @@
 import React, { Component } from "react";
-import DayTimePicker from '../DateTimePicker/DayTimePicker'
+// import DayTimePicker from '../DateTimePicker/DayTimePicker'
+import DateTimePicker from 'react-datetime-picker';
 import AlgoliaPlaces from 'algolia-places-react';
 import AppContext from '../Context/AppContext'
 import config from '../../config'
 import '../../AlgoliaPlaces.css'
+
+
 
 export default class AddEvents extends Component {
 static contextType = AppContext
@@ -14,7 +17,30 @@ static contextType = AppContext
     description : '',
     address:'',
     type:'',
-    time_of_event: new Date()
+    time_of_event: new Date(),
+    id: null
+  }
+
+  componentDidMount() {
+    const { event } = this.props.location.state
+    this.setState({
+        parent_name: event.parent_name,
+        title: event.title,
+        description: event.description,
+        address: event.address,
+        type: event.type,
+        time_of_event: new Date(event.time_of_event),
+        id: event.id
+    })
+    // AlgoliaPlaces.setVal(event.address)
+    // console.log(AlgoliaPlaces.Places)
+  }
+
+  handleChange =(e) => {
+    console.log(e.target.name, e.target.value)
+    this.setState({
+      [e.target.name] : e.target.value,
+    });
   }
 
   onChange = (date) => {
@@ -36,16 +62,10 @@ static contextType = AppContext
     })
   }
 
-  handleChange =(e) => {
-    this.setState({
-      [e.target.name] : e.target.value,
-    });
-  }
-
   handleSubmit =(e)=> {
     e.preventDefault()
-      fetch(`${config.API_ENDPOINT}/events`,{
-      method:'POST',
+    fetch(`${config.API_ENDPOINT}/events/${this.state.id}`,{
+      method:'PATCH',
       headers: {
         "content-type": "application/json"
       },
@@ -55,7 +75,7 @@ static contextType = AppContext
         description: this.state.description,
         address:this.state.address,
         type:this.state.type,
-         time_of_event: this.state.time_of_event
+        time_of_event: this.state.time_of_event
       }),
     })
     .then((res)=> {
@@ -77,8 +97,12 @@ static contextType = AppContext
         <h2>Create your event</h2>
         <p>Choose date and time:</p>
         <form onSubmit ={this.handleSubmit}>
-          <DayTimePicker onChange={this.onChange}
-          value={this.state.time_of_event} /> <br/>
+          {/* <DayTimePicker />  */}
+        <DateTimePicker
+          onChange={this.onChange}
+          value={this.state.time_of_event}
+        />
+          <br/>
           <label>Parent name</label> <br/>
           <input onChange={(e) => this.handleChange(e)}
             type="text" 
@@ -101,8 +125,9 @@ static contextType = AppContext
             required />
           <br/>
           <label>Address</label><br/>
-          <AlgoliaPlaces
+          {/* <AlgoliaPlaces
             placeholder='Write an address here'
+      
             options={{
               appId: config.APPID,
               apiKey: config.SEARCH_KEY,
@@ -114,19 +139,42 @@ static contextType = AppContext
       
             onChange={({ query, rawAnswer, suggestion, suggestionIndex }) => 
               this.handleAddress(suggestion)}
-              />
-              <label>Event type</label><br/>
-          <select name="type"
+              // console.log(suggestion.value)}
+      
+            // onSuggestions={({ rawAnswer, query, suggestions }) => 
+            //   console.log('Fired when dropdown receives suggestions. You will receive the array of suggestions that are displayed.')}
+      
+            // onCursorChanged={({ rawAnswer, query, suggestion, suggestonIndex }) => 
+            //   console.log('Fired when arrows keys are used to navigate suggestions.')}
+      
+            // onClear={() => 
+            //   console.log('Fired when the input is cleared.')}
+      
+            // onLimit={({ message }) => 
+            //   console.log('Fired when you reached your current rate limit.')}
+      
+            // onError={({ message }) => 
+            //   console.log('Fired when we could not make the request to Algolia Places servers for any reason but reaching your rate limit.')}
+          /> */}
+
+          <input onChange={(e) => this.handleChange(e)}
+            type="text" 
+            name="address" 
+            value={this.state.address} 
+            required /> 
+            <br/>
+          <label>Event type</label><br/>
+          <select name="type" value={this.state.type}
                 onChange={(e) => this.handleChange(e)}>
                 <option>--</option>
-                <option name='type' value={this.state.type}>Arts & Crafts</option>
-                <option name='type' value={this.state.type}>Music & Dance</option>
-                <option name='type' value={this.state.type}>Outdoor activities</option>
-                <option name='type' value={this.state.type}>Sport & Fitness</option>
-                <option name='type' value={this.state.type}>Books & Films</option>
-                <option name='type' value={this.state.type}>Tutoring</option>
+                <option value="arts-crafts">Arts & Crafts</option>
+                <option value="music-dance">Music & Dance</option>
+                <option value="outdoor-activities">Outdoor activities</option>
+                <option value="sports-fitness">Sport & Fitness</option>
+                <option value="books-films">Books & Films</option>
+                <option value="tutoring">Tutoring</option>
               </select> <br/>
-          <input type="submit" value="add event" />
+          <input type="submit" value="update event" />
         </form>
       </>
     );
