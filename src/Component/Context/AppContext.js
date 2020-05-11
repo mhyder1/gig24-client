@@ -5,7 +5,8 @@ const AppContext= React.createContext({
 
    events:[],
    users:[],
-   addEvent: ()=>{}
+   addEvent: ()=>{},
+   updateEvent: ()=>{}
 })
 
 export default AppContext;

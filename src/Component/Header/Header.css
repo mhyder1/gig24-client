@@ -1,0 +1,16 @@
+.logo {
+    text-decoration: none;
+    color: #00b1b0;
+
+}
+
+.log-sign-links {
+  text-decoration: none;
+  color: #212121;
+  cursor: pointer;
+}
+
+#parent-logo{
+  margin-top:10px;
+  margin-bottom:0;
+}

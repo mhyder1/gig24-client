@@ -1,4 +1,4 @@
-import config from '../../config'
+import config from '../config'
 import TokenService from './token-service'
 import IdleService from './idle-service'
 
@@ -17,13 +17,13 @@ const AuthApiService = {
           : res.json()
       )
   },
-  postLogin({ user_name, password }) {
+  postLogin({ username, password }) {
     return fetch(`${config.API_ENDPOINT}/auth/login`, {
       method: 'POST',
       headers: {
-        'content-type': 'application/json',
+        'content-type': 'application/json'
       },
-      body: JSON.stringify({ user_name, password }),
+      body: JSON.stringify({ username, password }),
     })
       .then(res =>
         (!res.ok)
