@@ -1,4 +1,4 @@
-/* .navigation {
+.navigation {
     display: flex;
     justify-content: space-evenly;
     flex-direction: column;
@@ -106,16 +106,16 @@ a.links.tutor {
         display: none;
     }
 } 
- */
- .navbar {
+
+
+ /* .navbar {
     padding: 20px;
     background-color: rgb(20, 173, 150);
     display: flex;
     flex-direction: column;
     position: absolute;
     right: 0;
-    /* display: none; */
-}
+   
 
 .navigation {
     position: relative;
@@ -163,7 +163,7 @@ li {
 
 @media screen and (min-width: 768px) {
     .navbar {
-        /* justify-content: space-evenly; */
+       
         flex-direction: row;
         position: static;
     }
@@ -175,4 +175,4 @@ li {
     .hamburger {
         display: none;
     }
-}
+} */
