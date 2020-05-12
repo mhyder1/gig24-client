@@ -9,3 +9,6 @@ p {
 .ev-list{
     padding:0;
 }
+#join-btn {
+    background-color: turquoise;
+}

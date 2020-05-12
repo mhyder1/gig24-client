@@ -11,7 +11,7 @@ export default class Login extends Component {
   state = {
     username: "",
     password: "",
-    error: null,
+    error: null
   };
 
   handleChange = (e) => {
@@ -29,23 +29,25 @@ export default class Login extends Component {
   handleSubmitJwtAuth = (ev) => {
     ev.preventDefault();
     this.setState({ error: null });
-    const { username, password } = this.state;
+        const { username, password } = this.state;
+        console.log(password)
     console.log({ username });
     AuthApiService.postLogin({
       username,
-      password,
+      password
     })
       .then((res) => {
         this.setState({
           username: "",
-          password: "",
+          password: ""
         });
         const token = TokenService.readJwtToken();
         this.context.setUserId(token.user_id, token.fullname);
         this.handleLoginSuccess();
       })
       .catch((res) => {
-        this.setState({ error: res.error });
+        console.log(res.error)
+        //this.setState({ error: res.error })
       });
   };
 
@@ -59,9 +61,9 @@ export default class Login extends Component {
           onSubmit={this.handleSubmitJwtAuth}
         >
           <div role="alert">
-            {error && <p style={{ color: "red" }}>{error}</p>}
+            {error && <p style={{color:"red"}}>{error}</p>}
           </div>
-          <label style={{ paddingRight: "3px" }}>Username: </label>
+          <label style={{paddingRight:"3px"}}>Username: </label>
           <input
             onChange={this.handleChange}
             type="text"

@@ -10,6 +10,8 @@ import Confirm from "./Component/Confirm/Confirm";
 import EventList from "./Component/EventList/EventList";
 import UpdateEvents from "./Component/UpdateEvents/UpdateEvents"
 import Login from './Component/Login/Login';
+import MyEvents from '../src/Component/MyEvents/MyEvents';
+import JoinEvent from '../src/Component/JoinEvent/JoinEvent';
 
 import PrivateRoute from './Component/Utils/PrivateRoute';
 //import PublicOnlyRoute from './Component/Utils/PublicOnlyRoute';
@@ -28,7 +30,10 @@ class App extends Component {
   state = {
     events: [],
     users:[],
-    hasError:false
+    attend: [],
+    hasError: false,
+    user_id: '',
+    fullname: ''
   };
 
   static getDerivedStateFromError(error) {
@@ -61,22 +66,22 @@ class App extends Component {
   componentDidMount() {
     Promise.all([
       fetch(`${config.API_ENDPOINT}/events`),
-      fetch(`${config.API_ENDPOINT}/users`)
+      fetch(`${config.API_ENDPOINT}/users`),
+      fetch(`${config.API_ENDPOINT}/attend`)
     ])
-    .then(([eventsRes, usersRes]) => {
+    .then(([eventsRes, usersRes, attendRes]) => {
       if (!eventsRes.ok) return eventsRes.json().then((e) => Promise.reject(e));
-      if (!usersRes.ok)
-        return usersRes.json().then((e) => Promise.reject(e));
-      return Promise.all([eventsRes.json(), usersRes.json()]);
+      if (!usersRes.ok) return usersRes.json().then((e) => Promise.reject(e));
+      if (!attendRes.ok) return attendRes.json().then((e) => Promise.reject(e));
+      return Promise.all([eventsRes.json(), usersRes.json(), attendRes.json()]);
     })
-    .then(([events, users]) => {
-      this.setState({ events, users });
-      console.log(events)
+    .then(([events, users, attend]) => {
+      this.setState({ events, users, attend });
+      // console.log(events)
     })
     .catch((error) => {
       console.log({ error })
     });
-
     /*
       set the function (callback) to call when a user goes idle
       we'll set this to logout a user when they're idle
@@ -134,9 +139,10 @@ class App extends Component {
   render() {
     const value = {
       events: this.state.events,
-      updateEvent: this.updateEvent,  
-      //users:this.state.users,
-      addEvent: this.addEvent
+      attend: this.state.attend,
+      addEvent: this.addEvent,
+      setUserId: this.setUserId,
+      updateEvent: this.updateEvent
     };
 
     return (
@@ -179,6 +185,11 @@ class App extends Component {
               <Route path="/update-events" component={UpdateEvents} />
             </section>
 
+            <section className="update-events">
+              {/* <Route path="/join-event" component={NavMenu} /> */}
+              <Route path="/join-event" component={JoinEvent} />
+            </section>
+
             <section className="success">
               {/* <Route path="/success" component={NavMenu} /> */}
               <Route path="/success" component={Confirm} />
@@ -203,6 +214,8 @@ class App extends Component {
 
               {/* <PrivateRoute path="/tutoring" component={NavMenu} /> */}
               <PrivateRoute path="/tutoring" component={EventList} />
+
+              <PrivateRoute path="/my-events" component={MyEvents} />
             </section>
           </div>
         </>

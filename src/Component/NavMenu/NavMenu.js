@@ -1,7 +1,6 @@
 import React, { Component } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 import "./nav.css";
-
 
 export default class NavMenu extends Component {
   state = {
@@ -66,6 +65,11 @@ export default class NavMenu extends Component {
               >
                 Tutoring
               </NavLink>
+              <Link className="my-events-link" to={"/my-events"}>
+                <span role="img" aria-label="calendar-picker">
+                  📅
+                </span>
+              </Link>
             </div>
           }
         </div>

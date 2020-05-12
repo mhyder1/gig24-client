@@ -13,7 +13,7 @@ export default class EventList extends Component {
     const token = TokenService.hasAuthToken()
       ? TokenService.readJwtToken()
       : { user_id: "" };
-    console.log(events);
+    //console.log(events);
     const eventList = events.filter((event) => event.type === type);
     
     return (
@@ -37,20 +37,32 @@ export default class EventList extends Component {
               <p>{event.description}</p>
               <p className="bold">Address</p>
               <p className='bdata'>{event.address}</p>
-              <button>Join</button>{" "}
-              {event.author === token.user_id && (
-                <button>
-                  <Link
-                    style={{ textDecoration: "none", color: "black" }}
+              {(event.author !== token.user_id) &&
+                <button id='join-btn'>
+                  <Link 
+                    style={{textDecoration:'none', color:'black'}} 
                     to={{
-                      pathname: "/update-events",
-                      state: { event },
+                      pathname: '/join-event',
+                      state: {event}
+                    }}
+                  >
+                    Join
+                  </Link>
+                </button>
+              }
+              {(event.author === token.user_id) &&
+                <button>
+                  <Link 
+                    style={{textDecoration:'none', color:'black'}} 
+                    to={{
+                      pathname: '/update-events',
+                      state: {event}
                     }}
                   >
                     Update
                   </Link>
                 </button>
-              )}
+              }
               <hr />
               <br />
             </li>

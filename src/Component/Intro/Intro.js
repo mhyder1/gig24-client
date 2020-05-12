@@ -11,7 +11,7 @@ export default class Intro extends Component {
   render() {
     const token = TokenService.hasAuthToken() ? TokenService.readJwtToken() : {fullname:''}
     const {events} = this.context
-    //console.group(events)
+
     return (
       <section>
         <h2>Welcome {token.fullname ? token.fullname: 'parents'}!</h2>
