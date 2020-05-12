@@ -1,4 +1,4 @@
-.navigation {
+/* .navigation {
     display: flex;
     justify-content: space-evenly;
     flex-direction: column;
@@ -10,7 +10,7 @@
   
 .hamburger {
     position: absolute;
-  /* right: 0; */
+
   margin-left:8px;
     z-index: 100;
     transform: rotate(90deg);
@@ -39,25 +39,9 @@
 .links {
 
 text-decoration: none;
-/* padding: 10px; */
-/* height: 100%; */
-color: #fff;
-/* padding: 1rem .5rem; */
-/* position: relative; */
-/* display: flex; */
-/* flex-direction: column;
-align-items: center;
-justify-content: center;
-text-align: center;
-border: 1px solid #7d7d7e  ;
-box-shadow: slategrey;
-transition: .1s; */
-/* float: left;
 
-height: 101px; */
-/* padding: 10px 15px 15px; */
-/* margin-bottom: 8px;
-border-bottom: 0; */
+color: #fff;
+
 
 }
 
@@ -109,7 +93,7 @@ a.links.tutor {
 
 @media screen and (min-width: 768px) {
     .navbar {
-        /* justify-content: space-evenly; */
+   
         flex-direction: row;
         position: static;
     }
@@ -122,4 +106,67 @@ a.links.tutor {
         display: none;
     }
 } 
+ */
+ padding: 20px;
+ background-color: rgb(20, 173, 150);
+ display: flex;
+ justify-content: space-evenly;
+ flex-direction: column;
+ position: absolute;
+ right: 0;
+ /* display: none; */
+}
 
+.navigation {
+ position: relative;
+}
+
+.hamburger {
+ position: absolute;
+ right: 0;
+ z-index: 100;
+ transform: rotate(90deg);
+ padding: 0;
+ font-size: 20px;
+ top: -4px;
+}
+
+.toggle {
+ display: none;
+}
+
+.show {
+ display: flex;
+}
+
+.links {
+text-decoration: none;
+color: white;
+padding: 10px;
+}
+
+li {
+ list-style: none; 
+}
+
+@media screen and (min-width: 1024px) {
+ .navbar {
+     justify-content: space-evenly;
+ }
+}
+
+@media screen and (min-width: 768px) {
+ .navbar {
+     /* justify-content: space-evenly; */
+     flex-direction: row;
+     position: static;
+ }
+
+ .toggle {
+     display: flex
+ }
+
+ .hamburger {
+     display: none;
+ }
+} 
