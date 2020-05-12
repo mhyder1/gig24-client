@@ -1,3 +1,14 @@
 .bold {
     font-weight: bold;
+    margin-bottom: 0;
+}
+p {
+    margin-top:0;
+}
+
+.ev-list{
+    padding:0;
+}
+#join-btn {
+    background-color: turquoise;
 }

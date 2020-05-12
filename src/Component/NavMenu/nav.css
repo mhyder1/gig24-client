@@ -1,16 +1,125 @@
-.navbar {
-    padding: 20px;
-    background-color: rgb(20, 173, 150);
+.navigation {
     display: flex;
     justify-content: space-evenly;
+    flex-direction: column;
+}
+
+.navigation {
+    position: relative;
+}
+  
+.hamburger {
+    position: absolute;
+  /* right: 0; */
+  margin-left:8px;
+    z-index: 100;
+    transform: rotate(90deg);
+    padding: 0;
+    font-size: 20px;
+    top: -4px;
+}
+
+#sidenav {
+  
+  padding: 12px;
+}
+
+.toggle {
+    display: none;
+}
+
+.show {
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    align-items: flex-start;
+    padding-top: 8px;
 }
 
 .links {
+
 text-decoration: none;
-color: white;
+/* padding: 10px; */
+/* height: 100%; */
+color: #fff;
+/* padding: 1rem .5rem; */
+/* position: relative; */
+/* display: flex; */
+/* flex-direction: column;
+align-items: center;
+justify-content: center;
+text-align: center;
+border: 1px solid #7d7d7e  ;
+box-shadow: slategrey;
+transition: .1s; */
+/* float: left;
+
+height: 101px; */
+/* padding: 10px 15px 15px; */
+/* margin-bottom: 8px;
+border-bottom: 0; */
+
 }
+
+
+
+.links:hover {
+    color:rgb(5, 170, 156) ! important;
+}
+
 
 li {
     list-style: none; 
 }
+
+a.links.art {
+    color: #ea4335;
+    box-shadow: grey;
+}
+
+a.links.music {
+    color: rgb(122, 3, 122);
+}
+
+a.links.sport {
+    color: #4285f4;
+}
+a.links.outdoor {
+    color:  #34a853;
+}
+a.links.books {
+    color: #f9ab00;;
+}
+a.links.tutor {
+    color: #000;
+}
+
+
+.main-nav-active{
+    color: 'black';
+  
+    background-color: rgb(21, 22, 22);
+}
+
+@media screen and (min-width: 1024px) {
+    .navbar {
+        justify-content: space-evenly;
+    }
+}
+
+@media screen and (min-width: 768px) {
+    .navbar {
+        /* justify-content: space-evenly; */
+        flex-direction: row;
+        position: static;
+    }
+
+    .toggle {
+        display: flex
+    }
+
+    .hamburger {
+        display: none;
+    }
+} 
 

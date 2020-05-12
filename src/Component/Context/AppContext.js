@@ -4,7 +4,10 @@ import React from 'react';
 const AppContext= React.createContext({
 
    events:[],
-   addEvent: ()=>{}
+   users:[],
+   attend:[],
+   addEvent: ()=>{},
+   updateEvent: ()=>{}
 })
 
 export default AppContext;
