@@ -1,56 +1,11 @@
-/* .navigation {
-    display: flex;
-    justify-content: space-evenly;
-    flex-direction: column;
-}
-
-.navigation {
-    position: relative;
-}
-  
-.hamburger {
-    position: absolute;
-
-  margin-left:8px;
-    z-index: 100;
-    transform: rotate(90deg);
-    padding: 0;
-    font-size: 20px;
-    top: -4px;
-}
-
-#sidenav {
-  
-  padding: 12px;
-}
-
-.toggle {
-    display: none;
-}
-
-.show {
-    display: flex;
-    flex-direction: column;
-    background-color: white;
-    align-items: flex-start;
-    padding-top: 8px;
-} */
-
 .links {
-
 text-decoration: none;
-
 color: #fff;
-
-
 }
-
-
 
 .links:hover {
     color:rgb(5, 170, 156) ! important;
 }
-
 
 li {
     list-style: none; 
@@ -82,44 +37,21 @@ a.links.tutor {
 .main-nav-active,
 .main-nav-active2
 {
-    color: 'black';
-    background-color: rgb(21, 22, 22);
-}
-/* 
-@media screen and (min-width: 1024px) {
-    .navbar {
-        justify-content: space-evenly;
-    }
+   background-color: #dff8f8; 
 }
 
-@media screen and (min-width: 768px) {
-    .navbar {
-   
-        flex-direction: row;
-        position: static;
-    }
-
-    .toggle {
-        display: flex
-    }
-
-    .hamburger {
-        display: none;
-    }
-}  */
-
-
- .navbar {
+.navbar {
     padding: 0px;
-    background-color: rgb(20, 173, 150);
     display: flex;
     flex-direction: column;
     position: absolute;
     right: 0;
+    background-color: white;
  }  
 
 .navigation {
     position: relative;
+   
 }
 
 .hamburger {

@@ -48,9 +48,9 @@ export default class Header extends Component {
       <>
       <nav>
           <Link to='/' 
-            style={{textDecoration:'none', borderBottom:'1px dashed purple'}}>
+            style={{textDecoration:'none', color:'#fff'}}>
             PARENT 
-            <span style={{fontSize: '40px', lineHeight: '.2', position: 'relative', margin:'0 5px', top: '5px'}}>&#8734;</span> 
+            <span style={{fontFamily:' -apple-system', fontSize: '40px', lineHeight: '.2', position: 'relative', margin:'0 5px', top: '5px'}}>&#8734;</span> 
             CONNECT
           </Link>
         {' '}

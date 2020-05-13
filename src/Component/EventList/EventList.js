@@ -56,8 +56,9 @@ export default class EventList extends Component {
                     Update
                   </Link>
                 </button>
+                
               }
-              <hr />
+    
               <br/>
             </li>
           ))}

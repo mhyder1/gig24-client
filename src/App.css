@@ -10,15 +10,17 @@
   top: 0px;
   transition: top 0s ease 0s, background-color 400ms ease-in-out 0s;
   transition: top .4s ease;
-  background-color: #fff;
-  border-bottom: 1px solid #e8eaed;
+  background-color: #00b1b0;
+  /* border-bottom: 1px solid #e8eaed; */
   box-sizing: content-box;
   position: relative;
   z-index: 100;
   /* text-align: center; */
 }
 
-
+ul {
+  padding:0;
+}
 .content {
   flex: 1 0 auto;
   text-align:center;
