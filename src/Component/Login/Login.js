@@ -30,8 +30,7 @@ export default class Login extends Component {
     ev.preventDefault();
     this.setState({ error: null });
         const { username, password } = this.state;
-        console.log(password)
-    console.log({ username });
+        
     AuthApiService.postLogin({
       username,
       password
@@ -46,18 +45,18 @@ export default class Login extends Component {
         this.handleLoginSuccess();
       })
       .catch((res) => {
-        console.log(res.error)
-        //this.setState({ error: res.error })
+  
+        this.setState({ error: res.error })
       });
   };
 
   render() {
-    const { error } = this.state;
+    const { error } = this.state
+    console.log(error)
     return (
       <>
         <h3>Log in</h3>
-
-        <p>demo username:dunder</p>
+        <p>demo username: dunder</p>
         <p>demo password: hello1</p>
         <form
           style={{ lineHeight: " 45px", backgroundColor: "#fff" }}

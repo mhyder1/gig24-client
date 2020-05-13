@@ -8,6 +8,11 @@ import "./MyEvents.css";
 export default class EventList extends Component {
   static contextType = AppContext;
 
+  numKids = (att, id) => {
+    return att.reduce((init, cur) => {
+        return cur.event === id ? init + cur.children : 0
+    },0)
+  }
   render() {
     const type = this.props.match.url.split('/')[1]
     const token = TokenService.hasAuthToken() ? TokenService.readJwtToken() : {user_id:''}
@@ -15,18 +20,7 @@ export default class EventList extends Component {
     // console.log(events)
     // console.log('attend',attend)
     const hosting = events.filter(event => event.author === token.user_id)
-    // console.log('hosting',hosting)
-    // const hostResult = []
-    // for (let host of hosting) {
-    //     for (let att of attend) {
-    //         if(att.event === host.id) {
-    //             // hostResult.push({...att,...host})
-    //             console.log(att)
-    //             console.log(host)
-    //         }
-    //     }
-    // }
-    // console.log(hostResult)
+  
 
 
     let attending = attend.filter(att => att.guest === token.user_id)
@@ -38,8 +32,7 @@ export default class EventList extends Component {
             }
         }
     }
-    // console.log(result)
-    // const eventList = events.filter(event => event.type === type)
+  
     
     return (
         <>
@@ -56,6 +49,9 @@ export default class EventList extends Component {
                     <NiceDate
                         date={new Date(event.time_of_event)}
                     />
+                    { this.numKids(attend, event.id) &&
+                    <p>{`Children: ${attend.length ? this.numKids(attend, event.id): null}`}</p>
+                    }
                     {/* <p className="bold">Description</p>
                     <p>{event.description}</p>
                     <p className="bold">Address</p>

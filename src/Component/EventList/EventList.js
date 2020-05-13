@@ -3,16 +3,39 @@ import AppContext from "../Context/AppContext";
 import {Link} from 'react-router-dom'
 import { NiceDate } from '../Utils/Utils'
 import TokenService from '../../services/token-service'
-import "./eventList.css";
+import config from '../../config'
+import "./eventList.css"; 
 
 export default class EventList extends Component {
   static contextType = AppContext;
 
+  removeAttend = (attend_id) => {
+    fetch(`${config.API_ENDPOINT}/attend/${attend_id}`, {
+      method: 'DELETE',
+      headers: {
+        'content-type': 'application/json'
+      },
+  })
+  .then(() => {
+    this.context.removeAttend(attend_id)
+  })
+  }
   render() {
     const type = this.props.match.url.split('/')[1]
     const token = TokenService.hasAuthToken() ? TokenService.readJwtToken() : {user_id:''}
-    const { events } = this.context
+    const { events, attend } = this.context
     const eventList = events.filter(event => event.type === type)
+
+    for (let event of eventList) {
+      event.joined = false
+        for (let att of attend) {
+            if(att.guest === token.user_id && att.event === event.id) {
+       
+                event.joined = true;
+                event.attend_id = att.id
+            }
+        }
+    }
     
     return (
       <>
@@ -31,7 +54,7 @@ export default class EventList extends Component {
               <p>{event.description}</p>
               <p className="bold">Address</p>
               <p>{event.address}</p>
-              {(event.author !== token.user_id) &&
+              {(event.author !== token.user_id && !event.joined) &&
                 <button>
                   <Link 
                     style={{textDecoration:'none', color:'black'}} 
@@ -43,6 +66,12 @@ export default class EventList extends Component {
                     Join
                   </Link>
                 </button>
+              }
+              {(event.author !== token.user_id && event.joined) &&
+                <button 
+                  onClick={() => this.removeAttend(event.attend_id)}
+                  style={{cursor:'pointer'}}
+                  >Un join</button>
               }
               {(event.author === token.user_id) &&
                 <button>

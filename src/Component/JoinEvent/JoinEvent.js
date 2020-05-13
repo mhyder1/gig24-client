@@ -63,9 +63,8 @@ static contextType = AppContext
       return res.json();
     })
     .then((attend)=> {
-        console.log(attend)
-    //   this.context.addEvent(event)
-    //   this.props.history.push(`/my-events`);
+      this.context.joinEvent(attend)
+      this.props.history.push(`/my-events`);
     })
     .catch((error) => {
       console.log({error});

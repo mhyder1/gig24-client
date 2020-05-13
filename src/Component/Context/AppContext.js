@@ -7,7 +7,9 @@ const AppContext= React.createContext({
    users:[],
    attend:[],
    addEvent: ()=>{},
-   updateEvent: ()=>{}
+   updateEvent: ()=>{},
+   joinEvent: ()=>{},
+   removeAttend: ()=> {}
 })
 
 export default AppContext;

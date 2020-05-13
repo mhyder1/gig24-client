@@ -54,6 +54,19 @@ class App extends Component {
     });
   };
 
+
+  joinEvent = (att) => {
+    this.setState({
+      attend: [...this.state.attend, att]
+    })
+  }
+
+  removeAttend = (att_id) => {
+    this.setState({
+      attend: this.state.attend.filter(att => att.id !== att_id)
+    });
+  }
+
   setUserId = (user_id, fullname) => {
     this.setState({
       user_id,
@@ -142,7 +155,9 @@ class App extends Component {
       attend: this.state.attend,
       addEvent: this.addEvent,
       setUserId: this.setUserId,
-      updateEvent: this.updateEvent
+      updateEvent: this.updateEvent,
+      joinEvent: this.joinEvent,
+      removeAttend: this.removeAttend
     };
 
     return (
