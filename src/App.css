@@ -10,7 +10,8 @@
   top: 0px;
   transition: top 0s ease 0s, background-color 400ms ease-in-out 0s;
   transition: top .4s ease;
-  background-color: #00b1b0;
+  background-color:#20a7a7;
+  /* background-color: #00b1b0; */
   /* border-bottom: 1px solid #e8eaed; */
   box-sizing: content-box;
   position: relative;

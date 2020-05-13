@@ -1,17 +1,20 @@
 .links {
 text-decoration: none;
 color: #fff;
+font-weight: 500; 
+font-size: 18px; 
 }
 
 .links:hover {
-    color:rgb(5, 170, 156) ! important;
+    color: #5f045f;
+      /* color:rgb(5, 170, 156) ! important; */
 }
 
 li {
     list-style: none; 
 }
 
-a.links.art {
+/* a.links.art {
     color: #ea4335;
     box-shadow: grey;
 }
@@ -31,13 +34,13 @@ a.links.books {
 }
 a.links.tutor {
     color: #000;
-}
+} */
 
 
 .main-nav-active,
 .main-nav-active2
 {
-   background-color: #dff8f8; 
+   background-color:#20a7a7; 
 }
 
 .navbar {
@@ -46,12 +49,11 @@ a.links.tutor {
     flex-direction: column;
     position: absolute;
     right: 0;
-    background-color: white;
+    background-color: #00CCCC;
  }  
 
 .navigation {
-    position: relative;
-   
+    position: relative;   
 }
 
 .hamburger {

@@ -52,6 +52,11 @@ export default class Header extends Component {
             PARENT 
             <span style={{fontFamily:' -apple-system', fontSize: '40px', lineHeight: '.2', position: 'relative', margin:'0 5px', top: '5px'}}>&#8734;</span> 
             CONNECT
+            {/* float: right; 
+ margin-right: 50px; 
+ margin-top: 5px; 
+ color: #fff; */}
+
           </Link>
         {' '}
         <span style={{float:'right', marginRight:'50px'}}>
