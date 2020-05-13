@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import TokenService from "../../services/token-service";
 import IdleService from "../../services/idle-service";
 import "./Header.css";
-import NavMenu from "../NavMenu/NavMenu";
+// import NavMenu from "../NavMenu/NavMenu";
 
 export default class Header extends Component {
   handleLogoutClick = () => {
@@ -45,41 +45,22 @@ export default class Header extends Component {
 
   render() {
     return (
-      <div className="topnav">
-        <nav>
-          <Link
-            className="logo"
-            style={{
-              textDecoration: "none",
-              borderBottom: "1px dashed purple",
-            }}
-            to="/"
-          >
-            <h2 id='parent-logo'>
-              {" "}
-              PARENT
-              <span
-                style={{
-                  fontSize: "40px",
-                  lineHeight: ".2",
-                  position: "relative",
-                  margin: "0 5px",
-                  top: "5px",
-                }}
-              >
-                &#8734;
-              </span>{" "}
-              CONNECT
-            </h2>{" "}
+      <>
+      <nav>
+          <Link to='/' 
+            style={{textDecoration:'none', borderBottom:'1px dashed purple'}}>
+            PARENT 
+            <span style={{fontSize: '40px', lineHeight: '.2', position: 'relative', margin:'0 5px', top: '5px'}}>&#8734;</span> 
+            CONNECT
           </Link>
-          <span style={{ float: "right", marginRight: "16px" }}>
-            {TokenService.hasAuthToken()
-              ? this.renderLogoutLink()
-              : this.renderLoginLink()}
-          </span>
-          <NavMenu />
-        </nav>
-      </div>
+        {' '}
+        <span style={{float:'right', marginRight:'50px'}}>
+        {TokenService.hasAuthToken()
+          ? this.renderLogoutLink()
+          : this.renderLoginLink()}
+        </span>
+      </nav>
+    </>
     );
   }
 }

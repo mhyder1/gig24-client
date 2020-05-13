@@ -20,7 +20,7 @@ export default class NavMenu extends Component {
         <button className="hamburger" onClick={this.toggle}>
           |||
         </button>
-        <div id="sidenav">
+        {/* <div id="sidenav"> */}
           {
             <div className={open ? "navbar show" : "navbar toggle"}>
               <NavLink
@@ -31,35 +31,35 @@ export default class NavMenu extends Component {
                 Arts & Crafts
               </NavLink>
               <NavLink
-                ActiveClassName="main-nav-active"
+                activeClassName="main-nav-active2"
                 className="links music"
                 to={"/music-dance"}
               >
                 Music & Dance
               </NavLink>
               <NavLink
-                ActiveClassName="main-nav-active"
+                activeClassName="main-nav-active"
                 className="links outdoor"
                 to={"/outdoor-activities"}
               >
                 Outdoor activities
               </NavLink>
               <NavLink
-                ActiveClassName="main-nav-active"
+                activeClassName="main-nav-active"
                 className="links sport"
                 to={"/sports-fitness"}
               >
                 Sports & Fitnesss
               </NavLink>
               <NavLink
-                ActiveClassName="main-nav-active"
+                activeClassName="main-nav-active"
                 className="links books"
                 to={"/books-films"}
               >
                 Books & Films
               </NavLink>
               <NavLink
-                ActiveClassName="main-nav-active"
+                activeClassName="main-nav-active"
                 className="links tutor"
                 to={"/tutoring"}
               >
@@ -72,7 +72,7 @@ export default class NavMenu extends Component {
               </Link>
             </div>
           }
-        </div>
+        {/* </div> */}
       </nav>
     );
   }

@@ -5,7 +5,7 @@ import Header from "./Component/Header/Header";
 import Intro from "./Component/Intro/Intro";
 import Signup from "./Component/Signup/Signup";
 import AddEvents from "./Component/AddEvents/AddEvents";
-//import NavMenu from "./Component/NavMenu/NavMenu";
+import NavMenu from "./Component/NavMenu/NavMenu";
 import Confirm from "./Component/Confirm/Confirm";
 import EventList from "./Component/EventList/EventList";
 import UpdateEvents from "./Component/UpdateEvents/UpdateEvents"
@@ -153,68 +153,68 @@ class App extends Component {
             <header className="App-header">
               <Switch>
                 <Route path="/" component={Header} />
-                {/* <Route exact path="/" component={NavMenu} /> */}
+                <Route exact path="/" component={NavMenu} />
               </Switch>
             </header>
 
             {/* Unprotected route */}
             <section className='home'>
-            {/* <Route exact path="/" component={NavMenu} /> */}
+            <Route exact path="/" component={NavMenu} />
             <Route exact path="/" component={Intro} />
             </section>
             {/* Unprotected route */}
             <section className='sign-up'>
-              {/* <Route path="/signup" component={NavMenu} /> */}
+              <Route path="/signup" component={NavMenu} />
               <Route path="/signup" component={Signup} />
             </section>
              
              <section>
-              {/* <Route path="/login" component={NavMenu} /> */}
+              <Route path="/login" component={NavMenu} />
               <Route path="/login" component={Login} />
             </section>
 
              {/* Protected route */}
             <section className="add-events">
-              {/* <Route path="/add-events" component={NavMenu} /> */}
+              <Route path="/add-events" component={NavMenu} />
               <Route path="/add-events" component={AddEvents} />
             </section>
 
             {/* Protected route */}
             <section className="update-events">
-              {/* <Route path="/update-events" component={NavMenu} /> */}
+              <Route path="/update-events" component={NavMenu} />
               <Route path="/update-events" component={UpdateEvents} />
             </section>
 
             <section className="update-events">
-              {/* <Route path="/join-event" component={NavMenu} /> */}
+              <Route path="/join-event" component={NavMenu} />
               <Route path="/join-event" component={JoinEvent} />
             </section>
 
             <section className="success">
-              {/* <Route path="/success" component={NavMenu} /> */}
+              <Route path="/success" component={NavMenu} />
               <Route path="/success" component={Confirm} />
             </section>
 
             {/* Protected route */}
             <section className="eventList">
-              {/* <PrivateRoute path="/arts-crafts" component={NavMenu} /> */}
+              <PrivateRoute path="/arts-crafts" component={NavMenu} />
               <PrivateRoute path="/arts-crafts" component={EventList} />
 
-              {/* <PrivateRoute path="/music-dance" component={NavMenu} /> */}
+              <PrivateRoute path="/music-dance" component={NavMenu} />
               <PrivateRoute path="/music-dance" component={EventList} />
-{/* 
-              <PrivateRoute path="/outdoor-activities" component={NavMenu} /> */}
+              <PrivateRoute path="/outdoor-activities" component={NavMenu} /> 
               <PrivateRoute path="/outdoor-activities" component={EventList} />
-{/* 
-              <PrivateRoute path="/sports-fitness" component={NavMenu} /> */}
+
+              <PrivateRoute path="/sports-fitness" component={NavMenu} /> 
               <PrivateRoute path="/sports-fitness" component={EventList} />
-{/* 
-              <PrivateRoute path="/books-films" component={NavMenu} /> */}
+
+              <PrivateRoute path="/books-films" component={NavMenu} />
               <PrivateRoute path="/books-films" component={EventList} />
 
-              {/* <PrivateRoute path="/tutoring" component={NavMenu} /> */}
+              <PrivateRoute path="/tutoring" component={NavMenu} />
               <PrivateRoute path="/tutoring" component={EventList} />
 
+              <PrivateRoute path="/my-events" component={NavMenu} />
               <PrivateRoute path="/my-events" component={MyEvents} />
             </section>
           </div>

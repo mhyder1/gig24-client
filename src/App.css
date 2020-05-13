@@ -15,12 +15,9 @@
   box-sizing: content-box;
   position: relative;
   z-index: 100;
+  /* text-align: center; */
 }
-/*  
-z-index: 1000;
-display: flex;
-background: #f7f4dc;
-border-bottom: 1px solid #201c29; */
+
 
 .content {
   flex: 1 0 auto;
