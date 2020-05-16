@@ -27,9 +27,9 @@ CSS
 
 1. Landing Page
 
-![alt text][https://raw.githubusercontent.com/Anarchalk/parent-connect-client/master/screenshots/Capture.JPG]
+![alt text][logo]
 
-[logo]: ("Landing page")
+[logo]: (https://raw.githubusercontent.com/Anarchalk/parent-connect-client/master/screenshots/Capture.JPG"Landing page")
 
 
 ![alt text]("Search result page")
