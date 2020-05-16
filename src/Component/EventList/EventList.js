@@ -21,6 +21,8 @@ export default class EventList extends Component {
   })
   }
   render() {
+    //const {eventType} = this.props.location.state
+    console.log(this.props.location)
     const type = this.props.match.url.split('/')[1]
     const token = TokenService.hasAuthToken() ? TokenService.readJwtToken() : {user_id:''}
     const { events, attend } = this.context
@@ -30,7 +32,6 @@ export default class EventList extends Component {
       event.joined = false
         for (let att of attend) {
             if(att.guest === token.user_id && att.event === event.id) {
-       
                 event.joined = true;
                 event.attend_id = att.id
             }
@@ -39,7 +40,7 @@ export default class EventList extends Component {
     
     return (
       <>
-        <h3 id='current'>Current events</h3>
+        <h3 id='current'> events</h3>
         <button 
           style={{
             marginRight: '5px',
@@ -47,10 +48,11 @@ export default class EventList extends Component {
             borderRadius: '5px',
             padding: '5px',
             marginTop: '10px',
+            marginBottom: '20px',
             backgroundColor: '#F98165'
           }}>
             <Link style={{textDecoration:'none', color:'white'}} to='/add-events'>Create your event</Link>
-            </button>
+            </button> 
         <ul className="event-list">
           {eventList.map((event, id) => (
             <li key={id}>

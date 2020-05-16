@@ -20,13 +20,17 @@ export default class NavMenu extends Component {
         <button className="hamburger" onClick={this.toggle}>
           |||
         </button>
-        {/* <div id="sidenav"> */}
           {
             <div className={open ? "navbar show" : "navbar toggle"}>
               <NavLink
                 activeClassName="main-nav-active"
                 className="links art"
-                to={"/arts-crafts"}
+                to={{
+                  pathname:'/arts-crafts',
+                  state: {
+                    eventType:'Arts & Crafts'
+                  }
+                }}
               >
                 Arts & Crafts
               </NavLink>
@@ -72,7 +76,6 @@ export default class NavMenu extends Component {
               </Link>
             </div>
           }
-        {/* </div> */}
       </nav>
     );
   }

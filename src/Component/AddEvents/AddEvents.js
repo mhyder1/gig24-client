@@ -9,6 +9,7 @@ import '../../AlgoliaPlaces.css'
 
 
 
+
 export default class AddEvents extends Component {
 static contextType = AppContext
 
@@ -85,7 +86,7 @@ static contextType = AppContext
   render() {
     return (
       <>
-        <h2>Create your event</h2>
+      <h2>Create your event</h2>
         <p>Choose date and time:</p>
         <form onSubmit ={this.handleSubmit}>
          <DateTimePicker
@@ -152,6 +153,7 @@ static contextType = AppContext
               </select> <br/>
           <input type="submit" value="add event" />
         </form>
+ 
       </>
     );
   }
