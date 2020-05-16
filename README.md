@@ -29,7 +29,7 @@ CSS
 
 ![alt text][logo]
 
-[logo]: (https://raw.githubusercontent.com/Anarchalk/parent-connect-client/master/screenshots/Capture.JPG"Landing page")
+![logo](https://raw.githubusercontent.com/Anarchalk/parent-connect-client/master/screenshots/Capture.JPG "Landing page")
 
 
 ![alt text]("Search result page")
