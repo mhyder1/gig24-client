@@ -27,16 +27,16 @@ CSS
 
 1. Landing Page
 
-![alt text][logo]
+![logo](https://github.com/Anarchalk/parent-connect-client/blob/master/screenshots/landing-pg.JPG "Landing Page")
 
-![logo](https://raw.githubusercontent.com/Anarchalk/parent-connect-client/master/screenshots/Capture.JPG "Landing page")
+![logo](https://raw.githubusercontent.com/Anarchalk/parent-connect-client/master/screenshots/signup-pg.JPG "Signup page")
 
+![logo](https://raw.githubusercontent.com/Anarchalk/parent-connect-client/master/screenshots/event-pg.JPG "Event host view")
 
-![alt text]("Search result page")
-
+![logo](https://github.com/Anarchalk/parent-connect-client/blob/master/screenshots/my-events.JPG "My event page")
 
 ***
 
 ## DOCUMENTATION
-You can find the detailed development documentation from the link below:
+You can find detailed development documentation from the link below:
 https://gist.github.com/Anarchalk/bcb7069ed9589d20de41f2ef65cbbfd0
