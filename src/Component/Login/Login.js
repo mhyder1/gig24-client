@@ -56,8 +56,8 @@ export default class Login extends Component {
     return (
       <>
         <h3>Log in</h3>
-        <p>demo username: dunder</p>
-        <p>demo password: hello1</p>
+        <p>Demo username: dunder</p>
+        <p>Demo password: password</p>
         <form
           style={{ lineHeight: " 45px", backgroundColor: "#fff" }}
           onSubmit={this.handleSubmitJwtAuth}
@@ -87,24 +87,27 @@ export default class Login extends Component {
           <br />
           <input
             style={{
-              marginLeft: "45px",
-              backgroundColor: "#212121",
-              color: "#fff",
-              padding: "3px 5px",
-              borderRadius: "4px",
-              lineHeight: "20px",
-              fontSize: "13px",
+              marginRight: '10px',
+              marginLeft:'4rem',
+              border: '1px solid #fff',
+              borderRadius: '5px',
+              padding: '5px',
+              color: '#fff',
+              marginTop: '10px',
+              backgroundColor: '#F98165'
             }}
             type="submit"
             value="login"
           />{" "}
           <button
             style={{
-              backgroundColor: "#212121",
-              padding: "3px 6px",
-              borderRadius: "4px",
-              lineHeight: "20px",
-              fontSize: "13px",
+              marginRight: '5px',
+              border: '1px solid #fff',
+              borderRadius: '5px',
+              padding: '5px',
+              color: '#fff',
+              marginTop: '10px',
+              backgroundColor: '#F98165'
             }}
           >
             <Link

@@ -92,7 +92,19 @@ static contextType = AppContext
                 <option value={10}>10</option>
               </select>
             {' '}
-          <input type="submit" value="join event" />
+          <input 
+            type="submit" 
+            value="join event"
+            style={{
+              marginRight: '5px',
+              border: '1px solid #fff',
+              borderRadius: '5px',
+              padding: '5px',
+              marginTop: '0',
+              marginBottom:'10px',
+              color:'#fff',
+              backgroundColor: 'rgb(0, 204, 204)'
+            }} />
         </form>
       </>
     );

@@ -1,6 +1,9 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Baloo+Da+2:wght@400;600&display=swap');
 
+html {
+  overflow-x:hidden;
+}
 
 body {
   margin: 0;
@@ -9,10 +12,13 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color:#fbfb050a;
+  height: 100vh;
+  overflow-x:hidden
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
- /* Libre Franklin */
+

@@ -1,31 +1,32 @@
 .bold {
     font-weight: bold;
     margin-bottom: 0;
+    margin-top:10px;
+    color:#045d5c;
 }
 p {
     margin-top:0;
 }
+#title {
+    text-transform: uppercase;
+}
 
+#current{
+margin-bottom: 0;;
+}
 
 .event-list{
     padding:0;
 }
-#join-btn {
-    background-color: turquoise;
-}
 
 .event-list > li {
-
-    width: 100%;
-    /* border: 1px solid; */
-    border-radius: 10px;
-    margin-bottom: 20px;
-    margin-left: 10px;
-    margin-right: 10px;
-    border: 1px solid #e8eaed;
-    background-color: white;
+    list-style: none;
+    border: 1px lightgrey solid;
+    margin: 0 10px 20px;
+    box-shadow: 1px 1px 10px #e8d4aa;
+    border-radius: 4px;
+    background-color: #fff;
 }
-
 
 
 @media screen and (min-width: 768px) {

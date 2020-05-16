@@ -24,7 +24,6 @@ componentDidMount() {
   const { event } = this.props.location.state
   console.log(this.context)
   this.setState({
-      // parent_name: event.parent_name,
       title: event.title,
       description: event.description,
       address: event.address,
@@ -94,19 +93,11 @@ handleSubmit =(e)=> {
       <h2>Create your event</h2>
       <p>Choose date and time:</p>
       <form onSubmit ={this.handleSubmit}>
-        {/* <DayTimePicker />  */}
       <DateTimePicker
         onChange={this.onChange}
         value={this.state.time_of_event}
       />
         <br/>
-        {/* <label>Parent name</label> <br/>
-        <input onChange={(e) => this.handleChange(e)}
-          type="text" 
-          name="parent_name" 
-          value={this.state.parent_name} 
-          required />
-          <br/> */}
         <label>Event title</label> <br/>
         <input onChange={(e) => this.handleChange(e)}
           type="text" 
@@ -171,7 +162,16 @@ handleSubmit =(e)=> {
               <option value="books-films">Books & Films</option>
               <option value="tutoring">Tutoring</option>
             </select> <br/>
-        <input type="submit" value="update event" />
+        <input type="submit" value="update event"
+        style={{
+              marginRight: '5px',
+              border: '1px solid #fff',
+              borderRadius: '5px',
+              padding: '5px',
+              color: '#fff',
+              marginTop: '10px',
+              backgroundColor: '#F98165'
+            }}/>
       </form>
       </>
     );

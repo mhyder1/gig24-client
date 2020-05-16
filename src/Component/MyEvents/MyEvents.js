@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import AppContext from "../Context/AppContext";
-//import {Link} from 'react-router-dom'
 import { NiceDate } from '../Utils/Utils'
 import TokenService from '../../services/token-service'
 import "./MyEvents.css";
@@ -14,11 +13,9 @@ export default class EventList extends Component {
     },0)
   }
   render() {
-    const type = this.props.match.url.split('/')[1]
+    //const type = this.props.match.url.split('/')[1]
     const token = TokenService.hasAuthToken() ? TokenService.readJwtToken() : {user_id:''}
     const { events, attend } = this.context
-    // console.log(events)
-    // console.log('attend',attend)
     const hosting = events.filter(event => event.author === token.user_id)
   
 

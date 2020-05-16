@@ -15,7 +15,7 @@ export default class Header extends Component {
   renderLogoutLink() {
     return (
       <div>
-        <Link onClick={this.handleLogoutClick} to="/">
+        <Link onClick={this.handleLogoutClick} to="/" style={{textDecoration:'none', color:'#000'}}>
           Logout
         </Link>
       </div>
@@ -25,21 +25,21 @@ export default class Header extends Component {
   renderLoginLink() {
     return (
       <>
-        <Link
+       <Link
           className="log-sign-links"
-          style={{ marginRight: "5px" }}
-          to="/signup"
+          style={{ marginRight: "5px", fontWeight:'bolder', color:'navy' }}
+          to="/login"
         >
-          Sign up
+          Log in
         </Link>{" "}
         <Link
           className="log-sign-links"
           style={{ marginLeft: "5px" }}
-          to="/login"
+          to="/signup"
         >
-          Log in
+          Sign up
         </Link>
-      </>
+       </>
     );
   }
 
@@ -52,14 +52,9 @@ export default class Header extends Component {
             PARENT 
             <span style={{fontFamily:' -apple-system', fontSize: '40px', lineHeight: '.2', position: 'relative', margin:'0 5px', top: '5px'}}>&#8734;</span> 
             CONNECT
-            {/* float: right; 
- margin-right: 50px; 
- margin-top: 5px; 
- color: #fff; */}
-
           </Link>
         {' '}
-        <span style={{float:'right', marginRight:'50px'}}>
+        <span className='header-span'>
         {TokenService.hasAuthToken()
           ? this.renderLogoutLink()
           : this.renderLoginLink()}

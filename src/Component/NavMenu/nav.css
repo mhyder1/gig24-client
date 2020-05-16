@@ -10,33 +10,6 @@ font-size: 18px;
       /* color:rgb(5, 170, 156) ! important; */
 }
 
-li {
-    list-style: none; 
-}
-
-/* a.links.art {
-    color: #ea4335;
-    box-shadow: grey;
-}
-
-a.links.music {
-    color: rgb(122, 3, 122);
-}
-
-a.links.sport {
-    color: #4285f4;
-}
-a.links.outdoor {
-    color:  #34a853;
-}
-a.links.books {
-    color: #f9ab00;;
-}
-a.links.tutor {
-    color: #000;
-} */
-
-
 .main-nav-active,
 .main-nav-active2
 {

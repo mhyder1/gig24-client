@@ -92,16 +92,15 @@ export default class Signup extends Component {
           <br />
           <input className='submitbtn'
             type="submit"
-            // style={{
-            //   marginRight: '5px',
-            //   border: '1px solid #fff',
-            //   borderRadius: '5px',
-            //   padding: '5px',
-            //   color: '#fff',
-            //   marginTop: '10px',
-            //   backgroundColor: '#F98165'
-            // }}
-
+            style={{
+              marginRight: '5px',
+              border: '1px solid #fff',
+              borderRadius: '5px',
+              padding: '5px',
+              color: '#fff',
+              marginTop: '10px',
+              backgroundColor: '#F98165'
+            }}
             value="Sign up"
           />
         </form>

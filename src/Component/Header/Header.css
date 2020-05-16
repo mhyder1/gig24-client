@@ -10,7 +10,7 @@
   cursor: pointer;
 }
 
-/* #parent-logo{
-  margin-top:10px;
-  margin-bottom:0;
-} */
+.header-span {
+  display: block;
+  /* style={{float:'right', marginRight:'50px'}} */
+}

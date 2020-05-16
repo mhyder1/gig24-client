@@ -39,25 +39,42 @@ export default class EventList extends Component {
     
     return (
       <>
-        <button style={{backgroundColor:'green', color:'white'}}><Link style={{textDecoration:'none', color:'white'}} to='/add-events'>Create your event</Link></button>
-        <h3>Current events</h3>
+        <h3 id='current'>Current events</h3>
+        <button 
+          style={{
+            marginRight: '5px',
+            border: '1px solid #fff',
+            borderRadius: '5px',
+            padding: '5px',
+            marginTop: '10px',
+            backgroundColor: '#F98165'
+          }}>
+            <Link style={{textDecoration:'none', color:'white'}} to='/add-events'>Create your event</Link>
+            </button>
         <ul className="event-list">
           {eventList.map((event, id) => (
             <li key={id}>
-              <p className="bold">{event.parent_name}</p>
-              <p className="bold">{event.title}</p>
-              {/* <p>{event.time_of_event}</p> */}
+              <p className="bold">Hosted by {event.parent_name}</p>
+              <h3 id='title'>{event.title}</h3>
               <NiceDate
                 date={new Date(event.time_of_event)}
               />
-              <p className="bold">Description</p>
-              <p>{event.description}</p>
+              <p className='description'>{event.description}</p>
               <p className="bold">Address</p>
               <p>{event.address}</p>
               {(event.author !== token.user_id && !event.joined) &&
-                <button>
+                <button 
+                style={{
+                  marginRight: '5px',
+                  border: '1px solid #fff',
+                  borderRadius: '5px',
+                  padding: '5px',
+                  marginTop: '0',
+                  marginBottom:'10px',
+                  backgroundColor: '#00CCCC'
+                }}>
                   <Link 
-                    style={{textDecoration:'none', color:'black'}} 
+                    style={{textDecoration:'none', color:'#fff'}} 
                     to={{
                       pathname: '/join-event',
                       state: {event}
@@ -74,9 +91,18 @@ export default class EventList extends Component {
                   >Un join</button>
               }
               {(event.author === token.user_id) &&
-                <button>
+                <button 
+                style={{
+                  marginRight: '5px',
+                  border: '1px solid #fff',
+                  borderRadius: '5px',
+                  padding: '5px',
+                  marginTop: '0',
+                  marginBottom:'10px',
+                  backgroundColor: 'rgb(0, 204, 204)'
+                }}>
                   <Link 
-                    style={{textDecoration:'none', color:'black'}} 
+                    style={{textDecoration:'none', color:'#fff'}} 
                     to={{
                       pathname: '/update-events',
                       state: {event}
