@@ -29,9 +29,15 @@ CSS
 
 ![logo](https://github.com/Anarchalk/parent-connect-client/blob/master/screenshots/landing-pg.JPG "Landing Page")
 
+2.Signup Page
+
 ![logo](https://raw.githubusercontent.com/Anarchalk/parent-connect-client/master/screenshots/signup-pg.JPG "Signup page")
 
+3.Event Host View
+
 ![logo](https://raw.githubusercontent.com/Anarchalk/parent-connect-client/master/screenshots/event-pg.JPG "Event host view")
+
+4. My Event Page
 
 ![logo](https://github.com/Anarchalk/parent-connect-client/blob/master/screenshots/my-events.JPG "My event page")
 
