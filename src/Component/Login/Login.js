@@ -56,8 +56,8 @@ export default class Login extends Component {
     return (
       <>
         <h3>Log in</h3>
-        <p>Demo username: dunder</p>
-        <p>Demo password: password</p>
+        <p>Demo username: anar</p>
+        <p>Demo password: hello</p>
         <form
           style={{ lineHeight: " 45px", backgroundColor: "#fff" }}
           onSubmit={this.handleSubmitJwtAuth}
