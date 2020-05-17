@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import TokenService from "../../services/token-service";
 import IdleService from "../../services/idle-service";
 import "./Header.css";
-// import NavMenu from "../NavMenu/NavMenu";
+
 
 export default class Header extends Component {
   handleLogoutClick = () => {

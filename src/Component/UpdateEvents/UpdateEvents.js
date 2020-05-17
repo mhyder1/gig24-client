@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import DateTimePicker from 'react-datetime-picker';
-//import AlgoliaPlaces from 'algolia-places-react';
 import AppContext from '../Context/AppContext'
 import config from '../../config'
 import '../../AlgoliaPlaces.css'
@@ -31,8 +30,6 @@ componentDidMount() {
       time_of_event: new Date(event.time_of_event),
       id: event.id,
   })
-  // AlgoliaPlaces.setVal(event.address)
-  // console.log(AlgoliaPlaces.Places)
 }
 handleChange =(e) => {
   console.log(e.target.name, e.target.value)
@@ -113,38 +110,6 @@ handleSubmit =(e)=> {
           required />
         <br/>
         <label>Address</label><br/>
-        {/* <AlgoliaPlaces
-          placeholder='Write an address here'
-    
-          options={{
-            appId: config.APPID,
-            apiKey: config.SEARCH_KEY,
-            language: 'en',
-            countries: ['us'],
-            type: 'address',
-            // Other options from https://community.algolia.com/places/documentation.html#options
-          }}
-    
-          onChange={({ query, rawAnswer, suggestion, suggestionIndex }) => 
-            this.handleAddress(suggestion)}
-            // console.log(suggestion.value)}
-    
-          // onSuggestions={({ rawAnswer, query, suggestions }) => 
-          //   console.log('Fired when dropdown receives suggestions. You will receive the array of suggestions that are displayed.')}
-    
-          // onCursorChanged={({ rawAnswer, query, suggestion, suggestonIndex }) => 
-          //   console.log('Fired when arrows keys are used to navigate suggestions.')}
-    
-          // onClear={() => 
-          //   console.log('Fired when the input is cleared.')}
-    
-          // onLimit={({ message }) => 
-          //   console.log('Fired when you reached your current rate limit.')}
-    
-          // onError={({ message }) => 
-          //   console.log('Fired when we could not make the request to Algolia Places servers for any reason but reaching your rate limit.')}
-        /> */}
-
         <input onChange={(e) => this.handleChange(e)}
           type="text" 
           name="address" 

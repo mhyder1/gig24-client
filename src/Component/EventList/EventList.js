@@ -21,7 +21,7 @@ export default class EventList extends Component {
   })
   }
   render() {
-    //const {eventType} = this.props.location.state
+
     console.log(this.props.location)
     const type = this.props.match.url.split('/')[1]
     const token = TokenService.hasAuthToken() ? TokenService.readJwtToken() : {user_id:''}

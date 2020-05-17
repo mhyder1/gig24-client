@@ -1,12 +1,10 @@
 import React, { Component } from "react";
-// import DayTimePicker from '../DateTimePicker/DayTimePicker'
 import DateTimePicker from 'react-datetime-picker';
 import AlgoliaPlaces from 'algolia-places-react';
 import AppContext from '../Context/AppContext'
 import TokenService from '../../services/token-service'
 import config from '../../config'
 import '../../AlgoliaPlaces.css'
-
 
 
 
@@ -27,7 +25,6 @@ static contextType = AppContext
   }
 
   handleChange =(e) => {
-    // console.log(e.target.name, e.target.value)
     this.setState({
       [e.target.name] : e.target.value,
     });
@@ -117,28 +114,10 @@ static contextType = AppContext
               language: 'en',
               countries: ['us'],
               type: 'address',
-              // Other options from https://community.algolia.com/places/documentation.html#options
             }}
       
             onChange={({ query, rawAnswer, suggestion, suggestionIndex }) => 
-              this.handleAddress(suggestion)}
-              // console.log(suggestion.value)}
-      
-            // onSuggestions={({ rawAnswer, query, suggestions }) => 
-            //   console.log('Fired when dropdown receives suggestions. You will receive the array of suggestions that are displayed.')}
-      
-            // onCursorChanged={({ rawAnswer, query, suggestion, suggestonIndex }) => 
-            //   console.log('Fired when arrows keys are used to navigate suggestions.')}
-      
-            // onClear={() => 
-            //   console.log('Fired when the input is cleared.')}
-      
-            // onLimit={({ message }) => 
-            //   console.log('Fired when you reached your current rate limit.')}
-      
-            // onError={({ message }) => 
-            //   console.log('Fired when we could not make the request to Algolia Places servers for any reason but reaching your rate limit.')}
-          />
+              this.handleAddress(suggestion)} />
          <br/>
           <label>Event type</label><br/>
           <select name="type"

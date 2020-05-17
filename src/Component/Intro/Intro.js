@@ -18,7 +18,7 @@ export default class Intro extends Component {
         <h2 id='welcome'>Welcome {token.fullname ? token.fullname: 'parents'}!</h2>
         <p>
           The Parent Connect app connects single parents to a collective online village where families 
-          can grow together experiencing different activities, cultures and most importantly supporting each other 
+          can grow together experiencing different activities, cultures and most importantly supporting each other. 
         </p>
         </article>
         <article>

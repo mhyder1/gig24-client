@@ -13,7 +13,6 @@ export default class EventList extends Component {
     },0)
   }
   render() {
-    //const type = this.props.match.url.split('/')[1]
     const token = TokenService.hasAuthToken() ? TokenService.readJwtToken() : {user_id:''}
     const { events, attend } = this.context
     const hosting = events.filter(event => event.author === token.user_id)
@@ -49,10 +48,6 @@ export default class EventList extends Component {
                     { this.numKids(attend, event.id) &&
                     <p>{`Children: ${attend.length ? this.numKids(attend, event.id): null}`}</p>
                     }
-                    {/* <p className="bold">Description</p>
-                    <p>{event.description}</p>
-                    <p className="bold">Address</p>
-                    <p>{event.address}</p> */}
                     </li>
                 ))}
                 </ul>

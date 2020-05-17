@@ -14,7 +14,6 @@ import MyEvents from '../src/Component/MyEvents/MyEvents';
 import JoinEvent from '../src/Component/JoinEvent/JoinEvent';
 
 import PrivateRoute from './Component/Utils/PrivateRoute';
-//import PublicOnlyRoute from './Component/Utils/PublicOnlyRoute';
 import TokenService from './services/token-service';
 import AuthApiService from './services/auth-api-service';
 import IdleService from './services/idle-service';
@@ -79,18 +78,15 @@ class App extends Component {
   componentDidMount() {
     Promise.all([
       fetch(`${config.API_ENDPOINT}/events`),
-      fetch(`${config.API_ENDPOINT}/users`),
       fetch(`${config.API_ENDPOINT}/attend`)
     ])
-    .then(([eventsRes, usersRes, attendRes]) => {
+    .then(([eventsRes, attendRes]) => {
       if (!eventsRes.ok) return eventsRes.json().then((e) => Promise.reject(e));
-      if (!usersRes.ok) return usersRes.json().then((e) => Promise.reject(e));
       if (!attendRes.ok) return attendRes.json().then((e) => Promise.reject(e));
-      return Promise.all([eventsRes.json(), usersRes.json(), attendRes.json()]);
+      return Promise.all([eventsRes.json(), attendRes.json()]);
     })
-    .then(([events, users, attend]) => {
-      this.setState({ events, users, attend });
-      // console.log(events)
+    .then(([events, attend]) => {
+      this.setState({ events, attend });
     })
     .catch((error) => {
       console.log({ error })
@@ -164,7 +160,6 @@ class App extends Component {
       <AppContext.Provider value={value}>
         <>
            <div className="App">
-            
             <header className="App-header">
               <Switch>
                 <Route path="/" component={Header} />
@@ -235,7 +230,6 @@ class App extends Component {
           </div>
         </>
       </AppContext.Provider>
-  
     );
   }
 }
