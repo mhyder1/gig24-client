@@ -18,7 +18,7 @@ https://parent-connect-app.now.sh/
 
 React.js
 Node.js
-Postgresql
+Postgresql, 
 CSS
 
 ***
