@@ -16,11 +16,11 @@ https://parent-connect-app.now.sh/
 
 ## TECHNOLOGIES USED
 
-React.js 
-CSS 
-Node.js 
-Express 
-PostgreSQL
+* React.js 
+* CSS 
+* Node.js 
+* Express 
+* PostgreSQL
 
 
 ***
