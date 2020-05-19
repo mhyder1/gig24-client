@@ -6,13 +6,12 @@ import Intro from "./Component/Intro/Intro";
 import Signup from "./Component/Signup/Signup";
 import AddEvents from "./Component/AddEvents/AddEvents";
 import NavMenu from "./Component/NavMenu/NavMenu";
-import Confirm from "./Component/Confirm/Confirm";
 import EventList from "./Component/EventList/EventList";
 import UpdateEvents from "./Component/UpdateEvents/UpdateEvents"
 import Login from './Component/Login/Login';
 import MyEvents from '../src/Component/MyEvents/MyEvents';
 import JoinEvent from '../src/Component/JoinEvent/JoinEvent';
-
+import ErrorBoundary from './ErrorBoundary'
 import PrivateRoute from './Component/Utils/PrivateRoute';
 import TokenService from './services/token-service';
 import AuthApiService from './services/auth-api-service';
@@ -157,6 +156,7 @@ class App extends Component {
     };
 
     return (
+      <ErrorBoundary>
       <AppContext.Provider value={value}>
         <>
            <div className="App">
@@ -200,11 +200,6 @@ class App extends Component {
               <Route path="/join-event" component={JoinEvent} />
             </section>
 
-            <section className="success">
-              <Route path="/success" component={NavMenu} />
-              <Route path="/success" component={Confirm} />
-            </section>
-
             {/* Protected route */}
             <section className="eventList">
               <PrivateRoute path="/arts-crafts" component={NavMenu} />
@@ -212,6 +207,7 @@ class App extends Component {
 
               <PrivateRoute path="/music-dance" component={NavMenu} />
               <PrivateRoute path="/music-dance" component={EventList} />
+             
               <PrivateRoute path="/outdoor-activities" component={NavMenu} /> 
               <PrivateRoute path="/outdoor-activities" component={EventList} />
 
@@ -230,6 +226,7 @@ class App extends Component {
           </div>
         </>
       </AppContext.Provider>
+      </ErrorBoundary>
     );
   }
 }

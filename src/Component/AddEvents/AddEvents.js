@@ -20,10 +20,6 @@ static contextType = AppContext
     time_of_event: new Date()
   }
 
-  componentDidMount() {
-    console.log(this.context)
-  }
-
   handleChange =(e) => {
     this.setState({
       [e.target.name] : e.target.value,

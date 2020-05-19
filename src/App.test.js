@@ -6,33 +6,47 @@ import AddEvents from './Component/AddEvents/AddEvents';
 import Header from './Component/Header/Header';
 import Intro from './Component/Intro/Intro';
 import Signup from './Component/Signup/Signup';
+import MyEvents from './Component/MyEvents/MyEvents';
 
-it('renders without crashing', () => {
+it('App renders without crashing', () => {
     const div = document.createElement('div');
+    window.HTMLCanvasElement.prototype.getContext = () => {}
     ReactDOM.render(<BrowserRouter><App /></BrowserRouter>, div);
     ReactDOM.unmountComponentAtNode(div);
   });
 
-  it('renders without crashing', () => {
+  it('AddEvents renders without crashing', () => {
     const div = document.createElement('div');
+    window.HTMLCanvasElement.prototype.getContext = () => {}
     ReactDOM.render(<BrowserRouter><AddEvents /></BrowserRouter>, div);
     ReactDOM.unmountComponentAtNode(div);
   });
   
-  it('renders without crashing', () => {
+  it('Header renders without crashing', () => {
     const div = document.createElement('div');
+    window.HTMLCanvasElement.prototype.getContext = () => {}
     ReactDOM.render(<BrowserRouter><Header /></BrowserRouter>, div);
     ReactDOM.unmountComponentAtNode(div);
   });
   
-  it('renders without crashing', () => {
+  it('Intro renders without crashing', () => {
     const div = document.createElement('div');
+    window.HTMLCanvasElement.prototype.getContext = () => {}
     ReactDOM.render(<BrowserRouter><Intro /></BrowserRouter>, div);
     ReactDOM.unmountComponentAtNode(div);
   });
 
-  it('renders without crashing', () => {
+  it('Signup renders without crashing', () => {
     const div = document.createElement('div');
+    window.HTMLCanvasElement.prototype.getContext = () => {}
     ReactDOM.render(<BrowserRouter><Signup /></BrowserRouter>, div);
     ReactDOM.unmountComponentAtNode(div);
   });
+
+  it('MyEvents renders without crashing', () => {
+    const div = document.createElement('div');
+    window.HTMLCanvasElement.prototype.getContext = () => {}
+    ReactDOM.render(<BrowserRouter><MyEvents /></BrowserRouter>, div);
+    ReactDOM.unmountComponentAtNode(div);
+  });
+

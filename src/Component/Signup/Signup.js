@@ -52,7 +52,7 @@ export default class Signup extends Component {
           <div role="alert">
             {error && <p style={{ color: "red" }}>{error}</p>}
           </div>
-          <label for="funame" style={{ paddingRight: "5px" }}>
+          <label htmlFor="funame" style={{ paddingRight: "5px" }}>
             Fullname:
           </label>{" "}
           <input
@@ -65,7 +65,7 @@ export default class Signup extends Component {
             onChange={this.handleChange}
           />
           <br />
-          <label for="luname" style={{ paddingRight: "2px" }}>
+          <label htmlFor="luname" style={{ paddingRight: "2px" }}>
             Username:
           </label>{" "}
           <input
@@ -78,7 +78,7 @@ export default class Signup extends Component {
             onChange={this.handleChange}
           />
           <br />
-          <label for="pass" style={{ paddingRight: "2px" }}>
+          <label htmlFor="pass" style={{ paddingRight: "2px" }}>
             Password:
           </label>{" "}
           <input
