@@ -22,7 +22,7 @@ font-size: 18px;
     flex-direction: column;
     position: absolute;
     right: 0;
-    background-color: #00CCCC;
+    background-color: rgb(13, 14, 14);
  }  
 
 .navigation {

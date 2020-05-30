@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import AppContext from "../Context/AppContext";
-import { NiceDate } from '../Utils/Utils'
+import { NiceDate } from '../../Component/Utils/Utils'
 import TokenService from '../../services/token-service'
 import "./MyEvents.css";
 

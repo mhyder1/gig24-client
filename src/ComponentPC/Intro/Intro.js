@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import {NiceDate} from '../Utils/Utils';
+import {NiceDate} from '../../Component/Utils/Utils';
 import AppContext from '../Context/AppContext'
 import TokenService from "../../services/token-service"
 import './Intro.css'

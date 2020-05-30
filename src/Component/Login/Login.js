@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import AuthApiService from "../../services/auth-api-service";
 
-import AppContext from "../../Component/Context/AppContext";
+import AppContext from "../../ComponentPC/Context/AppContext";
 import TokenService from "../../services/token-service";
 
 export default class Login extends Component {
@@ -114,7 +114,7 @@ export default class Login extends Component {
               style={{ textDecoration: "none", color: "#fff" }}
               to="/signup"
             >
-              create account
+              sign up
             </Link>
           </button>
         </form>

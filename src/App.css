@@ -2,14 +2,14 @@
   text-align: center;  height: 100%;
   display: flex;
   flex-direction: column;
-  font: 1rem 'Baloo Da 2', cursive;
+     font-family: "Libre Franklin",sans-serif;
  }
 
 .App-header {
   top: 0px;
   transition: top 0s ease 0s, background-color 400ms ease-in-out 0s;
   transition: top .4s ease;
-  background-color:#20a7a7;
+  background-color:#0e0d0d;
   /* background-color: #00b1b0; */
   /* border-bottom: 1px solid #e8eaed; */
   box-sizing: content-box;

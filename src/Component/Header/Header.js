@@ -15,7 +15,7 @@ export default class Header extends Component {
   renderLogoutLink() {
     return (
       <div>
-        <Link onClick={this.handleLogoutClick} to="/" style={{textDecoration:'none', color:'#000'}}>
+        <Link onClick={this.handleLogoutClick} to="/" style={{textDecoration:'none', color:'#fff'}}>
           Logout
         </Link>
       </div>
@@ -29,7 +29,7 @@ export default class Header extends Component {
       <>
        <Link
           className="log-sign-links"
-          style={{ marginRight: "5px", fontWeight:'bolder', color:'navy' }}
+          style={{ marginRight: "5px", fontWeight:'bolder', color:'#orange' }}
           to="/login"
         >
           Log in
@@ -50,10 +50,8 @@ export default class Header extends Component {
       <>
       <nav>
           <Link to='/' 
-            style={{textDecoration:'none', color:'#fff', fontSize:'24px'}}>
-            PARENT 
-            <span style={{fontFamily:' -apple-system', fontSize: '40px', lineHeight: '.2', position: 'relative', margin:'0 5px', top: '5px'}}>&#8734;</span> 
-            CONNECT
+            style={{textDecoration:'none', color:'#fff', fontSize:'34px'}}>
+            GIG 24
           </Link>
         {' '}
         <span className='header-span'>

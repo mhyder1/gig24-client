@@ -1,12 +1,12 @@
 .logo {
     text-decoration: none;
-    color: #00b1b0;
+    color: #fff;
 
 }
 
 .log-sign-links {
   text-decoration: none;
-  color: #212121;
+  color: rgb(0, 238, 255);
   cursor: pointer;
 }
 

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import AppContext from "../Context/AppContext";
 import {Link} from 'react-router-dom'
-import { NiceDate } from '../Utils/Utils'
+import { NiceDate } from '../../Component/Utils/Utils'
 import TokenService from '../../services/token-service'
 import config from '../../config'
 import "./eventList.css"; 
