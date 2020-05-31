@@ -8,17 +8,10 @@ import CreateJobSeekerPro from './Component/CreateProfile/CreateJobSeekerPro';
 import EmpDash from './Component/EmpDash/EmpDash'
 import PostAgig from "./Component/EmpPostAgig/PostAgig";
 import JobSeekerDash from './Component/JobSeekerDash/JobSeekerDash';
-import EmpHome from './Component/EmpHome/EmpHome';
-// import Intro from "./ComponentPC/Intro/Intro";
+import JsHome from './Component/JobSeekerHome/js-home';
 import Signup from "./Component/Signup/Signup";
-// import AddEvents from "./ComponentPC/AddEvents/AddEvents";
-// import NavMenu from "./ComponentPC/NavMenu/NavMenu";
-// import EventList from "./ComponentPC/EventList/EventList";
-// import UpdateEvents from "./ComponentPC/UpdateEvents/UpdateEvents"
 import Login from './Component/Login/Login';
-// import MyEvents from './ComponentPC/MyEvents/MyEvents';
-// import JoinEvent from './ComponentPC/JoinEvent/JoinEvent';
- import ErrorBoundary from './ErrorBoundary'
+import ErrorBoundary from './ErrorBoundary'
  import PrivateRoute from './Component/Utils/PrivateRoute';
  import TokenService from './services/token-service';
  import AuthApiService from './services/auth-api-service';
@@ -35,6 +28,9 @@ class App extends Component {
 
   state = {
     jobs: [],
+    applicants: [],
+    gigs:[],
+    userInfo: {}    
   //   applicants:[],
   //   emplo: [],
   //   hasError: false,
@@ -73,28 +69,42 @@ class App extends Component {
   //   });
   // }
 
-  // setUserId = (user_id, fullname) => {
+  // userId = (user_id, fullname) => {
   //   this.setState({
   //     user_id,
-  //     fullname
+  //     fullname,
+     
   //   })
   // }
 
 
 
   componentDidMount() {
-    fetch(`${config.API_ENDPOINT}/jobs}`)
-    .then((jobsRes) => {
-      if (!jobsRes.ok) return jobsRes.json().then((e) => Promise.reject(e));
-      return (jobsRes.json())
-    })
-    .then((jobs) => {
-      this.setState({jobs})
-    })
-    .catch((error) => {
-       console.log({ error })
 
-    })
+    const token = TokenService.hasAuthToken() ? TokenService.readJwtToken() : {user_id:''}
+    this.setState({userInfo:token})
+
+    Promise.all([
+      fetch(`${config.API_ENDPOINT}/applied/current/${token.user_id}`),
+       fetch(`${config.API_ENDPOINT}/jobs/byuser/${token.user_id}`),
+       fetch(`${config.API_ENDPOINT}/jobs`)
+     ])
+     .then(([appRes, jobsRes, gigRes]) => {
+       if (!appRes.ok) return appRes.json().then((e) => Promise.reject(e));
+       if (!jobsRes.ok) return jobsRes.json().then((e) => Promise.reject(e));
+       if (!gigRes.ok) return gigRes.json().then((e) => Promise.reject(e));
+       return Promise.all([appRes.json(), jobsRes.json(), gigRes.json()]);
+     })
+     .then(([applicants, jobs, gigs]) => {
+      // console.log(applicants)
+       console.log(jobs) 
+      this.setState({ applicants, jobs, gigs });
+     })
+     .catch((error) => {
+       console.log({ error })
+     });
+
+  
     /*
       set the function (callback) to call when a user goes idle
       we'll set this to logout a user when they're idle
@@ -151,13 +161,11 @@ class App extends Component {
 
   render() {
     const value = {
-      // events: this.state.events,
-      // attend: this.state.attend,
+      jobs: this.state.jobs,
+      applicants: this.state.applicants,
+      gigs: this.state.gigs,
       addJob: this.addJob,
-      setUserId: this.setUserId,
-      // updateEvent: this.updateEvent,
-      // joinEvent: this.joinEvent,
-      // removeAttend: this.removeAttend
+      userInfo: this.state.userInfo
     };
 
     return (
@@ -198,8 +206,7 @@ class App extends Component {
             <section>
               <Route path="/e-dashboard" component={EmpDash}/>
             </section>
-
-            <Route path='/emp-home'component={EmpHome}/>
+            <Route path='/js-home' component={JsHome} />
             <section>
               <Route path="/js-dashboard" component={JobSeekerDash}/>
             </section>

@@ -11,12 +11,12 @@ export default class PostAgig extends Component {
 
   state = {
     position: "",
-    category: "",
-    type: "",
-    requirements: "",
+    //category: "",
+    //type: "",
+    //requirements: "",
     location: "",
     description: "",
-    start_day: new Date(),
+    //start_day: new Date(),
     duration: "",
   };
 
@@ -46,26 +46,26 @@ export default class PostAgig extends Component {
   };
 
   handleSubmit = (e) => {
-    const token = TokenService.hasAuthToken()
-      ? TokenService.readJwtToken()
-      : { company_name: "", user_id: "" };
+  
     e.preventDefault();
     fetch(`${config.API_ENDPOINT}/jobs`, {
       method: "POST",
       headers: {
-        "content-type": "application/json",
+        "content-type": "application/json"
       },
       body: JSON.stringify({
         position: this.state.position,
-        category: this.state.category,
-        type: this.state.type,
-        requirements: this.state.requirements,
+       // category: this.state.category,
+        pay: '6',
+        //requirements: this.state.requirements,
         location: this.state.location,
         description: this.state.description,
-        start_day: new Date(),
-        duration: this.state.duration,
-        //author: token.user_id
-      }),
+        term :'part-time',
+        //start_day: new Date(),
+        duration: 'three weeks',
+        user_id:'4'
+        // company_name: token.user_id
+      })
     })
       .then((res) => {
         if (!res.ok) return res.json().then((e) => Promise.reject(e));
@@ -73,7 +73,7 @@ export default class PostAgig extends Component {
       })
       .then((job) => {
         this.context.addJob(job);
-        this.props.history.push(`/jobs`);
+        this.props.history.push('/e-dashboard');
       })
       .catch((error) => {
         console.log({ error });
@@ -85,7 +85,7 @@ export default class PostAgig extends Component {
       <>
         <h2>Post a Gig</h2>
 
-        <form>
+        <form onSubmit={this.handleSubmit}>
           <fieldset>
             <label>Position*</label>
             <input
@@ -101,7 +101,7 @@ export default class PostAgig extends Component {
               name="category"
               value={this.state.category}
             />
-            <label>Job Term*</label>
+            <label>Pay </label>
             <select name="type" onChange={(e) => this.handleChange(e)}>
               <option>--</option>
               <option value="full-time">Full-time</option>

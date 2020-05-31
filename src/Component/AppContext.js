@@ -4,12 +4,10 @@ import React from 'react';
 const AppContext= React.createContext({
 
    jobs:[],
-   // users:[],
-   // attend:[],
-   addJob: ()=>{}
-   // updateEvent: ()=>{},
-   // joinEvent: ()=>{},
-   // removeAttend: ()=> {}
+   applicants:[],
+   addJob: ()=>{},
+   gigs: []
+
 })
 
 export default AppContext;

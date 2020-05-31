@@ -23,8 +23,14 @@ export default class Login extends Component {
   handleLoginSuccess = () => {
     const { location, history } = this.props;
     const token = TokenService.hasAuthToken() ? TokenService.readJwtToken() : {user_id:''}
-    const destination = (location.state || {}).from || "/";
-    history.push(destination);
+    console.log(token)
+    //const destination = (location.state || {}).from || "/"; 
+    if(token.employer) {
+      history.push('/e-dashboard')
+    }else {
+      history.push('/js-home')
+    }
+    //history.push(destination);
   };
 
   handleSubmitJwtAuth = (ev) => {
@@ -42,7 +48,7 @@ export default class Login extends Component {
           password: ""
         });
         const token = TokenService.readJwtToken();
-        this.context.setUserId(token.user_id, token.fullname);
+        //this.context.setUserId(token.user_id, token.fullname);
         this.handleLoginSuccess();
       })
       .catch((res) => {
