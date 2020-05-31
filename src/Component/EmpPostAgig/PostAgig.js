@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import DateTimePicker from "react-datetime-picker";
 import AlgoliaPlaces from "algolia-places-react";
-import AppContext from "../../ComponentPC/Context/AppContext";
-//import TokenService from '../../services/token-service'
+import AppContext from "../AppContext";
+import TokenService from "../../services/token-service";
 import config from "../../config";
 import "../../AlgoliaPlaces.css";
 
@@ -10,12 +10,14 @@ export default class PostAgig extends Component {
   static contextType = AppContext;
 
   state = {
-    parent_name: "",
-    title: "",
-    description: "",
-    address: "",
+    position: "",
+    category: "",
     type: "",
-    time_of_event: new Date(),
+    requirements: "",
+    location: "",
+    description: "",
+    start_day: new Date(),
+    duration: "",
   };
 
   handleChange = (e) => {
@@ -26,7 +28,7 @@ export default class PostAgig extends Component {
 
   onChange = (date) => {
     this.setState({
-      time_of_event: date,
+      start_day: date,
     });
   };
 
@@ -36,43 +38,47 @@ export default class PostAgig extends Component {
   //   });
   // }
 
-  // handleAddress = (suggestion) => {
-  //   const {name, city, administrative, postcode} = suggestion
-  //   this.setState({
-  //     address: `${name}, ${city}, ${administrative} ${postcode}`
-  //   })
-  // }
+  handleAddress = (suggestion) => {
+    const { name, city, administrative, postcode } = suggestion;
+    this.setState({
+      address: `${name}, ${city}, ${administrative} ${postcode}`,
+    });
+  };
 
-  // handleSubmit =(e)=> {
-  //   const token = TokenService.hasAuthToken() ? TokenService.readJwtToken() : {fullname:'',user_id:''}
-  //   e.preventDefault()
-  //   fetch(`${config.API_ENDPOINT}/events`,{
-  //     method:'POST',
-  //     headers: {
-  //       "content-type": "application/json"
-  //     },
-  //     body: JSON.stringify({
-  //       parent_name: token.fullname,
-  //       title: this.state.title,
-  //       description: this.state.description,
-  //       address:this.state.address,
-  //       type:this.state.type,
-  //       time_of_event: this.state.time_of_event,
-  //       author: token.user_id
-  //     }),
-  //   })
-  //   .then((res)=> {
-  //     if(!res.ok) return res.json().then((e)=> Promise.reject(e));
-  //     return res.json();
-  //   })
-  //   .then((event)=> {
-  //     this.context.addEvent(event)
-  //     this.props.history.push(`/${event.type}`);
-  //   })
-  //   .catch((error) => {
-  //     console.log({error});
-  //   });
-  // }
+  handleSubmit = (e) => {
+    const token = TokenService.hasAuthToken()
+      ? TokenService.readJwtToken()
+      : { company_name: "", user_id: "" };
+    e.preventDefault();
+    fetch(`${config.API_ENDPOINT}/jobs`, {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify({
+        position: this.state.position,
+        category: this.state.category,
+        type: this.state.type,
+        requirements: this.state.requirements,
+        location: this.state.location,
+        description: this.state.description,
+        start_day: new Date(),
+        duration: this.state.duration,
+        //author: token.user_id
+      }),
+    })
+      .then((res) => {
+        if (!res.ok) return res.json().then((e) => Promise.reject(e));
+        return res.json();
+      })
+      .then((job) => {
+        this.context.addJob(job);
+        this.props.history.push(`/jobs`);
+      })
+      .catch((error) => {
+        console.log({ error });
+      });
+  };
 
   render() {
     return (
@@ -82,24 +88,41 @@ export default class PostAgig extends Component {
         <form>
           <fieldset>
             <label>Position*</label>
-            <input type="text" name="position" required />
+            <input
+              onChange={this.handleChange}
+              type="text"
+              name="position"
+              value={this.state.position}
+            />
             <label>Category</label>
-            <input type="text" name="category" required />
+            <input
+              onChange={this.handleChange}
+              type="text"
+              name="category"
+              value={this.state.category}
+            />
             <label>Job Term*</label>
-            <select name="type">
+            <select name="type" onChange={(e) => this.handleChange(e)}>
               <option>--</option>
-              <option>Full-time</option>
-              <option>Part-time</option>
-              <option>Low-budget</option>
-              <option>Internship</option>
+              <option value="full-time">Full-time</option>
+              <option value="part-time">Part-time</option>
+              <option value="low-budget">Low-budget</option>
+              <option value="internship">Internship</option>
             </select>
           </fieldset>
-      
-        <br />
-      
+
+          <br />
+
           <fieldset>
-            <label>Requirments</label><br/>
-            <textarea /><br/>
+            <label>Requirements</label>
+            <br />
+            <textarea
+              onChange={(e) => this.handleChange(e)}
+              type="text"
+              name="requirements"
+              value={this.state.requirements}
+            />
+            <br />
             <label>Location </label>
             <br />
             <AlgoliaPlaces
@@ -116,35 +139,64 @@ export default class PostAgig extends Component {
               }
             />
             <br />
-            <label>
-              Is this Union/Guild job? Yes
-            </label> <input type="radio" /> <label>No</label>
-            <input type="radio" />
+            <label>Is this Union/Guild job?</label> <br />
+            <label>Yes</label>
+            <input onChange={(e) => this.handleChange(e)} type="radio" />
+            <label>No</label>
+            <input onChange={(e) => this.handleChange(e)} type="radio" />
           </fieldset>
-    
-    
+
           <fieldset>
             <label>Start Day</label>
             <DateTimePicker
               onChange={this.onChange}
-              value={this.state.time_of_event}
+              value={this.state.start_day}
             />
             <br />
             <label>Duration</label>
             <br />
-            <input type="text" name="duration" required /><br/>
+            <input
+              onChange={this.handleChange}
+              type="text"
+              name="duration"
+              value={this.state.duration}
+            />
+            <br />
             <label>Day(s)</label>
-            <input type="radio" value="day" />
+            <input
+              onChange={(e) => this.handleChange(e)}
+              type="radio"
+              value="day"
+            />
             <label>Week(s)</label>
-            <input type="radio" value="week" />
+            <input
+              onChange={(e) => this.handleChange(e)}
+              type="radio"
+              value="week"
+            />
             <label>Month(s)</label>
-            <input type="radio" value="month" /><br/>
+            <input
+              onChange={(e) => this.handleChange(e)}
+              type="radio"
+              value="month"
+            />
+            <br />
+
             <label>Description</label>
-            <textarea /><br/>
+            <textarea
+              onChange={this.handleChange}
+              name="description"
+              value={this.state.description}
+            />
+            <br />
           </fieldset>
           <fieldset>
-            <input type="submit" value="POST A GIG" />{" "}
-            <input type="submit" value="CANCEL" />
+            <input
+              onChange={this.handleChange}
+              type="submit"
+              value="POST A GIG"
+            />{" "}
+            <input onChange={this.handleChange} type="submit" value="CANCEL" />
           </fieldset>
         </form>
       </>

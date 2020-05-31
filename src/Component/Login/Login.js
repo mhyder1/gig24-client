@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import AuthApiService from "../../services/auth-api-service";
 
-import AppContext from "../../ComponentPC/Context/AppContext";
+import AppContext from "../AppContext";
 import TokenService from "../../services/token-service";
 
 export default class Login extends Component {
@@ -22,6 +22,7 @@ export default class Login extends Component {
 
   handleLoginSuccess = () => {
     const { location, history } = this.props;
+    const token = TokenService.hasAuthToken() ? TokenService.readJwtToken() : {user_id:''}
     const destination = (location.state || {}).from || "/";
     history.push(destination);
   };
@@ -56,8 +57,8 @@ export default class Login extends Component {
     return (
       <>
         <h3>Log in</h3>
-        <p>Demo username: dunder</p>
-        <p>Demo password: hello1</p>
+        <p>Demo username: sam</p>
+        <p>Demo password: sam</p>
         <form
           style={{ lineHeight: " 45px", backgroundColor: "#fff" }}
           onSubmit={this.handleSubmitJwtAuth}
@@ -113,8 +114,7 @@ export default class Login extends Component {
             <Link
               style={{ textDecoration: "none", color: "#fff" }}
               to="/signup"
-            >
-              sign up
+            > sign up
             </Link>
           </button>
         </form>

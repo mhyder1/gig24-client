@@ -3,10 +3,10 @@ import React from 'react';
 
 const AppContext= React.createContext({
 
-   events:[],
-   users:[],
-   attend:[],
-   addEvent: ()=>{}
+   jobs:[],
+   // users:[],
+   // attend:[],
+   addJob: ()=>{}
    // updateEvent: ()=>{},
    // joinEvent: ()=>{},
    // removeAttend: ()=> {}
