@@ -6,7 +6,9 @@ const AppContext= React.createContext({
    jobs:[],
    applicants:[],
    addJob: ()=>{},
-   gigs: []
+   gigs: [],
+   appliedUser:[],
+   jsProfile:[]
 
 })
 

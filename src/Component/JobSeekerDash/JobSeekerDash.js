@@ -1,8 +1,13 @@
 import React, { Component } from "react";
+import AppContext from '../../Component/AppContext'
 
 export default class JobSeekerDash extends Component {
+  static contextType = AppContext;
+
   
+
   render() {
+    console.log(this.context)
     return (
       <>
         <section>
@@ -11,6 +16,13 @@ export default class JobSeekerDash extends Component {
           </header>
 
           <h3>Pending gigs</h3>
+          <ul>
+          {this.context.appliedUser.map((user,idx) => (
+            <li key={idx}>
+            <p>{user.description}</p>
+            </li>
+          ))}
+          </ul>
         </section>
       </>
     );

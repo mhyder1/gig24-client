@@ -26,54 +26,54 @@ export default class NavMenu extends Component {
                 activeClassName="main-nav-active"
                 className="links art"
                 to={{
-                  pathname:'/arts-crafts',
-                  state: {
-                    eventType:'Arts & Crafts'
-                  }
+                  pathname:'/js-home',
+                  // state: {
+                  //   eventType:'Arts & Crafts'
+                  // }
                 }}
               >
-                Arts & Crafts
+               Home
               </NavLink>
               <NavLink
                 activeClassName="main-nav-active2"
                 className="links music"
-                to={"/music-dance"}
+                to={"/js-profile"}
               >
-                Music & Dance
+                My Profile
               </NavLink>
-              <NavLink
+              {/* <NavLink
                 activeClassName="main-nav-active"
                 className="links outdoor"
-                to={"/outdoor-activities"}
+                to={"/js-profile"}
               >
                 Outdoor activities
-              </NavLink>
+              </NavLink> */}
               <NavLink
                 activeClassName="main-nav-active"
                 className="links sport"
-                to={"/sports-fitness"}
+                to={"/js-dashboard"}
               >
-                Sports & Fitnesss
+                Dashboard
               </NavLink>
-              <NavLink
+              {/* <NavLink
                 activeClassName="main-nav-active"
                 className="links books"
                 to={"/books-films"}
               >
                 Books & Films
-              </NavLink>
-              <NavLink
+              </NavLink> */}
+              {/* <NavLink
                 activeClassName="main-nav-active"
                 className="links tutor"
                 to={"/tutoring"}
               >
                 Tutoring
-              </NavLink>
-              <Link className="my-events-link" to={"/my-events"}>
+              </NavLink> */}
+              {/* <Link className="my-events-link" to={"/my-events"}>
                 <span role="img" aria-label="calendar-picker">
                   📅
                 </span>
-              </Link>
+              </Link> */}
             </div>
           }
       </nav>

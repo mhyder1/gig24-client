@@ -8,9 +8,11 @@ import CreateJobSeekerPro from './Component/CreateProfile/CreateJobSeekerPro';
 import EmpDash from './Component/EmpDash/EmpDash'
 import PostAgig from "./Component/EmpPostAgig/PostAgig";
 import JobSeekerDash from './Component/JobSeekerDash/JobSeekerDash';
+import JobSeekerPro from './Component/JobSeekerProfile/JobSeekerPro.js'
 import JsHome from './Component/JobSeekerHome/js-home';
 import Signup from "./Component/Signup/Signup";
 import Login from './Component/Login/Login';
+import NavMenu from './Component/NavMenu/NavMenu'
 import ErrorBoundary from './ErrorBoundary'
  import PrivateRoute from './Component/Utils/PrivateRoute';
  import TokenService from './services/token-service';
@@ -30,7 +32,9 @@ class App extends Component {
     jobs: [],
     applicants: [],
     gigs:[],
-    userInfo: {}    
+    userInfo: {},
+    appliedUser:[],
+    jsProfile:[]    
   //   applicants:[],
   //   emplo: [],
   //   hasError: false,
@@ -85,20 +89,25 @@ class App extends Component {
     this.setState({userInfo:token})
 
     Promise.all([
-      fetch(`${config.API_ENDPOINT}/applied/current/${token.user_id}`),
+       fetch(`${config.API_ENDPOINT}/applied/current/${token.user_id}`),
        fetch(`${config.API_ENDPOINT}/jobs/byuser/${token.user_id}`),
-       fetch(`${config.API_ENDPOINT}/jobs`)
+       fetch(`${config.API_ENDPOINT}/jobs`),
+       fetch(`${config.API_ENDPOINT}/applied/user/${token.user_id}`),
+       fetch(`${config.API_ENDPOINT}/userprofile/${token.user_id}`)
+
      ])
-     .then(([appRes, jobsRes, gigRes]) => {
+     .then(([appRes, jobsRes, gigRes, appliedUserRes,jsProRes]) => {
+       if (!appliedUserRes.ok) return appliedUserRes.json().then((e) => Promise.reject(e));
        if (!appRes.ok) return appRes.json().then((e) => Promise.reject(e));
        if (!jobsRes.ok) return jobsRes.json().then((e) => Promise.reject(e));
        if (!gigRes.ok) return gigRes.json().then((e) => Promise.reject(e));
-       return Promise.all([appRes.json(), jobsRes.json(), gigRes.json()]);
+       if (!jsProRes.ok) return jsProRes.json().then((e) => Promise.reject(e));
+       return Promise.all([appRes.json(), jobsRes.json(), gigRes.json(), appliedUserRes.json(), jsProRes.json()]);
      })
-     .then(([applicants, jobs, gigs]) => {
+     .then(([applicants, jobs, gigs, appliedUser, jsProfile]) => {
       // console.log(applicants)
        console.log(jobs) 
-      this.setState({ applicants, jobs, gigs });
+      this.setState({ applicants, jobs, gigs, appliedUser,jsProfile });
      })
      .catch((error) => {
        console.log({ error })
@@ -165,7 +174,9 @@ class App extends Component {
       applicants: this.state.applicants,
       gigs: this.state.gigs,
       addJob: this.addJob,
-      userInfo: this.state.userInfo
+      userInfo: this.state.userInfo,
+      appliedUser: this.state.appliedUser,
+      jsProfile: this.state.jsProfile
     };
 
     return (
@@ -174,15 +185,15 @@ class App extends Component {
         <>
            <div className="App">
             <header className="App-header">
-              <Switch>
+             
                 <Route path="/" component={Header} />
-                {/* <Route exact path="/" component={NavMenu} /> */}
-              </Switch>
+           
+                <Route exact path="/" component={NavMenu} />
             </header>
 
             {/* Unprotected route */}
             <section className='home'>
-            <Route exact path="/" component={LandingPg} />
+            {/* <Route exact path="/" component={LandingPg} /> */}
 
             {/* <Route exact path="/" component={Intro} /> */}
             </section>
@@ -190,7 +201,14 @@ class App extends Component {
               {/* Unprotected route */}
             <section className='create-profile'>
               <Route path="/crt-e-profile" component={CreateEmpPro} />
-              <Route path="/crt-js-profile" component={CreateJobSeekerPro} />
+              <PrivateRoute path="/crt-js-profile" component={CreateJobSeekerPro} />
+              <PrivateRoute path="/crt-js-profile" component={NavMenu} />
+            </section> 
+
+
+            <section className='js-profile'>
+              <PrivateRoute path="/js-profile" component={NavMenu} />
+              <PrivateRoute path="/js-profile" component={JobSeekerPro} />
             </section> 
 
             {/* Unprotected route */}
@@ -204,13 +222,15 @@ class App extends Component {
               <Route path="/login" component={Login}/>
             </section>
             <section>
-              <Route path="/e-dashboard" component={EmpDash}/>
+              <PrivateRoute path="/e-dashboard" component={EmpDash}/>
             </section>
-            <Route path='/js-home' component={JsHome} />
+            <PrivateRoute path="/js-home" component={NavMenu} />
+            <PrivateRoute path='/js-home' component={JsHome} />
             <section>
-              <Route path="/js-dashboard" component={JobSeekerDash}/>
+              <PrivateRoute path="/js-dashboard" component={NavMenu} />
+              <PrivateRoute path="/js-dashboard" component={JobSeekerDash}/>
             </section>
-            <Route path="/post-gig" component={PostAgig}/>
+            <PrivateRoute path="/post-gig" component={PostAgig}/>
              {/* Protected route */}
             {/* <section className="add-events">
               <Route path="/add-events" component={NavMenu} />

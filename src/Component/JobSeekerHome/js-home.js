@@ -60,8 +60,7 @@ export default class JsHome extends Component {
                     </li>
                   ))}
                 </ul>
-                <hr/>
-                <h2>applied jobs</h2>
+             
           </>
         );
     }
