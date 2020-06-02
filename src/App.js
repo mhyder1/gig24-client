@@ -23,12 +23,8 @@ import EmpProfile from "./Component/EmpProfile/EmpProfile";
 import config from './config.js';
 import "./App.css";
 
-
-
 class App extends Component {
   static contextType = AppContext;
-
-
 
   state = {
     jobs: [],
@@ -37,8 +33,10 @@ class App extends Component {
     userInfo: {},
     appliedUser:[],
     jsProfile:[],
-    empPros:[]    
-
+    empPros:[],
+    token: null,
+    user_id: null,
+    employer: null    
   };
 
   // static getDerivedStateFromError(error) {
@@ -72,54 +70,78 @@ class App extends Component {
   //   });
   // }
 
-  // userId = (user_id, fullname) => {
-  //   this.setState({
-  //     user_id,
-  //     fullname,
-     
-  //   })
-  // }
+  setUserId = (user_id, employer) => {
+    this.setState({
+      user_id,
+      employer
+    })
+  }
 
-
-
-  componentDidMount() {
-    console.log(this.props)
-    console.log('loading')
+   getEmployerData = () => {
     const token = TokenService.hasAuthToken() ? TokenService.readJwtToken() : {user_id:''}
-    this.setState({userInfo:token})
+    const {user_id} = token
+    Promise.all([
+      fetch(`${config.API_ENDPOINT}/applied/current/${user_id}`),
+      fetch(`${config.API_ENDPOINT}/jobs/byuser/${user_id}`),
+      fetch(`${config.API_ENDPOINT}/empprofile/emp/${user_id}`)
+    ])
+    .then(([appRes, jobsRes, empProRes]) => {
+      if (!appRes.ok) return appRes.json().then((e) => Promise.reject(e));
+      if (!jobsRes.ok) return jobsRes.json().then((e) => Promise.reject(e));
+      if (!empProRes.ok) return empProRes.json().then((e) => Promise.reject(e));
+      return Promise.all([appRes.json(), jobsRes.json(), empProRes.json()]);
+    })
+    .then(([applicants, jobs, empPros]) => {
+     this.setState({ applicants, jobs, empPros });
+    })
+    .catch((error) => {
+      console.log({ error })
+    });
+   }
+
+   getJobSeekerData = () => {
+    const token = TokenService.hasAuthToken() ? TokenService.readJwtToken() : {user_id:''}
+    const {user_id} = token
 
     Promise.all([
-       fetch(`${config.API_ENDPOINT}/applied/current/${token.user_id}`),
-       fetch(`${config.API_ENDPOINT}/jobs/byuser/${token.user_id}`),
-       fetch(`${config.API_ENDPOINT}/jobs`),
-       fetch(`${config.API_ENDPOINT}/applied/user/${token.user_id}`),
-       fetch(`${config.API_ENDPOINT}/userprofile/${token.user_id}`),
-       fetch(`${config.API_ENDPOINT}/empprofile/emp/${token.user_id}`)
-     ])
-     .then(([appRes, jobsRes, gigRes, appliedUserRes, jsProRes, empProRes]) => {
-       if (!appliedUserRes.ok) return appliedUserRes.json().then((e) => Promise.reject(e));
-       if (!appRes.ok) return appRes.json().then((e) => Promise.reject(e));
-       if (!jobsRes.ok) return jobsRes.json().then((e) => Promise.reject(e));
-       if (!gigRes.ok) return gigRes.json().then((e) => Promise.reject(e));
-       if (!jsProRes.ok) return jsProRes.json().then((e) => Promise.reject(e));
-       if (!empProRes.ok) return empProRes.json().then((e) => Promise.reject(e));
-       return Promise.all([appRes.json(), jobsRes.json(), gigRes.json(), appliedUserRes.json(), jsProRes.json(), empProRes.json(),]);
-     })
-     .then(([applicants, jobs, gigs, appliedUser, jsProfile, empPros]) => {
-      // console.log(applicants)
-       console.log(jobs) 
-      this.setState({ applicants, jobs, gigs, appliedUser, jsProfile, empPros });
-     })
-     .catch((error) => {
-       console.log({ error })
-     });
+      fetch(`${config.API_ENDPOINT}/jobs`),
+      fetch(`${config.API_ENDPOINT}/applied/user/${user_id}`),
+      fetch(`${config.API_ENDPOINT}/userprofile/${user_id}`)
+    ])
+    .then(([gigRes, appliedUserRes, jsProRes]) => {
+      if (!gigRes.ok) return gigRes.json().then((e) => Promise.reject(e));
+      if (!appliedUserRes.ok) return appliedUserRes.json().then((e) => Promise.reject(e));
+      if (!jsProRes.ok) return jsProRes.json().then((e) => Promise.reject(e));
+      return Promise.all([gigRes.json(), appliedUserRes.json(), jsProRes.json()]);
+    })
+    .then(([gigs, appliedUser, jsProfile]) => {
+     this.setState({gigs, appliedUser, jsProfile});
+    })
+    .catch((error) => {
+      console.log({ error })
+    });
+   }
 
-     //const destination = (location.state || {}).from || "/"; 
-     if(token.employer) {
-       this.props.history.push('/e-dashboard')
-     }else {
-       this.props.history.push('/js-home')
-     }
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.user_id !== this.state.user_id && this.state.employer) {
+      console.log('Im an employer')
+      this.getEmployerData()
+    } else if(prevState.user_id !== this.state.user_id && !this.state.employer) {
+      console.log("Im a job seeker")
+      this.getJobSeekerData()
+    }
+  } 
+
+  componentDidMount() {
+    const token = TokenService.hasAuthToken() ? TokenService.readJwtToken() : {user_id:''}
+    this.setState({userInfo:token})
+    if(this.state.employer) {
+      console.log('employer')
+      this.getEmployerData()
+    } else {
+      console.log('job seeker')
+      this.getJobSeekerData()
+    }
   
     /*
       set the function (callback) to call when a user goes idle
@@ -184,9 +206,9 @@ class App extends Component {
       userInfo: this.state.userInfo,
       appliedUser: this.state.appliedUser,
       jsProfile: this.state.jsProfile,
-      empPros: this.state.empPros
+      empPros: this.state.empPros,
+      setUserId: this.setUserId
     };
-
     return (
       <ErrorBoundary>
       <AppContext.Provider value={value}>

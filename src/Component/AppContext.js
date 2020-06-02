@@ -5,11 +5,12 @@ const AppContext= React.createContext({
 
    jobs:[],
    applicants:[],
-   addJob: ()=>{},
    gigs: [],
    appliedUser:[],
    jsProfile:[],
-   empPros:[]
+   empPros:[],
+   addJob: ()=>{},
+   setUserId: ()=>{},
 
 })
 

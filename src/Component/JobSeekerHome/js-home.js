@@ -7,7 +7,7 @@ export default class JsHome extends Component {
     static contextType = AppContext
    
     state= {
-        show: false
+        show: []
     }
 
     handleApply =(job_id) => {
@@ -33,12 +33,15 @@ export default class JsHome extends Component {
         })
     }
 
-    handleClick =(e)=> {
-        this.setState({
-            show: !this.state.show
-        })
+    handleClick =(index)=> {
+        console.log(index)
+        let show = this.state.show.slice();
+        show[index] = !show[index];
+        this.setState({show});
+ 
     }
     render() {
+        console.log(this.context.gigs)
         return (
           <>
             <h1>JsHome</h1>
@@ -51,9 +54,9 @@ export default class JsHome extends Component {
                         
                           <p>{gig.duration}</p>
                           <p>{gig.location}</p>
-                          <button onClick={this.handleClick}>details</button>
+                          <button onClick={()=>this.handleClick(idx)}>details</button>
                           <button onClick={()=>this.handleApply(gig.id)}>apply now</button>
-                          { this.state.show &&
+                          { this.state.show[idx] &&
                               <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proiden</p>
                           }
                       </div>
