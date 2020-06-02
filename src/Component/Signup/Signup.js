@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import AuthApiService from "../../services/auth-api-service";
-import './signup.css'
+import "./signup.css";
 
 export default class Signup extends Component {
   state = {
@@ -8,23 +8,34 @@ export default class Signup extends Component {
     fullname: "",
     username: "",
     password: "",
+    employer: false,
   };
 
   handleChange = (e) => {
+    console.log(typeof e.target.value)
+    let value 
+    if(e.target.value === 'true') {
+      value = true
+    } else if(e.target.value === 'false'){
+      value=false
+    }else{
+      value = e.target.value
+    }
     this.setState({
-      [e.target.name]: e.target.value,
+      [e.target.name]: value
     });
   };
 
   handleSubmit = (ev) => {
     ev.preventDefault();
-    const { fullname, username, password } = this.state;
-
+    const { fullname, username, password, employer } = this.state;
+    console.log(employer)
     this.setState({ error: null });
     AuthApiService.postUser({
       username,
       password,
       fullname,
+      employer,
     })
       .then((user) => {
         this.setState({
@@ -88,18 +99,38 @@ export default class Signup extends Component {
             value={this.state.password}
             required
             onChange={this.handleChange}
-          />
+          />{" "}
           <br />
-          <input className='submitbtn'
+          <div>
+            <input
+              onChange={this.handleChange}
+              type="radio"
+              name="employer"
+              value={true}
+              required
+            />
+            Employer
+            <input
+              onChange={this.handleChange}
+              type="radio"
+              name="employer"
+              value={false}
+              required
+            />
+            Job seeker
+          </div>
+          <br />
+          <input
+            className="submitbtn"
             type="submit"
             style={{
-              marginRight: '5px',
-              border: '1px solid #fff',
-              borderRadius: '5px',
-              padding: '5px',
-              color: '#fff',
-              marginTop: '10px',
-              backgroundColor: '#F98165'
+              marginRight: "5px",
+              border: "1px solid #fff",
+              borderRadius: "5px",
+              padding: "5px",
+              color: "#fff",
+              marginTop: "10px",
+              backgroundColor: "#F98165",
             }}
             value="Sign up"
           />

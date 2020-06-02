@@ -1,5 +1,13 @@
-.post-gig {
+.empdash {
     display:flex;
     flex-wrap: wrap;
     justify-content: space-around;
+}
+
+.e-dash {
+  
+        display:flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+    
 }

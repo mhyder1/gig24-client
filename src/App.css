@@ -3,6 +3,7 @@
   display: flex;
   flex-direction: column;
      font-family: "Libre Franklin",sans-serif;
+    
  }
 
 .App-header {
@@ -33,3 +34,10 @@ ul {
   border-radius: 4px;
   cursor: pointer;
 }
+
+.bkg {
+ height: fit-content;
+ width:auto;
+ /* background-image: url(./images/gig24cam.jpg);
+  */
+} 

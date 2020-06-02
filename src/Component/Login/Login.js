@@ -22,16 +22,16 @@ export default class Login extends Component {
 
   handleLoginSuccess = () => {
     const { location, history } = this.props;
-    console.log(history)
     const token = TokenService.hasAuthToken() ? TokenService.readJwtToken() : {user_id:''}
     console.log(token)
-    const destination = (location.state || {}).from || "/"; 
-    // if(token.employer) {
-    //   history.push('/e-dashboard')
-    // }else {
-    //   history.push('/js-home')
-    // }
-    history.push(destination);
+    this.context.setUserId(token.user_id, token.employer)
+    // const destination = (location.state || {}).from || "/"; 
+    if(token.employer) {
+      history.push('/e-dashboard')
+    }else {
+      history.push('/js-home')
+    }
+    // history.push(destination);
   };
 
   handleSubmitJwtAuth = (ev) => {
