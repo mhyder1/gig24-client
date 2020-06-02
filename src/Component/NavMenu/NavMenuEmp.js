@@ -22,26 +22,25 @@ export default class NavMenu extends Component {
         </button>
           {
             <div className={open ? "navbar show" : "navbar toggle"}>
-              <NavLink
+              {/* <NavLink
                 activeClassName="main-nav-active"
                 className="links art"
                 to={{
-                  pathname:'/js-home',
-                             }}
+                  pathname:'/-home' }}
               >
                Home
-              </NavLink>
+              </NavLink> */}
               <NavLink
                 activeClassName="main-nav-active2"
                 className="links music"
-                to={"/js-profile"}
+                to={"/empprofile"}
               >
                 My Profile
               </NavLink>
               <NavLink
                 activeClassName="main-nav-active"
                 className="links sport"
-                to={"/js-dashboard"}
+                to={"/e-dashboard"}
               >
                 Dashboard
               </NavLink>

@@ -22,15 +22,16 @@ export default class Login extends Component {
 
   handleLoginSuccess = () => {
     const { location, history } = this.props;
+    console.log(history)
     const token = TokenService.hasAuthToken() ? TokenService.readJwtToken() : {user_id:''}
     console.log(token)
-    //const destination = (location.state || {}).from || "/"; 
-    if(token.employer) {
-      history.push('/e-dashboard')
-    }else {
-      history.push('/js-home')
-    }
-    //history.push(destination);
+    const destination = (location.state || {}).from || "/"; 
+    // if(token.employer) {
+    //   history.push('/e-dashboard')
+    // }else {
+    //   history.push('/js-home')
+    // }
+    history.push(destination);
   };
 
   handleSubmitJwtAuth = (ev) => {
@@ -59,7 +60,7 @@ export default class Login extends Component {
 
   render() {
     const { error } = this.state
-    console.log(error)
+   
     return (
       <>
         <h3>Log in</h3>

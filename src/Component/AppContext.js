@@ -8,7 +8,8 @@ const AppContext= React.createContext({
    addJob: ()=>{},
    gigs: [],
    appliedUser:[],
-   jsProfile:[]
+   jsProfile:[],
+   empPros:[]
 
 })
 

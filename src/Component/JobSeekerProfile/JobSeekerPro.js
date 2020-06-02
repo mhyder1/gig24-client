@@ -14,7 +14,7 @@ render() {
     <p>{jsProfile.name}</p>
     <p>{jsProfile.about_me}</p>
    
-
+{/* <button>Edit Profile</button> */}
         </>
     )
 }

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Route, Switch } from "react-router-dom";
+import { Route, Switch, withRouter } from "react-router-dom";
 import AppContext from "./Component/AppContext";
 import Header from "./Component/Header/Header";
 import LandingPg from './Component/LandingPg/LandingPg';
@@ -13,14 +13,16 @@ import JsHome from './Component/JobSeekerHome/js-home';
 import Signup from "./Component/Signup/Signup";
 import Login from './Component/Login/Login';
 import NavMenu from './Component/NavMenu/NavMenu'
+import NavMenuEmp from './Component/NavMenu/NavMenuEmp'
 import ErrorBoundary from './ErrorBoundary'
  import PrivateRoute from './Component/Utils/PrivateRoute';
  import TokenService from './services/token-service';
  import AuthApiService from './services/auth-api-service';
  import IdleService from './services/idle-service';
-
+import EmpProfile from "./Component/EmpProfile/EmpProfile";
 import config from './config.js';
 import "./App.css";
+
 
 
 class App extends Component {
@@ -34,12 +36,9 @@ class App extends Component {
     gigs:[],
     userInfo: {},
     appliedUser:[],
-    jsProfile:[]    
-  //   applicants:[],
-  //   emplo: [],
-  //   hasError: false,
-  //   user_id: '',
-  //   fullname: ''
+    jsProfile:[],
+    empPros:[]    
+
   };
 
   // static getDerivedStateFromError(error) {
@@ -84,7 +83,8 @@ class App extends Component {
 
 
   componentDidMount() {
-
+    console.log(this.props)
+    console.log('loading')
     const token = TokenService.hasAuthToken() ? TokenService.readJwtToken() : {user_id:''}
     this.setState({userInfo:token})
 
@@ -93,26 +93,33 @@ class App extends Component {
        fetch(`${config.API_ENDPOINT}/jobs/byuser/${token.user_id}`),
        fetch(`${config.API_ENDPOINT}/jobs`),
        fetch(`${config.API_ENDPOINT}/applied/user/${token.user_id}`),
-       fetch(`${config.API_ENDPOINT}/userprofile/${token.user_id}`)
-
+       fetch(`${config.API_ENDPOINT}/userprofile/${token.user_id}`),
+       fetch(`${config.API_ENDPOINT}/empprofile/emp/${token.user_id}`)
      ])
-     .then(([appRes, jobsRes, gigRes, appliedUserRes,jsProRes]) => {
+     .then(([appRes, jobsRes, gigRes, appliedUserRes, jsProRes, empProRes]) => {
        if (!appliedUserRes.ok) return appliedUserRes.json().then((e) => Promise.reject(e));
        if (!appRes.ok) return appRes.json().then((e) => Promise.reject(e));
        if (!jobsRes.ok) return jobsRes.json().then((e) => Promise.reject(e));
        if (!gigRes.ok) return gigRes.json().then((e) => Promise.reject(e));
        if (!jsProRes.ok) return jsProRes.json().then((e) => Promise.reject(e));
-       return Promise.all([appRes.json(), jobsRes.json(), gigRes.json(), appliedUserRes.json(), jsProRes.json()]);
+       if (!empProRes.ok) return empProRes.json().then((e) => Promise.reject(e));
+       return Promise.all([appRes.json(), jobsRes.json(), gigRes.json(), appliedUserRes.json(), jsProRes.json(), empProRes.json(),]);
      })
-     .then(([applicants, jobs, gigs, appliedUser, jsProfile]) => {
+     .then(([applicants, jobs, gigs, appliedUser, jsProfile, empPros]) => {
       // console.log(applicants)
        console.log(jobs) 
-      this.setState({ applicants, jobs, gigs, appliedUser,jsProfile });
+      this.setState({ applicants, jobs, gigs, appliedUser, jsProfile, empPros });
      })
      .catch((error) => {
        console.log({ error })
      });
 
+     //const destination = (location.state || {}).from || "/"; 
+     if(token.employer) {
+       this.props.history.push('/e-dashboard')
+     }else {
+       this.props.history.push('/js-home')
+     }
   
     /*
       set the function (callback) to call when a user goes idle
@@ -176,11 +183,12 @@ class App extends Component {
       addJob: this.addJob,
       userInfo: this.state.userInfo,
       appliedUser: this.state.appliedUser,
-      jsProfile: this.state.jsProfile
+      jsProfile: this.state.jsProfile,
+      empPros: this.state.empPros
     };
 
     return (
-      // <ErrorBoundary>
+      <ErrorBoundary>
       <AppContext.Provider value={value}>
         <>
            <div className="App">
@@ -201,8 +209,8 @@ class App extends Component {
               {/* Unprotected route */}
             <section className='create-profile'>
               <Route path="/crt-e-profile" component={CreateEmpPro} />
-              <PrivateRoute path="/crt-js-profile" component={CreateJobSeekerPro} />
               <PrivateRoute path="/crt-js-profile" component={NavMenu} />
+              <PrivateRoute path="/crt-js-profile" component={CreateJobSeekerPro} />
             </section> 
 
 
@@ -222,7 +230,8 @@ class App extends Component {
               <Route path="/login" component={Login}/>
             </section>
             <section>
-              <PrivateRoute path="/e-dashboard" component={EmpDash}/>
+            <PrivateRoute exact path="/e-dashboard" component={NavMenuEmp} />
+            <PrivateRoute exact path="/e-dashboard" component={EmpDash}/>
             </section>
             <PrivateRoute path="/js-home" component={NavMenu} />
             <PrivateRoute path='/js-home' component={JsHome} />
@@ -232,52 +241,21 @@ class App extends Component {
             </section>
             <PrivateRoute path="/post-gig" component={PostAgig}/>
              {/* Protected route */}
-            {/* <section className="add-events">
-              <Route path="/add-events" component={NavMenu} />
-              <Route path="/add-events" component={AddEvents} />
-            </section> */}
+         
 
             {/* Protected route */}
-            {/* <section className="update-events">
-              <Route path="/update-events" component={NavMenu} />
-              <Route path="/update-events" component={UpdateEvents} />
-            </section> */}
+            <section className="empprofile">
+              <PrivateRoute path="/empprofile" component={NavMenuEmp} />
+              <PrivateRoute path="/empprofile" component={EmpProfile} />
 
-            {/* <section className="update-events">
-              <Route path="/join-event" component={NavMenu} />
-              <Route path="/join-event" component={JoinEvent} />
-            </section> */}
-
-            {/* Protected route */}
-            {/* <section className="eventList">
-              <PrivateRoute path="/arts-crafts" component={NavMenu} />
-              <PrivateRoute path="/arts-crafts" component={EventList} />
-
-              <PrivateRoute path="/music-dance" component={NavMenu} /> */}
-              {/* <PrivateRoute path="/music-dance" component={EventList} />
-             
-              <PrivateRoute path="/outdoor-activities" component={NavMenu} /> 
-              <PrivateRoute path="/outdoor-activities" component={EventList} />
-
-              <PrivateRoute path="/sports-fitness" component={NavMenu} /> 
-              <PrivateRoute path="/sports-fitness" component={EventList} />
-
-              <PrivateRoute path="/books-films" component={NavMenu} />
-              <PrivateRoute path="/books-films" component={EventList} />
-
-              <PrivateRoute path="/tutoring" component={NavMenu} />
-              <PrivateRoute path="/tutoring" component={EventList} />
-
-              <PrivateRoute path="/my-events" component={NavMenu} />
-              <PrivateRoute path="/my-events" component={MyEvents} /> */}
-            {/* </section> */}
+             </section>
           </div>
         </>
       </AppContext.Provider>
-      // </ErrorBoundary>
+    </ErrorBoundary>
     );
   }
 }
 
-export default App;
+export default withRouter(App);
 
