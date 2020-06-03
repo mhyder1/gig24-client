@@ -14,6 +14,7 @@ export default class Header extends Component {
     TokenService.clearAuthToken();
     TokenService.clearCallbackBeforeExpiry();
     IdleService.unRegisterIdleResets();
+    this.context.clearContext()
     const token = TokenService.hasAuthToken() ? TokenService.readJwtToken() : {user_id:''}
     this.context.setUserId(token.user_id, token.employer)
   };

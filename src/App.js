@@ -51,6 +51,14 @@ class App extends Component {
     });
   };
 
+  clearContext = () => {
+    this.setState({
+      jsProfile: [],
+      gigs: [],
+      appliedUser: []
+    })
+  }
+
   // updateEvent = (ev) => {
   //   const updatedEvents = this.state.events.filter(event => event.id !== ev.id)
   //   this.setState({
@@ -119,22 +127,39 @@ class App extends Component {
     Promise.all([
       fetch(`${config.API_ENDPOINT}/jobs/gigs/${user_id}`),
       fetch(`${config.API_ENDPOINT}/applied/user/${user_id}`),
-      //fetch(`${config.API_ENDPOINT}/userprofile/${user_id}`),
       fetch(`${config.API_ENDPOINT}/userprofile/user/${user_id}`)
     ])
+    // .then(results => {
+    //   const [gigRes, appliedUserRes, userProRes] = results
+    //   // console.log(gigRes)
+    //   // if (!gigRes.value.ok) return gigRes.value.json().then((e) => Promise.reject(e));
+    //   // if (!appliedUserRes.value.ok) return appliedUserRes.value.json().then((e) => Promise.reject(e));
+    //   // if (!userProRes.value.ok) return userProRes.value.json().then((e) => Promise.reject(e));
+    //   return Promise.allSettled([
+    //       gigRes.value.json(),
+    //       appliedUserRes.value.json(),
+    //       userProRes.value.json()
+    //     ])
+    //   })
+    //   .then(([gigs, appliedUser, jsProfile])=> {
+    //     console.log(gigs)
+    //     this.setState({ gigs, appliedUser, jsProfile});
+    //   })
+    
       .then(([gigRes, appliedUserRes, userProRes]) => {
-        if (!gigRes.ok) return gigRes.json().then((e) => Promise.reject(e));
-        if (!appliedUserRes.ok)
-          return appliedUserRes.json().then((e) => Promise.reject(e));
-        if (!userProRes.ok) return userProRes.json().then((e) => Promise.reject(e));
+        console.log('making api call')
+        // if (!gigRes.ok) return gigRes.json().then((e) => Promise.reject(e));
+        // if (!appliedUserRes.ok) return appliedUserRes.json().then((e) => Promise.reject(e));
+        // if (!userProRes.ok) return userProRes.json().then((e) => Promise.reject(e));
         return Promise.all([
           gigRes.json(),
           appliedUserRes.json(),
           userProRes.json(),
         ]);
       })
-      .then(([gigs, appliedUser, userProfile]) => {
-        this.setState({ gigs, appliedUser, userProfile });
+      .then(([gigs, appliedUser, jsProfile]) => {
+        console.log({gigs})
+        this.setState({ gigs, appliedUser, jsProfile });
       })
       .catch((error) => {
         console.log({ error });
@@ -230,6 +255,7 @@ class App extends Component {
       jsProfile: this.state.jsProfile,
       empPros: this.state.empPros,
       setUserId: this.setUserId,
+      clearContext: this.clearContext
     };
     return (
       <ErrorBoundary>

@@ -4,13 +4,6 @@ import config from "../../config";
 import './jshome.css'
 
 export default class JsHome extends Component {
-<<<<<<< HEAD
-    static contextType = AppContext
-   
-    state= {
-        show: []
-    }
-=======
   static contextType = AppContext;
 
   state = {
@@ -19,7 +12,6 @@ export default class JsHome extends Component {
 
   handleApply = (job_id) => {
     const { user_id } = this.context.userInfo;
->>>>>>> 293817b1feb1c34061b2450cc344ddfb27b3e8a8
 
     fetch(`${config.API_ENDPOINT}/applied`, {
       method: "POST",
@@ -41,42 +33,6 @@ export default class JsHome extends Component {
       });
   };
 
-<<<<<<< HEAD
-    handleClick =(index)=> {
-        console.log(index)
-        let show = this.state.show.slice();
-        show[index] = !show[index];
-        this.setState({show});
- 
-    }
-    render() {
-        console.log(this.context.gigs)
-        return (
-          <>
-            <h1>JsHome</h1>
-                <ul>
-                  {this.context.gigs.map((gig, idx) => (
-                    <li key={idx}>
-                      <div>
-                       
-                          <h4>{gig.position}</h4>
-                        
-                          <p>{gig.duration}</p>
-                          <p>{gig.location}</p>
-                          <button onClick={()=>this.handleClick(idx)}>details</button>
-                          <button onClick={()=>this.handleApply(gig.id)}>apply now</button>
-                          { this.state.show[idx] &&
-                              <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proiden</p>
-                          }
-                      </div>
-                    </li>
-                  ))}
-                </ul>
-             
-          </>
-        );
-    }
-=======
   handleClick = (index) => {
     console.log(index);
     let show = this.state.show.slice();
@@ -118,5 +74,4 @@ export default class JsHome extends Component {
  
     );
   }
->>>>>>> 293817b1feb1c34061b2450cc344ddfb27b3e8a8
 }
