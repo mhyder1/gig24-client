@@ -1,8 +1,10 @@
 .App {
-  text-align: center;  height: 100%;
+  text-align: center;  
+  height: 100%;
   display: flex;
-  flex-direction: column;
-     font-family: "Libre Franklin",sans-serif;
+  flex-direction: column;   
+  background-color: #1A1A1A; 
+  font-family: 'Open Sans', sans-serif;
  }
 
 .App-header {
@@ -10,14 +12,14 @@
   transition: top 0s ease 0s, background-color 400ms ease-in-out 0s;
   transition: top .4s ease;
   background-color:#0e0d0d;
-  /* background-color: #00b1b0; */
-  /* border-bottom: 1px solid #e8eaed; */
   box-sizing: content-box;
   position: relative;
   z-index: 100;
-  /* text-align: center; */
+  font-family: "Orbitron", sans-serif;
+  font-weight: 300;
+  text-shadow: 0 2px 17px rgba(0, 0, 0, 0.12);
 }
-
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap');
 ul {
   padding:0;
 }
@@ -33,3 +35,4 @@ ul {
   border-radius: 4px;
   cursor: pointer;
 }
+

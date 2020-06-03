@@ -1,0 +1,10 @@
+.dashboard {
+    color:white; 
+    /* background-color:#d408b2; */
+}
+
+#pending{
+    font-family: 'Orbitron', sans-serif;
+    color:#d408b2;
+}
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap');

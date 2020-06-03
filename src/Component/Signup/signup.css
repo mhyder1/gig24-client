@@ -1,5 +1,7 @@
-
-
-body {
-background-color: #fff;
+#signup-form{
+   line-height: 45px;
+   color: rgb(253, 24, 165);
+   color: #01fff0;
 }
+
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap');

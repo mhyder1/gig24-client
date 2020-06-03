@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import AppContext from "../AppContext";
-import {Link} from 'react-router-dom'
+//import {Link} from 'react-router-dom'
 import "./EmpDash.css";
 
 export default class EmpDash extends Component {
@@ -8,40 +8,45 @@ export default class EmpDash extends Component {
 
   render() {
     return (
-      <>
+      <div className="empdash">
         <section>
-          <header>
-            <h1>Employer Dashboard</h1>
-          </header>
           <article>
-            <h3>My posts</h3>
+            <h3 id='posts'>My posts</h3>
             <ul>
-              <div className="post-gig">
+              <div className="e-dash">
                 {this.context.jobs.map((job, idx) => (
                   <li key={idx}>
                     <h4>{job.position}</h4>
                     <p>{job.duration}</p>
                     <p>{job.location}</p>
+                    <p>{job.term}</p>
+                    <p>{job.pay}</p>
+                    <p>{job.description}</p>
                   </li>
                 ))}
               </div>
             </ul>
           </article>
           <article>
-            <h3>Applicants</h3>
-
+            <h3 id='applicants'>Applicants</h3>
             <ul>
-              {this.context.applicants.map((applicant, idx) => (
-                <li key={idx}>
-                  <Link><p>{applicant.fullname}</p></Link>
-                  <p>{applicant.user_id}</p>
-                </li>
-              ))}
+              <div className="e-applicants">
+                {this.context.applicants.map((applicant, idx) => (
+                  <li key={idx}>
+                    <p>{applicant.fullname}</p>
+                    <p>{applicant.education}</p>
+                    <p>{applicant.user_id}</p>
+                    {/* <p>{applicant.skillset}</p>
+                  <p>{applicant.about_me}</p>
+                  <p>{applicant.location}</p> */}
+                  </li>
+                ))}
+              </div>
             </ul>
             <br />
           </article>
         </section>
-      </>
+      </div>
     );
   }
 }

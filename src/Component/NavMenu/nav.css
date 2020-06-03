@@ -6,27 +6,32 @@ font-size: 18px;
 }
 
 .links:hover {
-    color: #5f045f;
+    color: #d9ff01;
+    color:#01fff0;
       /* color:rgb(5, 170, 156) ! important; */
 }
 
 .main-nav-active,
 .main-nav-active2
 {
-   background-color:#20a7a7; 
+   background-color:#39ff14; 
+   /* background-color: #ff5a34; */
+   /* background-color:#ff3101; */
 }
-
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap');
 .navbar {
     padding: 0px;
     display: flex;
     flex-direction: column;
     position: absolute;
     right: 0;
-    background-color: rgb(13, 14, 14);
+    background-color:#0e0d0d;
  }  
 
 .navigation {
     position: relative;   
+    font-family: "Orbitron", sans-serif;
+    font-size:20px;
 }
 
 .hamburger {

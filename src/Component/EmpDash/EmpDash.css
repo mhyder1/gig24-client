@@ -1,5 +1,28 @@
-.post-gig {
+.empdash {
     display:flex;
     flex-wrap: wrap;
     justify-content: space-around;
+    color:white;
+}
+
+.e-dash {
+    display:flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+#posts{
+    color:rgb(248, 16, 132);
+ /* text-shadow: 
+    0 0 5px #ff4701,
+    0 0 10px #fde8e0,
+    0 0 20px #ff4701,
+    0 0 40px #fdd521,
+    0 0 80px rgb(255, 0, 136),
+    0 0 90px rgb(216, 197, 215),
+    0 0 100px rgb(219, 111, 9),
+    0 0 150px rgb(241, 118, 46); */
+}
+
+#applicants{
+    color:rgb(248, 16, 132);
 }

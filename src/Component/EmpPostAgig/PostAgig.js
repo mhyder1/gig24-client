@@ -94,7 +94,14 @@ export default class PostAgig extends Component {
               name="position"
               value={this.state.position}
             />
-            <label>Category</label>
+                {/* <label>Production title</label>
+            <input
+              onChange={this.handleChange}
+              type="text"
+              name="title"
+              value={this.state.title}
+            /> */}
+            <label>Production type</label>
             <input
               onChange={this.handleChange}
               type="text"
