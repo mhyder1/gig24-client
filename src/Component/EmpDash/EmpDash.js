@@ -10,11 +10,8 @@ export default class EmpDash extends Component {
     return (
       <div className="empdash">
         <section>
-          <header>
-            <h1>Employer Dashboard</h1>
-          </header>
           <article>
-            <h3>My posts</h3>
+            <h3 id='posts'>My posts</h3>
             <ul>
               <div className="e-dash">
                 {this.context.jobs.map((job, idx) => (
@@ -31,8 +28,7 @@ export default class EmpDash extends Component {
             </ul>
           </article>
           <article>
-            <h3>Applicants</h3>
-
+            <h3 id='applicants'>Applicants</h3>
             <ul>
               <div className="e-applicants">
                 {this.context.applicants.map((applicant, idx) => (

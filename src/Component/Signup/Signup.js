@@ -57,8 +57,7 @@ export default class Signup extends Component {
         <h3>Sign up</h3>
         <form
           id="signup-form"
-          style={{ lineHeight: " 45px", backgroundColor: "#fff" }}
-          onSubmit={this.handleSubmit}
+            onSubmit={this.handleSubmit}
         >
           <div role="alert">
             {error && <p style={{ color: "red" }}>{error}</p>}
@@ -124,13 +123,13 @@ export default class Signup extends Component {
             className="submitbtn"
             type="submit"
             style={{
+              fontFamily:'Orbitron, sans-serif',
               marginRight: "5px",
-              border: "1px solid #fff",
-              borderRadius: "5px",
-              padding: "5px",
-              color: "#fff",
+              border: "1px solid #000",
+              padding: "8px",
+              color: "#000",
               marginTop: "10px",
-              backgroundColor: "#F98165",
+              backgroundColor: "#01fff0",
             }}
             value="Sign up"
           />

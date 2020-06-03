@@ -4,6 +4,7 @@ import AuthApiService from "../../services/auth-api-service";
 
 import AppContext from "../AppContext";
 import TokenService from "../../services/token-service";
+import './login.css'
 
 export default class Login extends Component {
   static contextType = AppContext;
@@ -66,8 +67,8 @@ export default class Login extends Component {
         <h3>Log in</h3>
         <p>Demo username: sam</p>
         <p>Demo password: sam</p>
-        <form
-          style={{ lineHeight: " 45px", backgroundColor: "#fff" }}
+        <form id='form'
+          style={{ lineHeight: " 45px"}}
           onSubmit={this.handleSubmitJwtAuth}
         >
           <div role="alert">
@@ -98,11 +99,10 @@ export default class Login extends Component {
               marginRight: '10px',
               marginLeft:'4rem',
               border: '1px solid #fff',
-              borderRadius: '5px',
               padding: '5px',
-              color: '#fff',
+              color: '#000',
               marginTop: '10px',
-              backgroundColor: '#F98165'
+              backgroundColor: '#01fff0'
             }}
             type="submit"
             value="login"
@@ -111,15 +111,14 @@ export default class Login extends Component {
             style={{
               marginRight: '5px',
               border: '1px solid #fff',
-              borderRadius: '5px',
               padding: '5px',
               color: '#fff',
               marginTop: '10px',
-              backgroundColor: '#F98165'
+              backgroundColor: '#01fff0'
             }}
           >
             <Link
-              style={{ textDecoration: "none", color: "#fff" }}
+              style={{ textDecoration: "none", color: "#000" }}
               to="/signup"
             > sign up
             </Link>

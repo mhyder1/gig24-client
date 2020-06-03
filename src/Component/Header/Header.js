@@ -55,7 +55,7 @@ export default class Header extends Component {
     return (
       <>
       <nav>
-          <Link to='/' 
+          <Link className='neon' to='/' 
             style={{textDecoration:'none', color:'#fff', fontSize:'34px'}}>
             GIG 24
           </Link>

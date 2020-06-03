@@ -9,36 +9,19 @@ export default function LandingPg() {
     <section
       className="landing"
       style={{
-        background:`url(${gig24cam})`,
-        height:"100vh",
-        backgroundRepeat:"no-repeat",
-        backgroundSize:"cover",
-        backgroundPosition:"center",
+        background: `url(${gig24cam})`,
+        height: "100vh",
+        backgroundRepeat: "no-repeat",
+        backgroundSize: "cover",
+        backgroundPosition: "center",
       }}
     >
-      {/* <div>{gig24cam}</div> */}
-      {/* <div styles={{ backgroundImage: `url(${gig24cam})` }}>
-      </div> */}
       <div className="postfind-link">
-        <Link
-          style={{
-            textDecoration: "none",
-            border: "2px solid #000",
-            padding: "20px",
-          }}
-          to="login"
-        >
-          POST A GIG
+        <Link to='/login'>
+          <button className='glow-on-hover' >POST A GIG</button>
         </Link>
-        <Link
-          style={{
-            textDecoration: "none",
-            border: "2px solid #000",
-            padding: "20px",
-          }}
-          to="login"
-        >
-          FIND A GIG
+        <Link to="/login">
+          <button className='glow-on-hover' >FIND A GIG</button>
         </Link>
       </div>
     </section>

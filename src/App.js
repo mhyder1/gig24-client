@@ -117,7 +117,7 @@ class App extends Component {
     const { user_id } = token;
 
     Promise.all([
-      fetch(`${config.API_ENDPOINT}/jobs`),
+      fetch(`${config.API_ENDPOINT}/jobs/gigs/${user_id}`),
       fetch(`${config.API_ENDPOINT}/applied/user/${user_id}`),
       //fetch(`${config.API_ENDPOINT}/userprofile/${user_id}`),
       fetch(`${config.API_ENDPOINT}/userprofile/user/${user_id}`)
