@@ -38,6 +38,9 @@ class App extends Component {
     token: null,
     user_id: null,
     employer: null,
+    token: TokenService.hasAuthToken() ? 
+           TokenService.readJwtToken() : 
+           { user_id: "" }
   };
 
   // static getDerivedStateFromError(error) {
@@ -55,7 +58,8 @@ class App extends Component {
     this.setState({
       jsProfile: [],
       gigs: [],
-      appliedUser: []
+      appliedUser: [],
+      token: {}
     })
   }
 
@@ -118,36 +122,16 @@ class App extends Component {
       });
   };
 
-  getJobSeekerData = () => {
-    const token = TokenService.hasAuthToken()
-      ? TokenService.readJwtToken()
-      : { user_id: "" };
-    const { user_id } = token;
-
+  getJobSeekerData = (user_id) => {
+    // const { user_id } = this.state.token;
+    console.log({user_id})
+    if(!user_id) return
     Promise.all([
       fetch(`${config.API_ENDPOINT}/jobs/gigs/${user_id}`),
       fetch(`${config.API_ENDPOINT}/applied/user/${user_id}`),
       fetch(`${config.API_ENDPOINT}/userprofile/user/${user_id}`)
-    ])
-    // .then(results => {
-    //   const [gigRes, appliedUserRes, userProRes] = results
-    //   // console.log(gigRes)
-    //   // if (!gigRes.value.ok) return gigRes.value.json().then((e) => Promise.reject(e));
-    //   // if (!appliedUserRes.value.ok) return appliedUserRes.value.json().then((e) => Promise.reject(e));
-    //   // if (!userProRes.value.ok) return userProRes.value.json().then((e) => Promise.reject(e));
-    //   return Promise.allSettled([
-    //       gigRes.value.json(),
-    //       appliedUserRes.value.json(),
-    //       userProRes.value.json()
-    //     ])
-    //   })
-    //   .then(([gigs, appliedUser, jsProfile])=> {
-    //     console.log(gigs)
-    //     this.setState({ gigs, appliedUser, jsProfile});
-    //   })
-    
+    ])    
       .then(([gigRes, appliedUserRes, userProRes]) => {
-        console.log('making api call')
         // if (!gigRes.ok) return gigRes.json().then((e) => Promise.reject(e));
         // if (!appliedUserRes.ok) return appliedUserRes.json().then((e) => Promise.reject(e));
         // if (!userProRes.ok) return userProRes.json().then((e) => Promise.reject(e));
@@ -158,7 +142,7 @@ class App extends Component {
         ]);
       })
       .then(([gigs, appliedUser, jsProfile]) => {
-        console.log({gigs})
+        console.log({appliedUser})
         this.setState({ gigs, appliedUser, jsProfile });
       })
       .catch((error) => {
@@ -167,29 +151,31 @@ class App extends Component {
   };
 
   componentDidUpdate(prevProps, prevState) {
+    console.log('component updating...')
+    console.log(this.state.prevState)
+    console.log(this.state.user_id)
+    console.log(this.state.token)
+    const {user_id} = this.state
     if (prevState.user_id !== this.state.user_id && this.state.employer) {
-      console.log("Im an employer");
-      this.getEmployerData();
+      this.getEmployerData(user_id);
     } else if (
-      prevState.user_id !== this.state.user_id &&
-      !this.state.employer
+      prevState.user_id !== this.state.user_id && !this.state.employer
     ) {
-      console.log("Im a job seeker");
-      this.getJobSeekerData();
+      this.getJobSeekerData(user_id);
     }
   }
 
   componentDidMount() {
+    console.log('components mounting')
     const token = TokenService.hasAuthToken()
       ? TokenService.readJwtToken()
       : { user_id: "" };
     this.setState({ userInfo: token });
+    const {user_id} = this.state.token
     if (this.state.employer) {
-      console.log("employer");
-      this.getEmployerData();
+      this.getEmployerData(user_id);
     } else {
-      console.log("job seeker");
-      this.getJobSeekerData();
+      this.getJobSeekerData(user_id);
     }
 
     /*
@@ -257,6 +243,9 @@ class App extends Component {
       setUserId: this.setUserId,
       clearContext: this.clearContext
     };
+    // console.log(this.state.token)
+    // console.log(this.state.user_id)
+    // console.log(this.state.employer)
     return (
       <ErrorBoundary>
         <AppContext.Provider value={value}>
