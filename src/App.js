@@ -63,6 +63,12 @@ class App extends Component {
     })
   }
 
+  createUserProfile = (profile) => {
+    this.setState({
+      jsProfile: profile
+    })
+  }
+
   // updateEvent = (ev) => {
   //   const updatedEvents = this.state.events.filter(event => event.id !== ev.id)
   //   this.setState({
@@ -241,7 +247,8 @@ class App extends Component {
       jsProfile: this.state.jsProfile,
       empPros: this.state.empPros,
       setUserId: this.setUserId,
-      clearContext: this.clearContext
+      clearContext: this.clearContext,
+      createUserProfile: this.createUserProfile
     };
     // console.log(this.state.token)
     // console.log(this.state.user_id)

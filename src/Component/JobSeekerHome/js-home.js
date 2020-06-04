@@ -50,8 +50,8 @@ export default class JsHome extends Component {
             <li key={idx}>
               <div className ='gig'>
                 <h4 id ='position'>{gig.position}</h4>
-                <p>{gig.duration}</p>
-                <p>{gig.location}</p>
+                {/* <p>duration: {gig.duration}</p>
+                <p>location: {gig.location}</p> */}
                 <button onClick={() => this.handleClick(idx)}>details</button>
                 <button className='glow-on'
                     onClick={() => this.handleApply(gig.id)}
@@ -60,11 +60,13 @@ export default class JsHome extends Component {
                   apply now
                 </button>
                 {this.state.show[idx] && (
-                  <p>
-                    Duis aute irure dolor in reprehenderit in voluptate velit
-                    esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
-                    occaecat cupidatat non proiden
-                  </p>
+                  <section>
+                    <p>duration: {gig.duration}</p>
+                    <p>location: {gig.location}</p>
+                    <p>description: {gig.description}</p>
+                    <p>term: {gig.term}</p>
+                    <p>pay: {gig.pay}</p>
+                  </section>
                 )}
               </div>
             </li>

@@ -10,7 +10,8 @@ const AppContext= React.createContext({
    empPros:[],
    addJob: ()=>{},
    setUserId: ()=>{},
-   clearContext: ()=>{}
+   clearContext: ()=>{},
+   createUserProfile: ()=>{}
 })
 
 export default AppContext;

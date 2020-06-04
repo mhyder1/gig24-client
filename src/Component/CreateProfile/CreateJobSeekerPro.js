@@ -3,6 +3,9 @@ import { Link } from "react-router-dom";
 import AlgoliaPlaces from "algolia-places-react";
 import config from "../../config";
 import AppContext from "../../Component/AppContext";
+import TokenService from "../../services/token-service"
+import "./create-js-profile.css"
+import "../../AlgoliaPlaces.css"
 
 export default class CreateJobSeekerPro extends Component {
   static contextType = AppContext;
@@ -14,6 +17,8 @@ export default class CreateJobSeekerPro extends Component {
     education: "",
     location: "",
     imdb: "",
+    phone: "",
+    email: "",
     skillset: "",
   };
 
@@ -26,11 +31,14 @@ export default class CreateJobSeekerPro extends Component {
   handleAddress = (suggestion) => {
     const { name, city, administrative, postcode } = suggestion;
     this.setState({
-      address: `${name}, ${city}, ${administrative} ${postcode}`,
-    });
+      location: `${name || ''}, ${city || ''}, ${administrative || ''} ${postcode || ''}`,
+    },()=> console.log(this.state.location));
   };
 
   handleSubmit = (e) => {
+    const token = TokenService.hasAuthToken()
+      ? TokenService.readJwtToken()
+      : { user_id: "" };
     e.preventDefault();
     fetch(`${config.API_ENDPOINT}/userprofile`, {
       method: "POST",
@@ -43,11 +51,12 @@ export default class CreateJobSeekerPro extends Component {
         // photo:'photo',
         education: this.state.education,
         location: this.state.location,
-        // duration:'seven days',
-        imdb: "imdb profile",
+        imdb: this.state.imdb,
         skillset: this.state.skillset,
-        user_id: this.context.userInfo.user_id,
-      }),
+        phone: this.state.phone,
+        email: this.state.email,
+        user_id: token.user_id
+      })
     })
       .then((res) => {
         if (!res.ok) return res.json().then((e) => Promise.reject(e));
@@ -55,6 +64,7 @@ export default class CreateJobSeekerPro extends Component {
       })
       .then((userPro) => {
         console.log(userPro);
+        this.context.createUserProfile(userPro)
         this.props.history.push("/js-profile");
       })
 
@@ -64,72 +74,81 @@ export default class CreateJobSeekerPro extends Component {
   };
 
   render() {
+    // console.log(this.context)
     return (
-      <>
-        <h1>CREATE JOB SEEKER PROFILE</h1>
-        <Link to={"/js-dashboard"}>Create</Link>
-        <form onSubmit={this.handleSubmit}>
-          <label> Name: </label>
+      <section className="create-js-profile">
+        <h1 style={{color: 'white'}}>CREATE JOB SEEKER PROFILE</h1>
+        {/* <Link to={"/js-dashboard"}>Create</Link> */}
+        <form onSubmit={this.handleSubmit} >
+          <label className="label" htmlFor="name"> Name:</label>
           <input
             onChange={this.handleChange}
             type="text"
             name="name"
+            id="name"
+            className="input"
             value={this.state.name}
             required
           />
-          <br />
-          <label>About me: </label>
+          <label className="label" htmlFor="about_me">About me:</label>
           <textarea
             onChange={this.handleChange}
             name="about_me"
+            id="about_me"
+            className="input"
             value={this.state.about_me}
           />
-          <br />
-          <label>Education: </label>
+          <label className="label" htmlFor="education">Education:</label>
           <input
             onChange={this.handleChange}
             type="text"
             name="education"
+            id="education"
+            className="input"
             value={this.state.education}
           />
-          <br />
-          <label>Link to your IMDB credit (if any):</label>
+          <label className="label" htmlFor="imdb">IMDB credit (if any):</label>
           <input
             onChange={this.handleChange}
-            url="url"
-            name="url"
-            value={this.state.url}
+            type="text"
+            name="imdb"
+            id="imdb"
+            className="input"
+            value={this.state.imdb}
           />
-          <br />
-          <label>Phone: </label>
+          <label className="label" htmlFor="phone">Phone:</label>
           <input
             onChange={this.handleChange}
             type="tel"
-            name="tel"
-            value={this.state.tel}
+            name="phone"
+            id="phone"
+            className="input"
+            value={this.state.phone}
             required
           />
-          <br />
-          <label>Email: </label>
+          <label className="label" htmlFor="email">Email:</label>
           <input
             onChange={this.handleChange}
             type="email"
             name="email"
+            id="email"
+            className="input"
             value={this.state.email}
             required
           />
-          <br />
-          <label>Skillset: </label>
+          <label className="label" htmlFor="skill">Skillset:</label>
           <textarea
             onChange={this.handleChange}
             name="skillset"
+            id="skill"
+            className="input"
             value={this.state.skillset}
             required
           />
-          <br />
-          <label>Location</label>
+          <label className="label" htmlFor="location">Location:</label>
           <br />
           <AlgoliaPlaces
+            id="location"
             placeholder="Write an address here"
             options={{
               appId: config.APPID,
@@ -142,14 +161,13 @@ export default class CreateJobSeekerPro extends Component {
               this.handleAddress(suggestion)
             }
           />
-          <br />
-          <label>Photo: </label>
+          {/* <label className="label">Photo: </label> */}
           {/* <input type="file" id="fileElem" multiple accept="image/*" /> */}
           <br />
           {/* <button id="fileSelect">Select file</button>         */}
           <input type="submit" value="create" />
         </form>
-      </>
+      </section>
     );
   }
 }
