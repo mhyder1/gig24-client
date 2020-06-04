@@ -19,7 +19,8 @@
     margin-bottom: 20px;
 }
  
-.create-js-profile button {
-    float: right;
-    width: calc(100% - 200px);
+.create-js-profile .submit {
+    /* float: right;
+    width: calc(100% - 200px); */
+    cursor: pointer;
 }

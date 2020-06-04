@@ -5,6 +5,7 @@ import Header from "./Component/Header/Header";
 import LandingPg from "./Component/LandingPg/LandingPg";
 import CreateEmpPro from "./Component/CreateProfile/CreateEmpPro";
 import CreateJobSeekerPro from "./Component/CreateProfile/CreateJobSeekerPro";
+import EditJobSeekerPro from "./Component/CreateProfile/EditJobSeekerPro";
 import EmpDash from "./Component/EmpDash/EmpDash";
 import PostAgig from "./Component/EmpPostAgig/PostAgig";
 import JobSeekerDash from "./Component/JobSeekerDash/JobSeekerDash";
@@ -274,6 +275,12 @@ class App extends Component {
                 <PrivateRoute
                   path="/crt-js-profile"
                   component={CreateJobSeekerPro}
+                />
+              </section>
+              <section>
+                <PrivateRoute
+                    path="/edit-js-profile"
+                    component={EditJobSeekerPro}
                 />
               </section>
 

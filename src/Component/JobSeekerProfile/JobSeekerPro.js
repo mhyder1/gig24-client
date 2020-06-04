@@ -22,9 +22,16 @@ export default class JobSeekerPro extends Component {
         <p>{jsProfile.skillset}</p>
         {!jsProfile.error 
           ?
-          <button>Edit Profile</button>
+          <Link
+            to={{
+              pathname: '/edit-js-profile',
+              state: {jsProfile}
+            }}
+          >
+            <button>Edit Profile</button>
+          </Link>
           :
-          <Link type="button" to='/crt-js-profile'>
+          <Link to='/crt-js-profile'>
             <button>Create Profile</button>
           </Link>
         }

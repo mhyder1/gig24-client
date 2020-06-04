@@ -165,7 +165,7 @@ export default class CreateJobSeekerPro extends Component {
           {/* <input type="file" id="fileElem" multiple accept="image/*" /> */}
           <br />
           {/* <button id="fileSelect">Select file</button>         */}
-          <input type="submit" value="create" />
+          <input className="submit" type="submit" value="create" />
         </form>
       </section>
     );
