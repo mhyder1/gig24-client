@@ -11,8 +11,13 @@
     padding-top:40px;
 }
 
-input[type=text] {
+/* input[type=text] {
     padding:10px;
     border:0;
     box-shadow:0 0 15px 4px rgb(1,255,240);
-  }
+  } */
+ #loginname, #loginpass {
+    line-height: 45px;
+    /* color: rgb(253, 24, 165); */
+    color: #01fff0;
+ }

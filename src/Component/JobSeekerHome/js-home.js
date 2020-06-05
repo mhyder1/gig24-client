@@ -50,10 +50,10 @@ export default class JsHome extends Component {
         return res.json();
       })
       .then((application) => {
-          this.cotext.updateApplications(application)
+          this.context.updateApplications(application)
           this.getGigs()
       })
-      .catch(error => console.e.log(error))
+      .catch(error => console.log(error))
   };
 
   handleClick = (index) => {
@@ -78,7 +78,7 @@ export default class JsHome extends Component {
             <li key={idx}>
               <div >
                 <h3 id ='position'>{gig.position}</h3>
-                <p>Duration: {gig.duration}</p>
+                <p>Duration: {gig.title}</p>
                 <p>Location: {gig.location}</p>
                 <button onClick={() => this.handleClick(idx)}>details</button>
                 <button className='glow-on'
@@ -89,10 +89,8 @@ export default class JsHome extends Component {
                 </button>
                 {this.state.show[idx] && (
                   <section>
-                    {/* <p>duration: {gig.duration}</p>
-                    <p>location: {gig.location}</p> */}
                     <p>Project Details: {gig.description}</p>
-                    <p>Term: {gig.term}</p>
+                    <p>Duration: {gig.duration}</p>
                     <p>Pay: {gig.pay}</p>
                   </section>
                 )}

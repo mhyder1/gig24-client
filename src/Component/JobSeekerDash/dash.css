@@ -4,7 +4,7 @@
 }
 .dash > li {
     background: rgb(0, 0, 0);
-    background: rgba(0, 0, 0, 0.7); 
+    background: rgba(0, 0, 0, 0.9); 
     color: #f1f1f1;
     list-style: none;
     border: 1px rgb(8, 248, 8) solid;
@@ -16,5 +16,6 @@
 #pending{
     font-family: 'Orbitron', sans-serif;
     color:#d408b2;
+    background-color: black
 }
 @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap');

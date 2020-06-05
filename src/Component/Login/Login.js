@@ -76,7 +76,7 @@ export default class Login extends Component {
           <div role="alert">
             {error && <p style={{ color: "red" }}>{error}</p>}
           </div>
-          <label style={{ paddingRight: "6px" }}>Username </label>
+          <label id='loginname'style={{ paddingRight: "6px" }}>Username </label>
           <input
             onChange={this.handleChange}
             type="text"
@@ -86,7 +86,7 @@ export default class Login extends Component {
             required
           />
           <br />
-          <label style={{ paddingRight: "10px" }}>Password </label>
+          <label id='loginpass'style={{ paddingRight: "10px" }}>Password </label>
           <input
             onChange={this.handleChange}
             type="text"

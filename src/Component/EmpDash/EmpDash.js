@@ -16,6 +16,7 @@ export default class EmpDash extends Component {
           height: "100vh",
           backgroundRepeat: "no-repeat",
           backgroundSize: "cover",
+          backgroundPosition: "center"
         }}
       >
         <section>

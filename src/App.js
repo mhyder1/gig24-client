@@ -43,11 +43,6 @@ class App extends Component {
       : { user_id: "" },
   };
 
-  // static getDerivedStateFromError(error) {
-  //   console.error(error)
-  //   return { hasError: true }
-  // }
-
   addJob = (job) => {
     this.setState({
       jobs: [...this.state.jobs, job],
@@ -81,32 +76,6 @@ class App extends Component {
     })
   }
 
-  // updateEvent = (ev) => {
-  //   const updatedEvents = this.state.events.filter(event => event.id !== ev.id)
-  //   this.setState({
-  //     events: [...updatedEvents, ev],
-  //   });
-  // };
-
-  // joinEvent = (att) => {
-  //   this.setState({
-  //     attend: [...this.state.attend, att]
-  //   })
-  // }
-
-  // removeAttend = (att_id) => {
-  //   this.setState({
-  //     attend: this.state.attend.filter(att => att.id !== att_id)
-  //   });
-  // }
-
-  // userId = (user_id, fullname) => {
-  //   this.setState({
-  //     user_id,
-  //     fullname,
-
-  //   })
-  // }
 
   setUserId = (user_id, employer) => {
     this.setState({
@@ -115,11 +84,8 @@ class App extends Component {
     });
   };
 
-  getEmployerData = () => {
-    const token = TokenService.hasAuthToken()
-      ? TokenService.readJwtToken()
-      : { user_id: "" };
-    const { user_id } = token;
+  getEmployerData = (user_id) => {
+    if (!user_id) return;
     Promise.all([
       fetch(`${config.API_ENDPOINT}/applied/current/${user_id}`),
       fetch(`${config.API_ENDPOINT}/jobs/byuser/${user_id}`),
@@ -142,7 +108,6 @@ class App extends Component {
 
   getJobSeekerData = (user_id) => {
     // const { user_id } = this.state.token;
-    console.log({ user_id });
     if (!user_id) return;
     Promise.all([
       fetch(`${config.API_ENDPOINT}/jobs/gigs/${user_id}`),
@@ -160,7 +125,6 @@ class App extends Component {
         ]);
       })
       .then(([gigs, appliedUser, jsProfile]) => {
-        console.log({ appliedUser });
         this.setState({ gigs, appliedUser, jsProfile });
       })
       .catch((error) => {
@@ -169,10 +133,6 @@ class App extends Component {
   };
 
   componentDidUpdate(prevProps, prevState) {
-    console.log("component updating...");
-    console.log(this.state.prevState);
-    console.log(this.state.user_id);
-    console.log(this.state.token);
     const { user_id } = this.state;
     if (prevState.user_id !== this.state.user_id && this.state.employer) {
       this.getEmployerData(user_id);
@@ -185,13 +145,13 @@ class App extends Component {
   }
 
   componentDidMount() {
-    console.log("components mounting");
     const token = TokenService.hasAuthToken()
       ? TokenService.readJwtToken()
       : { user_id: "" };
     this.setState({ userInfo: token });
-    const { user_id } = this.state.token;
-    if (this.state.employer) {
+    const { user_id, employer } = this.state.token;
+    
+    if (employer) {
       this.getEmployerData(user_id);
     } else {
       this.getJobSeekerData(user_id);

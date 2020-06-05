@@ -5,6 +5,7 @@ import AppContext from "../AppContext";
 import TokenService from "../../services/token-service";
 import config from "../../config";
 import "../../AlgoliaPlaces.css";
+import { Link } from 'react-router-dom'
 import "./postgig.css";
 export default class PostAgig extends Component {
   static contextType = AppContext;
@@ -15,28 +16,33 @@ export default class PostAgig extends Component {
     type: "",
     requirements: "",
     description: "",
-    membery: "",
-    member: "",
+    member: false,
     location: "",
     //start_day: new Date(),
     pay: "",
     duration: "",
-    day: "",
-    week: "",
-    month: ""
+    unit:''
   };
 
   handleChange = (e) => {
+    let value
+    if(e.target.value === 'yes'){
+      value = true
+    } else if(e.target.value === 'no'){
+      value = false
+    } else {
+      value = e.target.value;
+    }
     this.setState({
-      [e.target.name]: e.target.value,
+      [e.target.name]: value
     });
   };
 
-  onChange = (date) => {
-    this.setState({
-      start_day: date,
-    });
-  };
+  // onChange = (date) => {
+  //   this.setState({
+  //     start_day: date,
+  //   });
+  // };
 
   // handleSelect = (e) => {
   //   this.setState({
@@ -45,35 +51,37 @@ export default class PostAgig extends Component {
   // }
 
   handleAddress = (suggestion) => {
-    const { name, city, administrative, postcode } = suggestion;
+    const { city, administrative } = suggestion;
     this.setState({
-      address: `${name}, ${city}, ${administrative} ${postcode}`,
+      location: `${city}, ${administrative}`,
     });
   };
 
   handleSubmit = (e) => {
+    const token = TokenService.hasAuthToken()
+    ? TokenService.readJwtToken()
+    : { user_id: "" }
+    const {user_id} = token
     e.preventDefault();
+
     fetch(`${config.API_ENDPOINT}/jobs`, {
       method: "POST",
       headers: {
         "content-type": "application/json",
       },
-      body: JSON.stringify({
+      body: JSON.stringify( {
         position: this.state.position,
         title: this.state.title,
         type: this.state.type,
         requirements: this.state.requirements,
         description: this.state.description,
         member: this.state.member,
-        membery: this.state.membery,
         location: this.state.location,
         pay: this.state.pay,
         //start_day: new Date(),
-        duration: "three weeks",
-        day:this.state.day,
-        week: this.state.week,
-        month: this.state.month,
-        user_id: "4",
+        duration: this.state.duration,
+        unit:this.state.unit,
+        user_id
       }),
     })
       .then((res) => {
@@ -162,9 +170,9 @@ export default class PostAgig extends Component {
             <input
               onChange={this.handleChange}
               type="radio"
-              name="membery"
-              id="membery"
-              value={this.state.membery}
+              name="member"
+              id="member"
+              value='yes'
             />
             <label style={{ color: "white" }}>No</label>
             <input
@@ -172,7 +180,7 @@ export default class PostAgig extends Component {
               type="radio"
               name="member"
               id="member"
-              value={this.state.member}
+              value='no'
             />
           </fieldset>
           <br />
@@ -237,29 +245,30 @@ export default class PostAgig extends Component {
             <input
               onChange={this.handleChange}
               type="radio"
-              name="days"
-              value={this.state.day}
+              name="unit"
+              value='day'
             />{" "}
             <label style={{ color: "white" }}>Week(s)</label>
             <input
               onChange={this.handleChange}
               type="radio"
-              name="week"
-              value={this.state.week}
+              name="unit"
+              value='week'
             />
             <label style={{ color: "white" }}>Month(s)</label>
             <input
               onChange={this.handleChange}
               type="radio"
-              name="month"
-              value={this.state.month}
+              name="unit"
+              value='month'
             />
             <br />
           </fieldset>
           <br />
-          <input onChange={this.handleChange} type="submit" value="POST" />{" "}
-          <input onChange={this.handleChange} type="submit" value="CANCEL" />
+          <input type="submit" value="POST" />{" "}
         </form>
+        <br/>
+          <Link to='/e-dashboard'><button>CANCEL</button></Link>
       </section>
     );
   }
