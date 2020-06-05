@@ -70,6 +70,18 @@ class App extends Component {
     })
   }
 
+  updateApplications = (application) => {
+    this.setState({
+      appliedUser: [...this.state.appliedUser, application]
+    })
+  }
+
+  updateGigs = (gigs) => {
+    this.setState({
+      gigs
+    })
+  }
+
   // updateEvent = (ev) => {
   //   const updatedEvents = this.state.events.filter(event => event.id !== ev.id)
   //   this.setState({
@@ -249,7 +261,9 @@ class App extends Component {
       empPros: this.state.empPros,
       setUserId: this.setUserId,
       clearContext: this.clearContext,
-      createUserProfile: this.createUserProfile
+      createUserProfile: this.createUserProfile,
+      updateApplications: this.updateApplications,
+      updateGigs: this.updateGigs
     };
     // console.log(this.state.token)
     // console.log(this.state.user_id)

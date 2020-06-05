@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import AppContext from "../AppContext";
+import TokenService from "../../services/token-service";
 import config from "../../config";
 import './jshome.css'
 
@@ -10,8 +11,27 @@ export default class JsHome extends Component {
     show: [],
   };
 
+  getGigs = () => {
+    const token = TokenService.hasAuthToken() ? 
+                TokenService.readJwtToken() : 
+                { user_id: "" }
+    const { user_id } = token
+    fetch(`${config.API_ENDPOINT}/jobs/gigs/${user_id}`)
+        .then((res) => {
+          if (!res.ok) return res.json().then((e) => Promise.reject(e));
+          return res.json();
+        })
+        .then((gigs) => {
+            this.context.updateGigs(gigs)
+        })
+        .catch(error => console.e.log(error))
+  }
+
   handleApply = (job_id) => {
-    const { user_id } = this.context.userInfo;
+    const token = TokenService.hasAuthToken() ? 
+                    TokenService.readJwtToken() : 
+                    { user_id: "" }
+    const { user_id } = token
 
     fetch(`${config.API_ENDPOINT}/applied`, {
       method: "POST",
@@ -24,25 +44,24 @@ export default class JsHome extends Component {
         completed: false,
       }),
     })
-      .then((res) => {
+    .then((res) => {
         if (!res.ok) return res.json().then((e) => Promise.reject(e));
-        return res.json();
-      })
-      .then((appliedJob) => {
-        console.log(appliedJob);
-      });
+    return res.json();
+    })
+    .then((application) => {
+        this.cotext.updateApplications(application)
+        this.getGigs()
+    })
+    .catch(error => console.e.log(error))
   };
 
   handleClick = (index) => {
-    console.log(index);
     let show = this.state.show.slice();
     show[index] = !show[index];
     this.setState({ show });
   };
   render() {
-    console.log(this.context.gigs);
     return (
-  
       <section className = 'js-home'>
         <h1 id='open'>Open gigs</h1>
         <ul>

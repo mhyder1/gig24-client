@@ -14,6 +14,11 @@ export default class JobSeekerDash extends Component {
           {this.context.appliedUser.map((user, idx) => (
             <li key={idx}>
               <p>{user.description}</p>
+              <p>{user.duration}</p>
+              <p>{user.location}</p>
+              <p>{user.pay}</p>
+              <p>{user.position}</p>
+              <p>{user.term}</p>
             </li>
           ))}
         </ul>
