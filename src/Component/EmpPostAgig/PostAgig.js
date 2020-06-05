@@ -14,18 +14,16 @@ export default class PostAgig extends Component {
     title: "",
     type: "",
     requirements: "",
-    location: "",
     description: "",
+    membery: "",
+    member: "",
+    location: "",
     //start_day: new Date(),
+    pay: "",
     duration: "",
     day: "",
     week: "",
-    month: "",
-    pay: "",
-    membery: "",
-    member: "",
-    yes: "",
-    no: "",
+    month: ""
   };
 
   handleChange = (e) => {
@@ -62,17 +60,19 @@ export default class PostAgig extends Component {
       },
       body: JSON.stringify({
         position: this.state.position,
-        titel: this.state.title,
+        title: this.state.title,
         type: this.state.type,
-        pay: "6",
         requirements: this.state.requirements,
-        location: this.state.location,
         description: this.state.description,
-        term: "part-time",
-        yes: this.state.yes,
-        no: this.state.no,
+        member: this.state.member,
+        membery: this.state.membery,
+        location: this.state.location,
+        pay: this.state.pay,
         //start_day: new Date(),
         duration: "three weeks",
+        day:this.state.day,
+        week: this.state.week,
+        month: this.state.month,
         user_id: "4",
       }),
     })
@@ -233,7 +233,6 @@ export default class PostAgig extends Component {
               value={this.state.duration}
             />
             <br />
-            {/* <p style={{ color: "white" }}>Day(s)</p> */}
             <label style={{ color: "white" }}>Day(s)</label>
             <input
               onChange={this.handleChange}

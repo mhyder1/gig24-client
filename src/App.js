@@ -68,6 +68,19 @@ class App extends Component {
       jsProfile: profile,
     });
   };
+
+  updateApplications = (application) => {
+    this.setState({
+      appliedUser: [...this.state.appliedUser, application]
+    })
+  }
+
+  updateGigs = (gigs) => {
+    this.setState({
+      gigs
+    })
+  }
+
   // updateEvent = (ev) => {
   //   const updatedEvents = this.state.events.filter(event => event.id !== ev.id)
   //   this.setState({
@@ -249,6 +262,8 @@ class App extends Component {
       setUserId: this.setUserId,
       clearContext: this.clearContext,
       createUserProfile: this.createUserProfile,
+      updateApplications: this.updateApplications,
+      updateGigs: this.updateGigs
     };
 
     return (
