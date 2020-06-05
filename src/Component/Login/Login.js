@@ -65,9 +65,11 @@ export default class Login extends Component {
 
     return (
       <>
+        <p id="demo">Employer Demo username: sam</p>
+        <p id="demo">Employer Demo password: sam</p>
+        <p id="demo">Job seeker Demo username: dunder</p>
+        <p id="demo">Job seeker Demo password: password</p>
         <h3 id="log">Log in</h3>
-        <p id="demo">Demo username: sam</p>
-        <p id="demo">Demo password: sam</p>
         <form
           id="form"
           style={{ lineHeight: " 45px" }}
