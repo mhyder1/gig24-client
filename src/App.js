@@ -5,6 +5,7 @@ import Header from "./Component/Header/Header";
 import LandingPg from "./Component/LandingPg/LandingPg";
 import CreateEmpPro from "./Component/CreateProfile/CreateEmpPro";
 import CreateJobSeekerPro from "./Component/CreateProfile/CreateJobSeekerPro";
+import EditJobSeekerPro from "./Component/CreateProfile/EditJobSeekerPro";
 import EmpDash from "./Component/EmpDash/EmpDash";
 import PostAgig from "./Component/EmpPostAgig/PostAgig";
 import JobSeekerDash from "./Component/JobSeekerDash/JobSeekerDash";
@@ -20,7 +21,6 @@ import TokenService from "./services/token-service";
 import AuthApiService from "./services/auth-api-service";
 import IdleService from "./services/idle-service";
 import EmpProfile from "./Component/EmpProfile/EmpProfile";
-//import gig24cam from './images/gig24cam.jpg'
 import config from "./config.js";
 import "./App.css";
 
@@ -38,6 +38,9 @@ class App extends Component {
     token: null,
     user_id: null,
     employer: null,
+    token: TokenService.hasAuthToken()
+      ? TokenService.readJwtToken()
+      : { user_id: "" },
   };
 
   // static getDerivedStateFromError(error) {
@@ -51,6 +54,20 @@ class App extends Component {
     });
   };
 
+  clearContext = () => {
+    this.setState({
+      jsProfile: [],
+      gigs: [],
+      appliedUser: [],
+      token: {},
+    });
+  };
+
+  createUserProfile = (profile) => {
+    this.setState({
+      jsProfile: profile,
+    });
+  };
   // updateEvent = (ev) => {
   //   const updatedEvents = this.state.events.filter(event => event.id !== ev.id)
   //   this.setState({
@@ -110,31 +127,28 @@ class App extends Component {
       });
   };
 
-  getJobSeekerData = () => {
-    const token = TokenService.hasAuthToken()
-      ? TokenService.readJwtToken()
-      : { user_id: "" };
-    const { user_id } = token;
-
+  getJobSeekerData = (user_id) => {
+    // const { user_id } = this.state.token;
+    console.log({ user_id });
+    if (!user_id) return;
     Promise.all([
       fetch(`${config.API_ENDPOINT}/jobs/gigs/${user_id}`),
       fetch(`${config.API_ENDPOINT}/applied/user/${user_id}`),
-      //fetch(`${config.API_ENDPOINT}/userprofile/${user_id}`),
-      fetch(`${config.API_ENDPOINT}/userprofile/user/${user_id}`)
+      fetch(`${config.API_ENDPOINT}/userprofile/user/${user_id}`),
     ])
       .then(([gigRes, appliedUserRes, userProRes]) => {
-        if (!gigRes.ok) return gigRes.json().then((e) => Promise.reject(e));
-        if (!appliedUserRes.ok)
-          return appliedUserRes.json().then((e) => Promise.reject(e));
-        if (!userProRes.ok) return userProRes.json().then((e) => Promise.reject(e));
+        // if (!gigRes.ok) return gigRes.json().then((e) => Promise.reject(e));
+        // if (!appliedUserRes.ok) return appliedUserRes.json().then((e) => Promise.reject(e));
+        // if (!userProRes.ok) return userProRes.json().then((e) => Promise.reject(e));
         return Promise.all([
           gigRes.json(),
           appliedUserRes.json(),
           userProRes.json(),
         ]);
       })
-      .then(([gigs, appliedUser, userProfile]) => {
-        this.setState({ gigs, appliedUser, userProfile });
+      .then(([gigs, appliedUser, jsProfile]) => {
+        console.log({ appliedUser });
+        this.setState({ gigs, appliedUser, jsProfile });
       })
       .catch((error) => {
         console.log({ error });
@@ -142,29 +156,32 @@ class App extends Component {
   };
 
   componentDidUpdate(prevProps, prevState) {
+    console.log("component updating...");
+    console.log(this.state.prevState);
+    console.log(this.state.user_id);
+    console.log(this.state.token);
+    const { user_id } = this.state;
     if (prevState.user_id !== this.state.user_id && this.state.employer) {
-      console.log("Im an employer");
-      this.getEmployerData();
+      this.getEmployerData(user_id);
     } else if (
       prevState.user_id !== this.state.user_id &&
       !this.state.employer
     ) {
-      console.log("Im a job seeker");
-      this.getJobSeekerData();
+      this.getJobSeekerData(user_id);
     }
   }
 
   componentDidMount() {
+    console.log("components mounting");
     const token = TokenService.hasAuthToken()
       ? TokenService.readJwtToken()
       : { user_id: "" };
     this.setState({ userInfo: token });
+    const { user_id } = this.state.token;
     if (this.state.employer) {
-      console.log("employer");
-      this.getEmployerData();
+      this.getEmployerData(user_id);
     } else {
-      console.log("job seeker");
-      this.getJobSeekerData();
+      this.getJobSeekerData(user_id);
     }
 
     /*
@@ -230,6 +247,8 @@ class App extends Component {
       jsProfile: this.state.jsProfile,
       empPros: this.state.empPros,
       setUserId: this.setUserId,
+      clearContext: this.clearContext,
+      createUserProfile: this.createUserProfile,
     };
 
     return (
@@ -253,6 +272,12 @@ class App extends Component {
                 <PrivateRoute
                   path="/crt-js-profile"
                   component={CreateJobSeekerPro}
+                />
+              </section>
+              <section>
+                <PrivateRoute
+                  path="/edit-js-profile"
+                  component={EditJobSeekerPro}
                 />
               </section>
 
@@ -285,6 +310,7 @@ class App extends Component {
                 <PrivateRoute path="/js-dashboard" component={NavMenu} />
                 <PrivateRoute path="/js-dashboard" component={JobSeekerDash} />
               </section>
+              <PrivateRoute path="/post-gig" component={NavMenuEmp} />
               <PrivateRoute path="/post-gig" component={PostAgig} />
               {/* Protected route */}
 

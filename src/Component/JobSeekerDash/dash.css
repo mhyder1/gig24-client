@@ -2,6 +2,16 @@
     color:white; 
     /* background-color:#d408b2; */
 }
+.dash > li {
+    background: rgb(0, 0, 0);
+    background: rgba(0, 0, 0, 0.7); 
+    color: #f1f1f1;
+    list-style: none;
+    border: 1px rgb(8, 248, 8) solid;
+    margin: 0 10px 20px;
+    box-shadow: 1px 1px 10px #f4f5f4;
+    padding: 10px;
+}
 
 #pending{
     font-family: 'Orbitron', sans-serif;

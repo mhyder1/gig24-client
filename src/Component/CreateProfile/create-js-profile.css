@@ -1,0 +1,33 @@
+h1 {
+    font-family: 'Orbitron', sans-serif;
+    color:#01fff0;
+}
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap');
+
+
+.create-js-profile form {
+    overflow: hidden;
+    width: 600px;
+    margin: 0 auto;
+}
+
+.create-js-profile .label {
+    float: left;
+    width: 150px;
+    padding-right: 24px;
+    color: white;
+    margin-bottom: 20px;
+    text-align: right;
+}
+
+.create-js-profile .input {
+    float: left;
+    width: calc(100% - 200px);
+    margin-bottom: 20px;
+}
+ 
+.create-js-profile .submit {
+    /* float: right;
+    width: calc(100% - 200px); */
+    cursor: pointer;
+}

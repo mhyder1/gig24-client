@@ -7,13 +7,11 @@ import TokenService from "../../services/token-service"
 import "./create-js-profile.css"
 import "../../AlgoliaPlaces.css"
 
-
-export default class CreateJobSeekerPro extends Component {
+export default class EditJobSeekerPro extends Component {
   static contextType = AppContext;
 
   state = {
     name: "",
-    position:'',
     about_me: "",
     photo: "",
     education: "",
@@ -22,8 +20,37 @@ export default class CreateJobSeekerPro extends Component {
     phone: "",
     email: "",
     skillset: "",
+    id: null
   };
 
+  componentDidMount() {
+    const { jsProfile } = this.props.location.state
+    this.setState({
+        name: jsProfile.name,
+        about_me: jsProfile.about_me,
+        // photo:'photo',
+        education: jsProfile.education,
+        location: jsProfile.location,
+        imdb: jsProfile.imdb,
+        skillset: jsProfile.skillset,
+        phone: jsProfile.phone,
+        email: jsProfile.email,
+        id: jsProfile.id
+    }, () => {
+        const location = document.querySelector('#location')
+        console.log(location.innerHTML)
+        console.log(this.state.location)
+        location.value = this.state.location
+    })
+  }
+
+  resetLocation = (e) => {
+    e.preventDefault()
+    const location = document.querySelector('#location')
+    console.log(location)
+    location.value = "Hello"
+
+  }
 
   handleChange = (e) => {
     this.setState({
@@ -33,14 +60,9 @@ export default class CreateJobSeekerPro extends Component {
 
   handleAddress = (suggestion) => {
     const { name, city, administrative, postcode } = suggestion;
-    this.setState(
-      {
-        location: `${name || ""}, ${city || ""}, ${administrative || ""} ${
-          postcode || ""
-        }`,
-      },
-      () => console.log(this.state.location)
-    );
+    this.setState({
+      location: `${name || ''}, ${city || ''}, ${administrative || ''} ${postcode || ''}`,
+    },()=> console.log(this.state.location));
   };
 
   handleSubmit = (e) => {
@@ -48,15 +70,14 @@ export default class CreateJobSeekerPro extends Component {
       ? TokenService.readJwtToken()
       : { user_id: "" };
     e.preventDefault();
-    fetch(`${config.API_ENDPOINT}/userprofile`, {
-      method: "POST",
+    fetch(`${config.API_ENDPOINT}/userprofile/${this.state.id}`, {
+      method: "PATCH",
       headers: {
         "content-type": "application/json",
       },
       body: JSON.stringify({
         name: this.state.name,
         about_me: this.state.about_me,
-        position: this.state.position,
         // photo:'photo',
         education: this.state.education,
         location: this.state.location,
@@ -64,15 +85,15 @@ export default class CreateJobSeekerPro extends Component {
         skillset: this.state.skillset,
         phone: this.state.phone,
         email: this.state.email,
-        user_id: token.user_id
-      }),
+      })
     })
       .then((res) => {
         if (!res.ok) return res.json().then((e) => Promise.reject(e));
         return res.json();
       })
       .then((userPro) => {
-        this.context.createUserProfile(userPro);
+        console.log(userPro);
+        this.context.createUserProfile(userPro)
         this.props.history.push("/js-profile");
       })
       .catch((error) => {
@@ -81,15 +102,13 @@ export default class CreateJobSeekerPro extends Component {
   };
 
   render() {
+
     return (
       <section className="create-js-profile">
-        <h1>CREATE JOB SEEKER PROFILE</h1>
+        <h1 style={{color: 'white'}}>EDIT JOB SEEKER PROFILE</h1>
         {/* <Link to={"/js-dashboard"}>Create</Link> */}
-        <form onSubmit={this.handleSubmit}>
-          <label className="label" htmlFor="name">
-            {" "}
-            Name:
-          </label>
+        <form onSubmit={this.handleSubmit} >
+          <label className="label" htmlFor="name"> Name:</label>
           <input
             onChange={this.handleChange}
             type="text"
@@ -99,22 +118,7 @@ export default class CreateJobSeekerPro extends Component {
             value={this.state.name}
             required
           />
-           <label className="label" htmlFor="position">
-            {" "}
-            Primary Position:
-          </label>
-          <input
-            onChange={this.handleChange}
-            type="text"
-            name="position"
-            id="position"
-            className="input"
-            value={this.state.position}
-            required
-          />
-          <label className="label" htmlFor="about_me">
-            About me:
-          </label>
+          <label className="label" htmlFor="about_me">About me:</label>
           <textarea
             onChange={this.handleChange}
             name="about_me"
@@ -122,9 +126,7 @@ export default class CreateJobSeekerPro extends Component {
             className="input"
             value={this.state.about_me}
           />
-          <label className="label" htmlFor="education">
-            Education:
-          </label>
+          <label className="label" htmlFor="education">Education:</label>
           <input
             onChange={this.handleChange}
             type="text"
@@ -133,9 +135,7 @@ export default class CreateJobSeekerPro extends Component {
             className="input"
             value={this.state.education}
           />
-          <label className="label" htmlFor="imdb">
-            IMDB credit (if any):
-          </label>
+          <label className="label" htmlFor="imdb">IMDB credit (if any):</label>
           <input
             onChange={this.handleChange}
             type="text"
@@ -144,9 +144,7 @@ export default class CreateJobSeekerPro extends Component {
             className="input"
             value={this.state.imdb}
           />
-          <label className="label" htmlFor="phone">
-            Phone:
-          </label>
+          <label className="label" htmlFor="phone">Phone:</label>
           <input
             onChange={this.handleChange}
             type="tel"
@@ -156,9 +154,7 @@ export default class CreateJobSeekerPro extends Component {
             value={this.state.phone}
             required
           />
-          <label className="label" htmlFor="email">
-            Email:
-          </label>
+          <label className="label" htmlFor="email">Email:</label>
           <input
             onChange={this.handleChange}
             type="email"
@@ -168,9 +164,7 @@ export default class CreateJobSeekerPro extends Component {
             value={this.state.email}
             required
           />
-          <label className="label" htmlFor="skill">
-            Skillset:
-          </label>
+          <label className="label" htmlFor="skill">Skillset:</label>
           <textarea
             onChange={this.handleChange}
             name="skillset"
@@ -179,9 +173,7 @@ export default class CreateJobSeekerPro extends Component {
             value={this.state.skillset}
             required
           />
-          <label className="label" htmlFor="location">
-            Location:
-          </label>
+          <label className="label" htmlFor="location">Location:</label>
           <br />
           <AlgoliaPlaces
             id="location"
@@ -193,15 +185,16 @@ export default class CreateJobSeekerPro extends Component {
               countries: ["us"],
               type: "address",
             }}
+            onBlur={this.resetLocation}
             onChange={({ query, rawAnswer, suggestion, suggestionIndex }) =>
               this.handleAddress(suggestion)
             }
           />
-          {/* <label>Photo: </label> */}
+          {/* <label className="label">Photo: </label> */}
           {/* <input type="file" id="fileElem" multiple accept="image/*" /> */}
           <br />
           {/* <button id="fileSelect">Select file</button>         */}
-          <input className="submit" type="submit" value="create" />
+          <input className="submit" type="submit" value="update" />
         </form>
       </section>
     );

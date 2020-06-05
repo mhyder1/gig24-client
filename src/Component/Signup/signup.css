@@ -3,5 +3,16 @@
    color: rgb(253, 24, 165);
    color: #01fff0;
 }
+.submitbtn{
+   cursor: pointer;
+}
+.submitbtn:hover{
+   background-color: blueviolet;
+}
 
 @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap');
+input[type=text] {
+   padding:10px;
+   border:0;
+   box-shadow:0 0 15px 4px rgb(1,255,240);
+ }

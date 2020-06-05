@@ -43,7 +43,7 @@ export default class NavMenu extends Component {
                 className="links sport"
                 to={"/js-dashboard"}
               >
-                Dashboard
+                Pending Gigs
               </NavLink>
         
             </div>

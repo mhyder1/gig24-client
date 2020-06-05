@@ -1,0 +1,66 @@
+#postgig{
+    color:white;
+}
+
+#loc {
+    display: grid;
+    width: calc(95% - 49px);
+    margin-left: 7rem;
+}
+
+textarea#description, 
+textarea#requirements,
+select.input {
+    padding:10px;
+    border:0;
+    box-shadow: 0 0 15px 4px rgb(1,255,240);
+  }
+
+.post-a-gig textarea#requirements, 
+.post-a-gig textarea#description {
+    float: left;
+    width: calc(100% - 200px);
+    margin-bottom: 20px;
+}
+
+.post-a-gig form {
+    overflow: hidden;
+    width: 600px;
+    margin: 0 auto;
+}
+
+.post-a-gig .label {
+    float: left;
+    width: 150px;
+    padding-right: 24px;
+    color: white;
+    margin-bottom: 20px;
+    text-align: right;
+}
+
+.post-a-gig .input {
+    float: left;
+    width: calc(100% - 200px);
+    margin-bottom: 20px;
+}
+.post-a-gig .location {
+    float: left;
+    width: 150px;
+    padding-right: 24px;
+    color: white;
+    margin-bottom: 20px;
+    text-align: right;
+}
+
+
+ 
+.post-a-gig .submit {
+    /* float: right;
+    width: calc(100% - 200px); */
+    cursor: pointer;
+}
+
+input[type="radio" i] {
+    margin-left: 10px;
+    margin-right: 40px;
+}

@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import AppContext from "../AppContext";
 import config from "../../config";
-import './jshome.css'
+import clapper from "../../images/clapper.jpg";
+import "./jshome.css";
 
 export default class JsHome extends Component {
   static contextType = AppContext;
@@ -40,18 +41,25 @@ export default class JsHome extends Component {
     this.setState({ show });
   };
   render() {
-    console.log(this.context.gigs);
+    console.log(this.context);
     return (
-  
-      <section className = 'js-home'>
+      <section
+        className="js-home"
+        style={{
+          background: `url(${clapper})`,
+          height: "100vh",
+          backgroundRepeat: "no-repeat",
+          backgroundSize: "cover",
+        }}
+      >
         <h1 id='open'>Open gigs</h1>
-        <ul>
+        <ul className ='gig'>
           {this.context.gigs.map((gig, idx) => (
             <li key={idx}>
-              <div className ='gig'>
-                <h4 id ='position'>{gig.position}</h4>
-                <p>{gig.duration}</p>
-                <p>{gig.location}</p>
+              <div >
+                <h3 id ='position'>{gig.position}</h3>
+                <p>Duration: {gig.duration}</p>
+                <p>Location: {gig.location}</p>
                 <button onClick={() => this.handleClick(idx)}>details</button>
                 <button className='glow-on'
                     onClick={() => this.handleApply(gig.id)}
@@ -60,18 +68,19 @@ export default class JsHome extends Component {
                   apply now
                 </button>
                 {this.state.show[idx] && (
-                  <p>
-                    Duis aute irure dolor in reprehenderit in voluptate velit
-                    esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
-                    occaecat cupidatat non proiden
-                  </p>
+                  <section>
+                    {/* <p>duration: {gig.duration}</p>
+                    <p>location: {gig.location}</p> */}
+                    <p>Project Details: {gig.description}</p>
+                    <p>Term: {gig.term}</p>
+                    <p>Pay: {gig.pay}</p>
+                  </section>
                 )}
               </div>
             </li>
           ))}
         </ul>
         </section>
- 
     );
   }
 }

@@ -1,4 +1,4 @@
-.mypro{
+#header, #click, #clickme{
     font-family: 'Orbitron', sans-serif;
 }
 @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap');
@@ -6,3 +6,36 @@
 .myprofile {
     color:white;
 }
+
+#header{
+    /* color:rgb(255, 249, 254); */
+}
+#who {
+    display:flex;
+    padding: 20px;
+    flex-direction: column;
+    background: rgb(0, 0, 0);
+    background: rgba(0, 0, 0, 0.5); 
+    color: #f1f1f1;
+    list-style: none;
+    border: 1px rgb(217, 175, 236) solid;
+    border-style: hidden;
+    margin: 0 10px 20px;
+    box-shadow: 1px 1px 10px #fad4f4;
+    padding: 10px;
+  }
+
+  #second {
+    display:flex;
+    padding: 20px;
+    flex-direction: column;
+    background: rgb(0, 0, 0);
+    background: rgba(0, 0, 0, 0.6); 
+    color: #f1f1f1;
+    list-style: none;
+    border: 1px rgb(217, 175, 236) solid;
+    border-style: hidden;
+    margin: 0 10px 20px;
+    box-shadow: 1px 1px 10px #f5e2f2;
+    padding: 10px;
+  }
