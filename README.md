@@ -40,7 +40,7 @@ https://parent-connect-app.now.sh/
 
 ### 4. Employer Dashboard Page
 
-![logo]("Employer Dashboard view")
+![logo](https://raw.githubusercontent.com/Anarchalk/gig24-client/master/screenshots/employer-dash.JPG "Employer Dashboard view")
 
 ***
 
