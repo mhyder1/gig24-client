@@ -31,3 +31,7 @@ h1 {
     width: calc(100% - 200px); */
     cursor: pointer;
 }
+
+.create-js-profile label {
+    color: white;
+}

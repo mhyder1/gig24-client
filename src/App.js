@@ -34,8 +34,7 @@ class App extends Component {
     userInfo: {},
     appliedUser: [],
     jsProfile: [],
-    empPros: [],
-    token: null,
+    empPros: {},
     user_id: null,
     employer: null,
     token: TokenService.hasAuthToken()
@@ -63,6 +62,19 @@ class App extends Component {
       jsProfile: profile,
     });
   };
+
+  createEmpProfile = (profile) => {
+    this.setState({
+      empPros: profile,
+    });
+  };
+
+  deleteEmpJob = (id) => {
+    console.log(id)
+    this.setState({
+      jobs: this.state.jobs.filter(job => job.id !== id)
+    })
+  }
 
   updateApplications = (application) => {
     this.setState({
@@ -92,10 +104,9 @@ class App extends Component {
       fetch(`${config.API_ENDPOINT}/empprofile/emp/${user_id}`),
     ])
       .then(([appRes, jobsRes, empProRes]) => {
-        if (!appRes.ok) return appRes.json().then((e) => Promise.reject(e));
-        if (!jobsRes.ok) return jobsRes.json().then((e) => Promise.reject(e));
-        if (!empProRes.ok)
-          return empProRes.json().then((e) => Promise.reject(e));
+        // if (!appRes.ok) return appRes.json().then((e) => Promise.reject(e));
+        // if (!jobsRes.ok) return jobsRes.json().then((e) => Promise.reject(e));
+        // if (!empProRes.ok) return empProRes.json().then((e) => Promise.reject(e));
         return Promise.all([appRes.json(), jobsRes.json(), empProRes.json()]);
       })
       .then(([applicants, jobs, empPros]) => {
@@ -222,8 +233,10 @@ class App extends Component {
       setUserId: this.setUserId,
       clearContext: this.clearContext,
       createUserProfile: this.createUserProfile,
+      createEmpProfile: this.createEmpProfile,
       updateApplications: this.updateApplications,
-      updateGigs: this.updateGigs
+      updateGigs: this.updateGigs,
+      deleteEmpJob: this.deleteEmpJob
     };
     // console.log(this.state.token)
     // console.log(this.state.user_id)
@@ -244,7 +257,7 @@ class App extends Component {
 
               {/* Unprotected route */}
               <section className="create-profile">
-                <Route path="/crt-e-profile" component={CreateEmpPro} />
+                <PrivateRoute path="/crt-e-profile" component={CreateEmpPro} />
                 <PrivateRoute path="/crt-js-profile" component={NavMenu} />
                 <PrivateRoute
                   path="/crt-js-profile"

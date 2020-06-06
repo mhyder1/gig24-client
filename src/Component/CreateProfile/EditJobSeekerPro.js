@@ -3,7 +3,7 @@ import React, { Component } from "react";
 import AlgoliaPlaces from "algolia-places-react";
 import config from "../../config";
 import AppContext from "../../Component/AppContext";
-import TokenService from "../../services/token-service"
+// import TokenService from "../../services/token-service"
 import "./create-js-profile.css"
 import "../../AlgoliaPlaces.css"
 
@@ -65,9 +65,9 @@ export default class EditJobSeekerPro extends Component {
   };
 
   handleSubmit = (e) => {
-    const token = TokenService.hasAuthToken()
-      ? TokenService.readJwtToken()
-      : { user_id: "" };
+    // const token = TokenService.hasAuthToken()
+    //   ? TokenService.readJwtToken()
+    //   : { user_id: "" };
     e.preventDefault();
     fetch(`${config.API_ENDPOINT}/userprofile/${this.state.id}`, {
       method: "PATCH",

@@ -22,11 +22,10 @@ export default class Login extends Component {
   };
 
   handleLoginSuccess = () => {
-    const { location, history } = this.props;
+    const { history } = this.props;
     const token = TokenService.hasAuthToken()
       ? TokenService.readJwtToken()
       : { user_id: "" };
-    console.log(token);
     this.context.setUserId(token.user_id, token.employer);
     // const destination = (location.state || {}).from || "/";
     if (token.employer) {
@@ -51,7 +50,7 @@ export default class Login extends Component {
           username: "",
           password: "",
         });
-        const token = TokenService.readJwtToken();
+        // const token = TokenService.readJwtToken();
         //this.context.setUserId(token.user_id, token.fullname);
         this.handleLoginSuccess();
       })

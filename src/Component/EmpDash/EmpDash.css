@@ -15,6 +15,11 @@
     /* max-width: 75%; */
 }
 
+.e-dash .delete {
+    float: right;
+    cursor: pointer;
+}
+
 
 .e-applicants > li {
     background: rgb(0, 0, 0);
