@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Route, Switch, withRouter } from "react-router-dom";
+import { Route, withRouter } from "react-router-dom";
 import AppContext from "./Component/AppContext";
 import Header from "./Component/Header/Header";
 import LandingPg from "./Component/LandingPg/LandingPg";

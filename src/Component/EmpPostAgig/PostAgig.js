@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import DateTimePicker from "react-datetime-picker";
+//import DateTimePicker from "react-datetime-picker";
 import AlgoliaPlaces from "algolia-places-react";
 import AppContext from "../AppContext";
 import TokenService from "../../services/token-service";

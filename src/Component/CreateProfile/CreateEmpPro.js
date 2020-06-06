@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 import AlgoliaPlaces from "algolia-places-react";
 import config from "../../config";
 

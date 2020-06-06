@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import AppContext from "../AppContext";
-import { Link } from "react-router-dom";
+//import { Link } from "react-router-dom";
 import blue from '../../images/blue.jpg'
 import "./EmpDash.css";
 
