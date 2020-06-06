@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+//import { Link } from "react-router-dom";
 import AlgoliaPlaces from "algolia-places-react";
 import config from "../../config";
 import AppContext from "../../Component/AppContext";
@@ -49,7 +49,6 @@ export default class EditJobSeekerPro extends Component {
     const location = document.querySelector('#location')
     console.log(location)
     location.value = "Hello"
-    
   }
 
   handleChange = (e) => {
@@ -102,7 +101,6 @@ export default class EditJobSeekerPro extends Component {
   };
 
   render() {
-      
     return (
       <section className="create-js-profile">
         <h1 style={{color: 'white'}}>EDIT JOB SEEKER PROFILE</h1>

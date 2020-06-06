@@ -4,7 +4,7 @@ import AuthApiService from "../../services/auth-api-service";
 
 import AppContext from "../AppContext";
 import TokenService from "../../services/token-service";
-import './login.css'
+import "./login.css";
 
 export default class Login extends Component {
   static contextType = AppContext;
@@ -12,7 +12,7 @@ export default class Login extends Component {
   state = {
     username: "",
     password: "",
-    error: null
+    error: null,
   };
 
   handleChange = (e) => {
@@ -23,14 +23,16 @@ export default class Login extends Component {
 
   handleLoginSuccess = () => {
     const { location, history } = this.props;
-    const token = TokenService.hasAuthToken() ? TokenService.readJwtToken() : {user_id:''}
-    console.log(token)
-    this.context.setUserId(token.user_id, token.employer)
-    // const destination = (location.state || {}).from || "/"; 
-    if(token.employer) {
-      history.push('/e-dashboard')
-    }else {
-      history.push('/js-home')
+    const token = TokenService.hasAuthToken()
+      ? TokenService.readJwtToken()
+      : { user_id: "" };
+    console.log(token);
+    this.context.setUserId(token.user_id, token.employer);
+    // const destination = (location.state || {}).from || "/";
+    if (token.employer) {
+      history.push("/e-dashboard");
+    } else {
+      history.push("/js-home");
     }
     // history.push(destination);
   };
@@ -38,43 +40,45 @@ export default class Login extends Component {
   handleSubmitJwtAuth = (ev) => {
     ev.preventDefault();
     this.setState({ error: null });
-        const { username, password } = this.state;
-        
+    const { username, password } = this.state;
+
     AuthApiService.postLogin({
       username,
-      password
+      password,
     })
       .then((res) => {
         this.setState({
           username: "",
-          password: ""
+          password: "",
         });
         const token = TokenService.readJwtToken();
         //this.context.setUserId(token.user_id, token.fullname);
         this.handleLoginSuccess();
       })
       .catch((res) => {
-  
-        this.setState({ error: res.error })
+        this.setState({ error: res.error });
       });
   };
 
   render() {
-    const { error } = this.state
-   
+    const { error } = this.state;
+
     return (
       <>
-        <h3>Log in</h3>
-        <p>Demo username: sam</p>
-        <p>Demo password: sam</p>
-        <form id='form'
-          style={{ lineHeight: " 45px"}}
+        <p id="demo">Employer Demo username: sam</p>
+        <p id="demo">Employer Demo password: sam</p>
+        <p id="demo">Job seeker Demo username: dunder</p>
+        <p id="demo">Job seeker Demo password: password</p>
+        <h3 id="log">Log in</h3>
+        <form
+          id="form"
+          style={{ lineHeight: " 45px" }}
           onSubmit={this.handleSubmitJwtAuth}
         >
           <div role="alert">
-            {error && <p style={{color:"red"}}>{error}</p>}
+            {error && <p style={{ color: "red" }}>{error}</p>}
           </div>
-          <label style={{paddingRight:"3px"}}>Username: </label>
+          <label id='loginname'style={{ paddingRight: "6px" }}>Username </label>
           <input
             onChange={this.handleChange}
             type="text"
@@ -84,47 +88,48 @@ export default class Login extends Component {
             required
           />
           <br />
-          <label style={{ paddingRight: "3px" }}>Password: </label>
+          <label id='loginpass'style={{ paddingRight: "10px" }}>Password </label>
           <input
             onChange={this.handleChange}
-            type="password"
+            type="text"
             name="password"
             placeholder="username"
             value={this.state.password}
             required
           />
           <br />
-          <input
+          <input 
             style={{
-              marginRight: '10px',
-              marginLeft:'4rem',
-              border: '1px solid #fff',
-              padding: '5px',
-              color: '#000',
-              marginTop: '10px',
-              backgroundColor: '#01fff0'
+              marginRight: "10px",
+              marginLeft: "4rem",
+              border: "1px solid #fff",
+              padding: "5px",
+              color: "#000",
+              marginTop: "10px",
+              backgroundColor: "#01fff0",
             }}
             type="submit"
             value="login"
           />{" "}
           <button
             style={{
-              marginRight: '5px',
-              border: '1px solid #fff',
-              padding: '5px',
-              color: '#fff',
-              marginTop: '10px',
-              backgroundColor: '#01fff0'
+              marginRight: "5px",
+              border: "1px solid #fff",
+              padding: "5px",
+              color: "#fff",
+              marginTop: "10px",
+              backgroundColor: "#01fff0",
             }}
           >
             <Link
               style={{ textDecoration: "none", color: "#000" }}
               to="/signup"
-            > sign up
+            >
+              {" "}
+              sign up
             </Link>
           </button>
         </form>
-        
       </>
     );
   }

@@ -4,7 +4,7 @@ import gig24cam from "../../images/gig24cam.jpg";
 import "./landing.css";
 
 export default function LandingPg() {
-  //const gig24cam = <img src={`./images/gig24cam.jpg`}></img>
+ 
   return (
     <section
       className="landing"
@@ -16,12 +16,18 @@ export default function LandingPg() {
         backgroundPosition: "center",
       }}
     >
+      <div id='content'>
+      <p>
+        GIG 24 is the one stop shop for PA and film production jobs. Search for gigs and
+        submit your resume today!
+      </p>
+    </div>
       <div className="postfind-link">
-        <Link to='/login'>
-          <button className='glow-on-hover' >POST A GIG</button>
+        <Link to="/login">
+          <button className="glow-on-hover">POST A GIG</button>
         </Link>
         <Link to="/login">
-          <button className='glow-on-hover' >FIND A GIG</button>
+          <button className="glow-on-hover">FIND A GIG</button>
         </Link>
       </div>
     </section>

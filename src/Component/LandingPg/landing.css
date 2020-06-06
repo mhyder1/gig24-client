@@ -4,10 +4,22 @@
   padding: 20px;
 }
 
+#content {
+  background: rgb(0, 0, 0); /* Fallback color */
+  background: rgba(0, 0, 0, 0.5); /* Black background with 0.5 opacity */
+  color: #f1f1f1;
+  padding: 20px;
+}
+
+#content> p {
+  font-size:1.3rem;
+  line-height: 1.6rem;
+}
+
 @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap');
 .glow-on-hover {
-  width: 200px;
-  height: 100px;
+  width: 140px;
+  height: 70px;
   border: none;
   outline: none;
   color: #d9ff01;
@@ -66,3 +78,28 @@
   50% { background-position: 400% 0; }
   100% { background-position: 0 0; }
 }
+
+@media screen and (min-width: 768px) {
+  .postfind-link {
+     padding:10px;
+  }
+  .glow-on-hover {
+    width: 200px;
+    height: 100px;
+    font-size: 1.3rem;
+  }
+  #content {
+    width: 100%;
+  }
+  #content> p {
+    font-size:2rem;
+    line-height: 2.6rem;
+  }
+ }
+ 
+ @media screen and (min-width: 1024px){
+     .event-list{
+         max-width: 50%;
+     }
+    
+ }

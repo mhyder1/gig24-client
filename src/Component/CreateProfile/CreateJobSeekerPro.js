@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 import AlgoliaPlaces from "algolia-places-react";
 import config from "../../config";
 import AppContext from "../../Component/AppContext";
@@ -12,6 +12,7 @@ export default class CreateJobSeekerPro extends Component {
 
   state = {
     name: "",
+    position:'',
     about_me: "",
     photo: "",
     education: "",
@@ -22,6 +23,7 @@ export default class CreateJobSeekerPro extends Component {
     skillset: "",
   };
 
+
   handleChange = (e) => {
     this.setState({
       [e.target.name]: e.target.value,
@@ -30,9 +32,14 @@ export default class CreateJobSeekerPro extends Component {
 
   handleAddress = (suggestion) => {
     const { name, city, administrative, postcode } = suggestion;
-    this.setState({
-      location: `${name || ''}, ${city || ''}, ${administrative || ''} ${postcode || ''}`,
-    },()=> console.log(this.state.location));
+    this.setState(
+      {
+        location: `${name || ""}, ${city || ""}, ${administrative || ""} ${
+          postcode || ""
+        }`,
+      },
+      () => console.log(this.state.location)
+    );
   };
 
   handleSubmit = (e) => {
@@ -48,6 +55,7 @@ export default class CreateJobSeekerPro extends Component {
       body: JSON.stringify({
         name: this.state.name,
         about_me: this.state.about_me,
+        position: this.state.position,
         // photo:'photo',
         education: this.state.education,
         location: this.state.location,
@@ -56,18 +64,16 @@ export default class CreateJobSeekerPro extends Component {
         phone: this.state.phone,
         email: this.state.email,
         user_id: token.user_id
-      })
+      }),
     })
       .then((res) => {
         if (!res.ok) return res.json().then((e) => Promise.reject(e));
         return res.json();
       })
       .then((userPro) => {
-        console.log(userPro);
-        this.context.createUserProfile(userPro)
+        this.context.createUserProfile(userPro);
         this.props.history.push("/js-profile");
       })
-
       .catch((error) => {
         console.log({ error });
       });
@@ -77,10 +83,13 @@ export default class CreateJobSeekerPro extends Component {
     // console.log(this.context)
     return (
       <section className="create-js-profile">
-        <h1 style={{color: 'white'}}>CREATE JOB SEEKER PROFILE</h1>
+        <h1>CREATE JOB SEEKER PROFILE</h1>
         {/* <Link to={"/js-dashboard"}>Create</Link> */}
-        <form onSubmit={this.handleSubmit} >
-          <label className="label" htmlFor="name"> Name:</label>
+        <form onSubmit={this.handleSubmit}>
+          <label className="label" htmlFor="name">
+            {" "}
+            Name:
+          </label>
           <input
             onChange={this.handleChange}
             type="text"
@@ -90,7 +99,22 @@ export default class CreateJobSeekerPro extends Component {
             value={this.state.name}
             required
           />
-          <label className="label" htmlFor="about_me">About me:</label>
+           <label className="label" htmlFor="position">
+            {" "}
+            Primary Position:
+          </label>
+          <input
+            onChange={this.handleChange}
+            type="text"
+            name="position"
+            id="position"
+            className="input"
+            value={this.state.position}
+            required
+          />
+          <label className="label" htmlFor="about_me">
+            About me:
+          </label>
           <textarea
             onChange={this.handleChange}
             name="about_me"
@@ -98,7 +122,9 @@ export default class CreateJobSeekerPro extends Component {
             className="input"
             value={this.state.about_me}
           />
-          <label className="label" htmlFor="education">Education:</label>
+          <label className="label" htmlFor="education">
+            Education:
+          </label>
           <input
             onChange={this.handleChange}
             type="text"
@@ -107,7 +133,9 @@ export default class CreateJobSeekerPro extends Component {
             className="input"
             value={this.state.education}
           />
-          <label className="label" htmlFor="imdb">IMDB credit (if any):</label>
+          <label className="label" htmlFor="imdb">
+            IMDB credit (if any):
+          </label>
           <input
             onChange={this.handleChange}
             type="text"
@@ -116,7 +144,9 @@ export default class CreateJobSeekerPro extends Component {
             className="input"
             value={this.state.imdb}
           />
-          <label className="label" htmlFor="phone">Phone:</label>
+          <label className="label" htmlFor="phone">
+            Phone:
+          </label>
           <input
             onChange={this.handleChange}
             type="tel"
@@ -126,7 +156,9 @@ export default class CreateJobSeekerPro extends Component {
             value={this.state.phone}
             required
           />
-          <label className="label" htmlFor="email">Email:</label>
+          <label className="label" htmlFor="email">
+            Email:
+          </label>
           <input
             onChange={this.handleChange}
             type="email"
@@ -136,7 +168,9 @@ export default class CreateJobSeekerPro extends Component {
             value={this.state.email}
             required
           />
-          <label className="label" htmlFor="skill">Skillset:</label>
+          <label className="label" htmlFor="skill">
+            Skillset:
+          </label>
           <textarea
             onChange={this.handleChange}
             name="skillset"
@@ -145,7 +179,9 @@ export default class CreateJobSeekerPro extends Component {
             value={this.state.skillset}
             required
           />
-          <label className="label" htmlFor="location">Location:</label>
+          <label className="label" htmlFor="location">
+            Location:
+          </label>
           <br />
           <AlgoliaPlaces
             id="location"
@@ -161,7 +197,7 @@ export default class CreateJobSeekerPro extends Component {
               this.handleAddress(suggestion)
             }
           />
-          {/* <label className="label">Photo: </label> */}
+          {/* <label>Photo: </label> */}
           {/* <input type="file" id="fileElem" multiple accept="image/*" /> */}
           <br />
           {/* <button id="fileSelect">Select file</button>         */}

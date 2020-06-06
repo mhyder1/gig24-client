@@ -56,10 +56,10 @@ export default class Header extends Component {
     return (
       <>
       <nav>
-          <Link className='neon' to='/' 
+          <h1 className='neon' 
             style={{textDecoration:'none', color:'#fff', fontSize:'34px'}}>
             GIG 24
-          </Link>
+          </h1>
         {' '}
         <span className='header-span'>
         {TokenService.hasAuthToken()

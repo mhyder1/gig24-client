@@ -2,13 +2,42 @@
 color:white;
 }
 #position {
-    color: #ff1b8d;
+    color: #fd04bf;
 }
 
+.gig {
+  display:flex;
+  padding: 20px;
+  flex-direction: column;
+ }
+
+.gig > li {
+  background: rgb(0, 0, 0);
+  background: rgba(0, 0, 0, 0.8); 
+  color: #f1f1f1;
+  list-style: none;
+  border: 1px rgb(251, 252, 252) solid;
+  margin: 0 10px 20px;
+  box-shadow: 1px 1px 10px #fd04bf;
+  padding: 10px;
+}
 #open{
     font-family: 'Orbitron', sans-serif;
 }
 @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap');
+
+ @media screen and (min-width: 768px) {
+  .gig {
+    max-width: 75%;
+    justify-content: center;
+    margin: 0 auto;
+  }
+} 
+
+@media screen and (min-width: 1024px){
+
+}
+
 /* 
 
 .glow-on-hover {

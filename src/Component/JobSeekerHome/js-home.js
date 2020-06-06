@@ -2,7 +2,9 @@ import React, { Component } from "react";
 import AppContext from "../AppContext";
 import TokenService from "../../services/token-service";
 import config from "../../config";
-import './jshome.css'
+import clapper from "../../images/clapper.jpg";
+import TokenService from "../../services/token-service";
+import "./jshome.css";
 
 export default class JsHome extends Component {
   static contextType = AppContext;
@@ -29,8 +31,8 @@ export default class JsHome extends Component {
 
   handleApply = (job_id) => {
     const token = TokenService.hasAuthToken() ? 
-                    TokenService.readJwtToken() : 
-                    { user_id: "" }
+    TokenService.readJwtToken() : 
+    { user_id: "" }
     const { user_id } = token
 
     fetch(`${config.API_ENDPOINT}/applied`, {
@@ -46,13 +48,13 @@ export default class JsHome extends Component {
     })
     .then((res) => {
         if (!res.ok) return res.json().then((e) => Promise.reject(e));
-    return res.json();
-    })
-    .then((application) => {
-        this.cotext.updateApplications(application)
-        this.getGigs()
-    })
-    .catch(error => console.e.log(error))
+        return res.json();
+      })
+      .then((application) => {
+          this.context.updateApplications(application)
+          this.getGigs()
+      })
+      .catch(error => console.log(error))
   };
 
   handleClick = (index) => {
@@ -62,15 +64,23 @@ export default class JsHome extends Component {
   };
   render() {
     return (
-      <section className = 'js-home'>
+      <section
+        className="js-home"
+        style={{
+          background: `url(${clapper})`,
+          height: "100vh",
+          backgroundRepeat: "no-repeat",
+          backgroundSize: "cover",
+        }}
+      >
         <h1 id='open'>Open gigs</h1>
-        <ul>
+        <ul className ='gig'>
           {this.context.gigs.map((gig, idx) => (
             <li key={idx}>
-              <div className ='gig'>
-                <h4 id ='position'>{gig.position}</h4>
-                {/* <p>duration: {gig.duration}</p>
-                <p>location: {gig.location}</p> */}
+              <div >
+                <h3 id ='position'>{gig.position}</h3>
+                <p>Duration: {gig.title}</p>
+                <p>Location: {gig.location}</p>
                 <button onClick={() => this.handleClick(idx)}>details</button>
                 <button className='glow-on'
                     onClick={() => this.handleApply(gig.id)}
@@ -80,11 +90,9 @@ export default class JsHome extends Component {
                 </button>
                 {this.state.show[idx] && (
                   <section>
-                    <p>duration: {gig.duration}</p>
-                    <p>location: {gig.location}</p>
-                    <p>description: {gig.description}</p>
-                    <p>term: {gig.term}</p>
-                    <p>pay: {gig.pay}</p>
+                    <p>Project Details: {gig.description}</p>
+                    <p>Duration: {gig.duration}</p>
+                    <p>Pay: {gig.pay}</p>
                   </section>
                 )}
               </div>
@@ -92,7 +100,6 @@ export default class JsHome extends Component {
           ))}
         </ul>
         </section>
- 
     );
   }
 }

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { NavLink, Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import "./nav.css";
 
 export default class NavMenu extends Component {
@@ -20,33 +20,31 @@ export default class NavMenu extends Component {
         <button className="hamburger" onClick={this.toggle}>
           |||
         </button>
-          {
-            <div className={open ? "navbar show" : "navbar toggle"}>
-              {/* <NavLink
-                activeClassName="main-nav-active"
-                className="links art"
-                to={{
-                  pathname:'/-home' }}
-              >
-               Home
-              </NavLink> */}
-              <NavLink
-                activeClassName="main-nav-active2"
-                className="links music"
-                to={"/empprofile"}
-              >
-                My Profile
-              </NavLink>
-              <NavLink
-                activeClassName="main-nav-active"
-                className="links sport"
-                to={"/e-dashboard"}
-              >
-                Dashboard
-              </NavLink>
-        
-            </div>
-          }
+        {
+          <div className={open ? "navbar show" : "navbar toggle"}>
+            <NavLink
+              activeClassName="main-nav-active2"
+              className="links music"
+              to={"/empprofile"}
+            >
+              My Profile
+            </NavLink>
+            <NavLink
+              activeClassName="main-nav-active"
+              className="links sport"
+              to={"/e-dashboard"}
+            >
+              Dashboard
+            </NavLink>
+            <NavLink
+              activeClassName="main-nav-active"
+              className="links music"
+              to={"/post-gig"}
+            >
+              Post a Gig
+            </NavLink>
+          </div>
+        }
       </nav>
     );
   }

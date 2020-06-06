@@ -1,3 +1,10 @@
+h1 {
+    font-family: 'Orbitron', sans-serif;
+    color:#01fff0;
+}
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap');
+
+
 .create-js-profile form {
     overflow: hidden;
     width: 600px;

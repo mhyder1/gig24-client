@@ -1,6 +1,6 @@
 # GIG 24 App
 
- The GIG 24 app connects single parents to a collective online village where families  can grow together experiencing different activities, cultures and most importantly supporting each other. User has to signup in order to join and create variety of events. 
+ The GIG 24 is the one stop shop for PA and film production jobs. Search for gigs and submit your resume today! 
 
 
 * * *
@@ -19,6 +19,7 @@ https://parent-connect-app.now.sh/
 * Node.js 
 * Express 
 * PostgreSQL
+* SQL
 
 
 ***
@@ -27,22 +28,21 @@ https://parent-connect-app.now.sh/
 
 ### 1. Landing Page
 
-![logo](https://github.com/Anarchalk/parent-connect-client/blob/master/screenshots/landing-pg.JPG "Landing Page")
+![logo](https://raw.githubusercontent.com/Anarchalk/gig24-client/master/screenshots/landing.JPG "Landing Page")
 
-### 2.Signup Page
+### 2.POST A GIG Page
 
-![logo](https://raw.githubusercontent.com/Anarchalk/parent-connect-client/master/screenshots/signup-pg.JPG "Signup page")
+![logo](https://raw.githubusercontent.com/Anarchalk/gig24-client/master/screenshots/postgig.JPG "Post a gig Page")
 
-### 3.Event Host View
+### 3.JOB SEEKER HOME Page
+![logo](https://raw.githubusercontent.com/Anarchalk/gig24-client/master/screenshots/jshome.JPG "Job Seeker home view")
 
-![logo](https://raw.githubusercontent.com/Anarchalk/parent-connect-client/master/screenshots/event-pg.JPG "Event host view")
+### 4. EMPLOYER DASHBOARD Page
 
-### 4. My Event Page
-
-![logo](https://github.com/Anarchalk/parent-connect-client/blob/master/screenshots/my-events.JPG "My event page")
+![logo](https://raw.githubusercontent.com/Anarchalk/gig24-client/master/screenshots/employer-dash.JPG "Employer Dashboard")
 
 ***
 
 ## DOCUMENTATION
 You can find detailed development documentation from the link below:
-https://gist.github.com/Anarchalk/bcb7069ed9589d20de41f2ef65cbbfd0
+https://gist.github.com/Anarchalk/450fdadd3d1daa9a4fa7b28672425824

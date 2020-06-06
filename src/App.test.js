@@ -2,11 +2,11 @@ import React from 'react'
 import ReactDOM from 'react-dom';
 import App from './App'
 import { BrowserRouter } from "react-router-dom";
-import AddEvents from './Component/AddEvents/AddEvents';
+import LandingPg from "./Component/LandingPg/LandingPg";
 import Header from './Component/Header/Header';
-import Intro from './Component/Intro/Intro';
+import EmpDash from "./Component/EmpDash/EmpDash";
 import Signup from './Component/Signup/Signup';
-import MyEvents from './Component/MyEvents/MyEvents';
+import NavMenu from "./Component/NavMenu/NavMenu";
 
 it('App renders without crashing', () => {
     const div = document.createElement('div');
@@ -18,7 +18,7 @@ it('App renders without crashing', () => {
   it('AddEvents renders without crashing', () => {
     const div = document.createElement('div');
     window.HTMLCanvasElement.prototype.getContext = () => {}
-    ReactDOM.render(<BrowserRouter><AddEvents /></BrowserRouter>, div);
+    ReactDOM.render(<BrowserRouter><LandingPg /></BrowserRouter>, div);
     ReactDOM.unmountComponentAtNode(div);
   });
   
@@ -32,7 +32,7 @@ it('App renders without crashing', () => {
   it('Intro renders without crashing', () => {
     const div = document.createElement('div');
     window.HTMLCanvasElement.prototype.getContext = () => {}
-    ReactDOM.render(<BrowserRouter><Intro /></BrowserRouter>, div);
+    ReactDOM.render(<BrowserRouter><EmpDash /></BrowserRouter>, div);
     ReactDOM.unmountComponentAtNode(div);
   });
 
@@ -46,7 +46,7 @@ it('App renders without crashing', () => {
   it('MyEvents renders without crashing', () => {
     const div = document.createElement('div');
     window.HTMLCanvasElement.prototype.getContext = () => {}
-    ReactDOM.render(<BrowserRouter><MyEvents /></BrowserRouter>, div);
+    ReactDOM.render(<BrowserRouter><NavMenu /></BrowserRouter>, div);
     ReactDOM.unmountComponentAtNode(div);
   });
 

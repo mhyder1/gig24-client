@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import AppContext from "../AppContext";
-//import {Link} from 'react-router-dom'
+//import { Link } from "react-router-dom";
+import blue from '../../images/blue.jpg'
 import "./EmpDash.css";
 
 export default class EmpDash extends Component {
@@ -8,12 +9,20 @@ export default class EmpDash extends Component {
 
   render() {
     return (
-      <div className="empdash">
+      <div
+        className="empdash"
+        style={{
+          background: `url(${blue})`,
+          height: "100vh",
+          backgroundRepeat: "no-repeat",
+          backgroundSize: "cover",
+          backgroundPosition: "center"
+        }}
+      >
         <section>
           <article>
-            <h3 id='posts'>My posts</h3>
-            <ul>
-              <div className="e-dash">
+            <h2 id="posts">MY POSTS</h2>
+            <ul className="e-dash">
                 {this.context.jobs.map((job, idx) => (
                   <li key={idx}>
                     <h4>{job.position}</h4>
@@ -24,13 +33,11 @@ export default class EmpDash extends Component {
                     <p>{job.description}</p>
                   </li>
                 ))}
-              </div>
             </ul>
           </article>
           <article>
-            <h3 id='applicants'>Applicants</h3>
-            <ul>
-              <div className="e-applicants">
+            <h2 id="applicants">APPLICANTS</h2>
+            <ul className="e-applicants">
                 {this.context.applicants.map((applicant, idx) => (
                   <li key={idx}>
                     <p>{applicant.fullname}</p>
@@ -41,9 +48,8 @@ export default class EmpDash extends Component {
                   <p>{applicant.location}</p> */}
                   </li>
                 ))}
-              </div>
             </ul>
-            <br />
+          
           </article>
         </section>
       </div>

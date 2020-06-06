@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Route, Switch, withRouter } from "react-router-dom";
+import { Route, withRouter } from "react-router-dom";
 import AppContext from "./Component/AppContext";
 import Header from "./Component/Header/Header";
 import LandingPg from "./Component/LandingPg/LandingPg";
@@ -21,7 +21,6 @@ import TokenService from "./services/token-service";
 import AuthApiService from "./services/auth-api-service";
 import IdleService from "./services/idle-service";
 import EmpProfile from "./Component/EmpProfile/EmpProfile";
-//import gig24cam from './images/gig24cam.jpg'
 import config from "./config.js";
 import "./App.css";
 
@@ -39,15 +38,10 @@ class App extends Component {
     token: null,
     user_id: null,
     employer: null,
-    token: TokenService.hasAuthToken() ? 
-           TokenService.readJwtToken() : 
-           { user_id: "" }
+    token: TokenService.hasAuthToken()
+      ? TokenService.readJwtToken()
+      : { user_id: "" },
   };
-
-  // static getDerivedStateFromError(error) {
-  //   console.error(error)
-  //   return { hasError: true }
-  // }
 
   addJob = (job) => {
     this.setState({
@@ -60,15 +54,15 @@ class App extends Component {
       jsProfile: [],
       gigs: [],
       appliedUser: [],
-      token: {}
-    })
-  }
+      token: {},
+    });
+  };
 
   createUserProfile = (profile) => {
     this.setState({
-      jsProfile: profile
-    })
-  }
+      jsProfile: profile,
+    });
+  };
 
   updateApplications = (application) => {
     this.setState({
@@ -82,32 +76,6 @@ class App extends Component {
     })
   }
 
-  // updateEvent = (ev) => {
-  //   const updatedEvents = this.state.events.filter(event => event.id !== ev.id)
-  //   this.setState({
-  //     events: [...updatedEvents, ev],
-  //   });
-  // };
-
-  // joinEvent = (att) => {
-  //   this.setState({
-  //     attend: [...this.state.attend, att]
-  //   })
-  // }
-
-  // removeAttend = (att_id) => {
-  //   this.setState({
-  //     attend: this.state.attend.filter(att => att.id !== att_id)
-  //   });
-  // }
-
-  // userId = (user_id, fullname) => {
-  //   this.setState({
-  //     user_id,
-  //     fullname,
-
-  //   })
-  // }
 
   setUserId = (user_id, employer) => {
     this.setState({
@@ -116,11 +84,8 @@ class App extends Component {
     });
   };
 
-  getEmployerData = () => {
-    const token = TokenService.hasAuthToken()
-      ? TokenService.readJwtToken()
-      : { user_id: "" };
-    const { user_id } = token;
+  getEmployerData = (user_id) => {
+    if (!user_id) return;
     Promise.all([
       fetch(`${config.API_ENDPOINT}/applied/current/${user_id}`),
       fetch(`${config.API_ENDPOINT}/jobs/byuser/${user_id}`),
@@ -143,13 +108,12 @@ class App extends Component {
 
   getJobSeekerData = (user_id) => {
     // const { user_id } = this.state.token;
-    console.log({user_id})
-    if(!user_id) return
+    if (!user_id) return;
     Promise.all([
       fetch(`${config.API_ENDPOINT}/jobs/gigs/${user_id}`),
       fetch(`${config.API_ENDPOINT}/applied/user/${user_id}`),
-      fetch(`${config.API_ENDPOINT}/userprofile/user/${user_id}`)
-    ])    
+      fetch(`${config.API_ENDPOINT}/userprofile/user/${user_id}`),
+    ])
       .then(([gigRes, appliedUserRes, userProRes]) => {
         // if (!gigRes.ok) return gigRes.json().then((e) => Promise.reject(e));
         // if (!appliedUserRes.ok) return appliedUserRes.json().then((e) => Promise.reject(e));
@@ -161,7 +125,6 @@ class App extends Component {
         ]);
       })
       .then(([gigs, appliedUser, jsProfile]) => {
-        console.log({appliedUser})
         this.setState({ gigs, appliedUser, jsProfile });
       })
       .catch((error) => {
@@ -170,11 +133,7 @@ class App extends Component {
   };
 
   componentDidUpdate(prevProps, prevState) {
-    console.log('component updating...')
-    console.log(this.state.prevState)
-    console.log(this.state.user_id)
-    console.log(this.state.token)
-    const {user_id} = this.state
+    const { user_id } = this.state;
     if (prevState.user_id !== this.state.user_id && this.state.employer) {
       this.getEmployerData(user_id);
     } else if (
@@ -190,8 +149,9 @@ class App extends Component {
       ? TokenService.readJwtToken()
       : { user_id: "" };
     this.setState({ userInfo: token });
-    const {user_id} = this.state.token
-    if (this.state.employer) {
+    const { user_id, employer } = this.state.token;
+    
+    if (employer) {
       this.getEmployerData(user_id);
     } else {
       this.getJobSeekerData(user_id);
@@ -293,8 +253,8 @@ class App extends Component {
               </section>
               <section>
                 <PrivateRoute
-                    path="/edit-js-profile"
-                    component={EditJobSeekerPro}
+                  path="/edit-js-profile"
+                  component={EditJobSeekerPro}
                 />
               </section>
 
@@ -327,6 +287,7 @@ class App extends Component {
                 <PrivateRoute path="/js-dashboard" component={NavMenu} />
                 <PrivateRoute path="/js-dashboard" component={JobSeekerDash} />
               </section>
+              <PrivateRoute path="/post-gig" component={NavMenuEmp} />
               <PrivateRoute path="/post-gig" component={PostAgig} />
               {/* Protected route */}
 
