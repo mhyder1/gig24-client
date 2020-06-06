@@ -28,15 +28,15 @@ https://parent-connect-app.now.sh/
 
 ### 1. Landing Page
 
-![logo]( "Landing Page")
+![logo](https://raw.githubusercontent.com/Anarchalk/gig24-client/master/screenshots/landing.JPG "Landing Page")
 
 ### 2.Post a gig Page
 
-![logo]( "Post a gig Page")
+![logo](https://raw.githubusercontent.com/Anarchalk/gig24-client/master/screenshots/postgig.JPG" Post a gig Page")
 
 ### 3.Job Seeker home
 
-![logo]( "Job Seeker home view")
+![logo](https://raw.githubusercontent.com/Anarchalk/gig24-client/master/screenshots/jshome.JPG "Job Seeker home view")
 
 ### 4. Employer Dashboard Page
 
@@ -46,4 +46,4 @@ https://parent-connect-app.now.sh/
 
 ## DOCUMENTATION
 You can find detailed development documentation from the link below:
-https://gist.github.com/Anarchalk/bcb7069ed9589d20de41f2ef65cbbfd0
+https://gist.github.com/Anarchalk/450fdadd3d1daa9a4fa7b28672425824
