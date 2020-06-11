@@ -15,7 +15,8 @@ const AppContext= React.createContext({
    updateApplications: ()=>{},
    updateGigs: ()=>{},
    createEmpProfile: ()=>{},
-   deleteEmpJob: ()=>{}
+   deleteEmpJob: ()=>{},
+   removeApplication: ()=>{}
 })
 
 export default AppContext;

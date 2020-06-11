@@ -76,10 +76,19 @@ class App extends Component {
     })
   }
 
-  updateApplications = (application) => {
+  updateApplications = (id) => {
     this.setState({
-      appliedUser: [...this.state.appliedUser, application]
+      appliedUser: this.state.appliedUser.filter(app => app.id !== id)
     })
+  }
+
+  removeApplication = (user_id) => {
+    fetch(`${config.API_ENDPOINT}/jobs/gigs/${user_id}`)
+    .then(res => res.json())
+    .then(gigs => {
+      this.setState({gigs})
+    })
+    .catch(error => console.log(error))
   }
 
   updateGigs = (gigs) => {
@@ -236,11 +245,10 @@ class App extends Component {
       createEmpProfile: this.createEmpProfile,
       updateApplications: this.updateApplications,
       updateGigs: this.updateGigs,
-      deleteEmpJob: this.deleteEmpJob
+      deleteEmpJob: this.deleteEmpJob,
+      removeApplication: this.removeApplication
     };
-    // console.log(this.state.token)
-    // console.log(this.state.user_id)
-    // console.log(this.state.employer)
+
     return (
       <ErrorBoundary>
         <AppContext.Provider value={value}>
