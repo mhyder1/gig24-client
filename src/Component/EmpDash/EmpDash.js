@@ -8,6 +8,11 @@ import "./EmpDash.css";
 export default class EmpDash extends Component {
   static contextType = AppContext;
 
+  state = {
+    profile: {},
+    show: []
+  }
+
   deletePost = (id) => {
     
     fetch(`${config.API_ENDPOINT}/jobs/${id}`, {
@@ -18,6 +23,24 @@ export default class EmpDash extends Component {
     })
     .catch(error => console.log(error))
   }
+
+  getUserProfile = (user_id) => {
+    console.log(user_id)
+    fetch(`${config.API_ENDPOINT}/userprofile/user/${user_id}`)
+    .then(res => res.json())
+    .then(profile => {
+      console.log(profile)
+      this.setState({profile})
+    })
+    .catch(error => console.log(error))
+  }
+
+  handleClick = (index, user_id) => {
+    let show = this.state.show.slice();
+    show[index] = !show[index];
+    this.getUserProfile(user_id)
+    this.setState({ show });
+  };
 
   render() {
     return (
@@ -61,12 +84,25 @@ export default class EmpDash extends Component {
             <ul className="e-applicants">
                 {this.context.applicants.map((applicant, idx) => (
                   <li key={idx}>
-                    <p>{applicant.fullname}</p>
-                    <p>{applicant.education}</p>
-                    <p>{applicant.user_id}</p>
-                    {/* <p>{applicant.skillset}</p>
-                  <p>{applicant.about_me}</p>
-                  <p>{applicant.location}</p> */}
+                    <p>
+                      <span 
+                        style={{cursor: 'pointer', textDecoration: 'underline'}}
+                        onClick={()=>this.handleClick(idx, applicant.user_id)}>
+                          {applicant.fullname}
+                      </span> applied to {applicant.position}
+                    </p>
+                    {this.state.show[idx] && (
+                      this.state.profile &&
+                      <section>
+                        <p>About me: {this.state.profile.about_me}</p>
+                        <p>Education: {this.state.profile.education}</p>
+                        <p>Phone: {this.state.profile.phone}</p>
+                        <p>Email: {this.state.profile.email}</p>
+                        <p>Skillset: {this.state.profile.skillset}</p>
+                        <p>Location: {this.state.profile.location}</p>
+                        <p>IMDB: {this.state.profile.imdb}</p>
+                      </section>
+                    )}
                   </li>
                 ))}
             </ul>
